@@ -1,5 +1,31 @@
 import { createGlobalStyle } from 'styled-components';
 
+interface BMartTheme {
+  colors: {
+    main: string;
+    background: string;
+  };
+  border: {
+    radius: string;
+  };
+  shadow: string;
+}
+
+declare module 'styled-components' {
+  export interface DefaultTheme extends BMartTheme {}
+}
+
+const theme: BMartTheme = {
+  colors: {
+    main: '#ef5350',
+    background: '#ffebee',
+  },
+  border: {
+    radius: '10px',
+  },
+  shadow: '0px 0px 6px 2px rgba(0, 0, 0, 0.065)',
+};
+
 const GlobalStyle = createGlobalStyle`
 a,
 h1,
@@ -65,4 +91,4 @@ html, body {
 }
 `;
 
-export default GlobalStyle;
+export { theme, GlobalStyle };
