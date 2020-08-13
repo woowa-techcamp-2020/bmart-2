@@ -6,7 +6,10 @@ import {
   ImageWrapper,
   ProductTitle,
   ProductPrice,
+  StyledFavoriteCheck,
 } from './Product.styles';
+import { Favorite, FavoriteBorder } from '@material-ui/icons';
+import { Checkbox } from '@material-ui/core';
 
 interface ProductType {
   url: string;
@@ -38,6 +41,11 @@ const Product = () => {
               style={{ width: '100%', height: '100%' }}
               alt={'asdf'}
               src={image.url}
+            />
+            <StyledFavoriteCheck
+              icon={<FavoriteBorder />}
+              checkedIcon={<Favorite />}
+              name="checked"
             />
           </ImageWrapper>
           <ProductTitle>페브리즈 탈취제 370ml </ProductTitle>

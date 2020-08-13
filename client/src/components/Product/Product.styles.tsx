@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
+import { Grid, Checkbox } from '@material-ui/core';
 
 const StyledProduct = styled(Grid)`
   box-shadow: ${(props) => props.theme.shadow};
@@ -15,6 +15,7 @@ const ImageWrapper = styled.div`
   margin-bottom: 12px;
   overflow: hidden;
   border-radius: 4px;
+  position: relative;
 `;
 
 const ProductTitle = styled.div`
@@ -34,4 +35,19 @@ const StyledProductWrapper = styled.div`
   min-width: 40%;
 `;
 
-export { StyledProduct, ImageWrapper, ProductTitle, ProductPrice };
+const StyledFavoriteCheck = styled(Checkbox)`
+  && {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    margin: 0;
+  }
+` as typeof Checkbox;
+
+export {
+  StyledProduct,
+  ImageWrapper,
+  ProductTitle,
+  ProductPrice,
+  StyledFavoriteCheck,
+};
