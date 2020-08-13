@@ -1,12 +1,14 @@
 import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Button from '@material-ui/core/Button';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import InputBase from '@material-ui/core/InputBase';
-import { StyledLogoH, StyledInput } from './Header.styles';
+import {
+  StyledLogoH,
+  StyledInput,
+  StyledToolbar,
+  StyledButton,
+} from './Header.styles';
 
 interface HeaderProps {
   title: string;
@@ -18,9 +20,9 @@ export default function Header({ title, page }: HeaderProps) {
     return (
       <>
         <StyledInput />
-        <Button aria-label="search">
+        <StyledButton aria-label="search">
           <SearchIcon />
-        </Button>
+        </StyledButton>
       </>
     );
   };
@@ -29,9 +31,9 @@ export default function Header({ title, page }: HeaderProps) {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
-        <Button aria-label="menu">
+        <StyledButton aria-label="menu">
           <MenuIcon />
-        </Button>
+        </StyledButton>
       </>
     );
   };
@@ -40,12 +42,12 @@ export default function Header({ title, page }: HeaderProps) {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
-        <Button aria-label="menu">
+        <StyledButton aria-label="menu">
           <MenuIcon />
-        </Button>
-        <Button aria-label="search">
+        </StyledButton>
+        <StyledButton aria-label="search">
           <SearchIcon />
-        </Button>
+        </StyledButton>
       </>
     );
   };
@@ -76,12 +78,12 @@ export default function Header({ title, page }: HeaderProps) {
   return (
     <div>
       <AppBar position="static" color="inherit">
-        <Toolbar>
-          <Button color="inherit">
+        <StyledToolbar>
+          <StyledButton color="inherit">
             <ArrowBackIcon />
-          </Button>
+          </StyledButton>
           {renderByPage()}
-        </Toolbar>
+        </StyledToolbar>
       </AppBar>
     </div>
   );
