@@ -1,0 +1,5 @@
+{
+  "extension": ["ts"],
+  "spec": "../app.ts",
+  "require": "ts-node/register"
+}
