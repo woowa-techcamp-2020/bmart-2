@@ -4,6 +4,7 @@ import { GlobalStyle, theme } from './global.styles';
 import { ThemeProvider } from 'styled-components';
 import Container from '@material-ui/core/Container';
 
+import Header from './components/Header';
 import Main from './pages/Main';
 import Category from './pages/Category';
 import Cart from './pages/Cart';
@@ -18,6 +19,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
+        <Header title="B-MART" page="main" />
         <Container maxWidth="md">
           <BrowserRouter>
             <Switch>
