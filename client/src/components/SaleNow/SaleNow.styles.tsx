@@ -1,15 +1,42 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
-const StyledProduct = styled(Grid)`
+type TListImage = {
+  selected: boolean;
+};
+
+export const StyledProduct = styled(Grid)`
   box-shadow: ${(props) => props.theme.shadow};
-  padding: 14px !important;
-  // height: 100%;
+  padding: 5px !important;
   border-radius: 12px;
   background: white;
 ` as typeof Grid;
 
-const ImageWrapper = styled.div`
+
+export const ListImage = styled.img<TListImage>`
+  box-shadow: ${(props) => props.theme.shadow};
+  border-radius: 12px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box; 
+  border: ${(props: any) =>
+    props.selected ? 'solid 2px red' : 'none'};
+`;
+
+export const SelectedImage = styled.img`
+  border-radius: 12px;
+  box-shadow: ${(props) => props.theme.shadow};
+  object-fit: cover;
+  width: 100%;
+  height: 300px;
+`;
+
+export const SelectedProductWrap = styled.div`
+  margin: 15px 0;
+  text-align: center;
+`;
+
+export const ImageWrapper = styled.div`
   width: 100%;
   min-height: 80px;
   margin-bottom: 12px;
@@ -17,15 +44,18 @@ const ImageWrapper = styled.div`
   border-radius: 4px;
 `;
 
-const ProductTitle = styled.div`
+export const ProductTitle = styled.div`
   width: 100%;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 600;
   margin-bottom: 4px;
 `;
 
-const ProductPrice = styled.div`
+export const ProductPrice = styled.div`
   width: 100%;
+  font-size: 20px;
   color: #777;
 `;
 
-export { StyledProduct, ImageWrapper, ProductTitle, ProductPrice };
+
+

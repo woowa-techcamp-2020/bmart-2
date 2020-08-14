@@ -1,6 +1,8 @@
 #ignore file config
 .DS_Store
 
+.ide 
+
 # Logs
 logs
 *.log
