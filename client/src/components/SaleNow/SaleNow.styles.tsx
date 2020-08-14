@@ -12,15 +12,13 @@ export const StyledProduct = styled(Grid)`
   background: white;
 ` as typeof Grid;
 
-
 export const ListImage = styled.img<TListImage>`
   box-shadow: ${(props) => props.theme.shadow};
   border-radius: 12px;
   width: 100%;
   height: 100%;
-  box-sizing: border-box; 
-  border: ${(props: any) =>
-    props.selected ? 'solid 2px red' : 'none'};
+  box-sizing: border-box;
+  border: ${(props: any) => (props.selected ? 'solid 2px red' : 'none')};
 `;
 
 export const SelectedImage = styled.img`
@@ -58,13 +56,10 @@ export const ProductPrice = styled.div`
 `;
 
 export const SaleText = styled.div`
-  span{
+  span {
     margin-left: 5px;
     color: red;
   }
   font-weight: bold;
   margin-bottom: 10px;
 `;
-
-
-

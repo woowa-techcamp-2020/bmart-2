@@ -1,8 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
-import { title } from 'process';
-import { StyledProduct, ListImage, SelectedImage, ProductTitle, ProductPrice, SelectedProductWrap, SaleText } from './SaleNow.styles';
+import {
+  StyledProduct,
+  ListImage,
+  SelectedImage,
+  ProductTitle,
+  ProductPrice,
+  SaleText,
+} from './SaleNow.styles';
 
 type Product = {
   title: string;
@@ -34,60 +40,51 @@ const SaleNow = () => {
     },
   ]);
 
-  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
+  const [selectedProduct, setSelectedProduct] = useState<Product | null>(null);
 
   useEffect(() => {
-    if(products[0]){
+    if (products[0]) {
       setSelectedProduct(products[0]);
     }
-  }, [])
+  }, []);
 
-  const onSelectProduct = (product:Product) => {
+  const onSelectProduct = (product: Product) => {
     setSelectedProduct(product);
-  }
+  };
 
-  const productsList = () => products.map((product) => {
-    return (
-      <Grid item xs={3} key={uuidv4()}>
+  const productsList = () =>
+    products.map((product) => {
+      return (
+        <Grid item xs={3} key={uuidv4()}>
           <ListImage
             alt={product.title}
             src={product.url}
             onClick={() => onSelectProduct(product)}
             selected={product == selectedProduct}
           />
-      </Grid>
-    );
-  });
+        </Grid>
+      );
+    });
 
   return (
     <div>
       <SaleText>
-        지금사면 ⚡  
-        <span>
-          번쩍 할인 
-        </span> 
+        지금사면 ⚡<span>번쩍 할인</span>
       </SaleText>
       <Grid container spacing={1}>
         {productsList()}
         <Grid item xs={12}>
-          { selectedProduct ? (
+          {selectedProduct ? (
             <StyledProduct>
-              <SelectedImage
-                  alt={'asdf'}
-                  src={selectedProduct.url}
-              />
+              <SelectedImage alt="asdf" src={selectedProduct.url} />
               <ProductTitle> {selectedProduct.title} </ProductTitle>
               <ProductPrice> {selectedProduct.price}원⚡</ProductPrice>
             </StyledProduct>
-            )
-            :
-            (
+          ) : (
             <img />
-            )
-          }
+          )}
         </Grid>
       </Grid>
-
     </div>
   );
 };
