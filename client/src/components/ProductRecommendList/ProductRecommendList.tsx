@@ -16,18 +16,22 @@ interface ProductRecommendListType {}
 const items = [1, 2, 3, 4, 5, 6];
 
 const ProductRecommendList = ({}: ProductRecommendListType) => {
+  const renderProduct = () => {
+    return items.map((item, index) => (
+      <Grid item xs={4} sm={3} key={'recommand-list' + index}>
+        <Product />
+      </Grid>
+    ));
+  };
   return (
     <StyledListWrapper>
       <StyledListTitle>지금 뭐 먹지?</StyledListTitle>
       <StyledRecommendList container spacing={2}>
-        {items.map((item, index) => (
-          <Grid item xs={4} sm={3} key={'recommand-list' + index}>
-            <Product></Product>
-          </Grid>
-        ))}
+        {renderProduct()}
       </StyledRecommendList>
       <StyledRefreshButton>
-        <StyledRefreshIcon></StyledRefreshIcon>지금 뭐 먹지? 다른 상품 보기
+        <StyledRefreshIcon />
+        지금 뭐 먹지? 다른 상품 보기
       </StyledRefreshButton>
     </StyledListWrapper>
   );

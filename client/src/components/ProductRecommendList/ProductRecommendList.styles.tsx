@@ -2,22 +2,22 @@ import styled from 'styled-components';
 import { Grid, Button } from '@material-ui/core';
 import RefreshIcon from '@material-ui/icons/Refresh';
 
-const StyledListTitle = styled.div`
+export const StyledListTitle = styled.div`
   padding: 6px 0;
   font-size: 15px;
   font-weight: 500;
 `;
 
-const StyledRecommendList = styled(Grid)`
+export const StyledRecommendList = styled(Grid)`
   width: 100%;
 `;
 
-const StyledListWrapper = styled.div`
+export const StyledListWrapper = styled.div`
   background: white;
   padding: 8px 0;
 `;
 
-const StyledRefreshButton = styled(Button)`
+export const StyledRefreshButton = styled(Button)`
   && {
     width: 100%;
     margin: 12px 0 4px;
@@ -31,17 +31,9 @@ const StyledRefreshButton = styled(Button)`
   }
 `;
 
-const StyledRefreshIcon = styled(RefreshIcon)`
+export const StyledRefreshIcon = styled(RefreshIcon)`
   && {
     font-size: 14px;
     margin-right: 6px;
   }
 `;
-
-export {
-  StyledListTitle,
-  StyledRecommendList,
-  StyledListWrapper,
-  StyledRefreshButton,
-  StyledRefreshIcon,
-};
