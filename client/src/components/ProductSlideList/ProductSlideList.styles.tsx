@@ -1,13 +1,13 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
-const StyledListTitle = styled.div`
+export const StyledListTitle = styled.div`
   padding: 6px 0;
   font-size: 15px;
   font-weight: 500;
 `;
 
-const StyledSlideList = styled(Grid)`
+export const StyledSlideList = styled(Grid)`
   width: 100%;
   overflow-x: auto;
   flex-wrap: noWrap;
@@ -16,9 +16,7 @@ const StyledSlideList = styled(Grid)`
   }
 `;
 
-const StyledSlideListWrapper = styled.div`
+export const StyledSlideListWrapper = styled.div`
   background: white;
   padding: 8px 0;
 `;
-
-export { StyledListTitle, StyledSlideList, StyledSlideListWrapper };
