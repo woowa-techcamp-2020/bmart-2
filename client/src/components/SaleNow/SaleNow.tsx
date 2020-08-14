@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { v4 as uuidv4 } from 'uuid';
 import { title } from 'process';
-import { StyledProduct, ListImage, SelectedImage, ProductTitle, ProductPrice, SelectedProductWrap } from './SaleNow.styles';
+import { StyledProduct, ListImage, SelectedImage, ProductTitle, ProductPrice, SelectedProductWrap, SaleText } from './SaleNow.styles';
 
 type Product = {
   title: string;
@@ -61,6 +61,12 @@ const SaleNow = () => {
 
   return (
     <div>
+      <SaleText>
+        지금사면 ⚡  
+        <span>
+          번쩍 할인 
+        </span> 
+      </SaleText>
       <Grid container spacing={1}>
         {productsList()}
         <Grid item xs={12}>
@@ -71,7 +77,7 @@ const SaleNow = () => {
                   src={selectedProduct.url}
               />
               <ProductTitle> {selectedProduct.title} </ProductTitle>
-              <ProductPrice> {selectedProduct.price}원</ProductPrice>
+              <ProductPrice> {selectedProduct.price}원⚡</ProductPrice>
             </StyledProduct>
             )
             :

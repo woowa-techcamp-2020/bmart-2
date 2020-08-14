@@ -57,5 +57,14 @@ export const ProductPrice = styled.div`
   color: #777;
 `;
 
+export const SaleText = styled.div`
+  span{
+    margin-left: 5px;
+    color: red;
+  }
+  font-weight: bold;
+  margin-bottom: 10px;
+`;
+
 
 
