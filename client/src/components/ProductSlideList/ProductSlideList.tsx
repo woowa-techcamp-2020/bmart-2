@@ -14,15 +14,18 @@ interface ProductSlideListType {}
 const items = [1, 2, 3, 4, 5, 6];
 
 const ProductSlideList = ({}: ProductSlideListType) => {
+  const renderProduct = () => {
+    return items.map((item, index) => (
+      <Grid item style={{ minWidth: '150px' }} key={'slide-list' + index}>
+        <Product />
+      </Grid>
+    ));
+  };
   return (
     <StyledSlideListWrapper>
       <StyledListTitle>이수정님을 위해 준비한 상품</StyledListTitle>
       <StyledSlideList container spacing={2} wrap={'nowrap'}>
-        {items.map((item, index) => (
-          <Grid item style={{ minWidth: '150px' }} key={'slide-list' + index}>
-            <Product></Product>
-          </Grid>
-        ))}
+        {renderProduct()}
       </StyledSlideList>
     </StyledSlideListWrapper>
   );
