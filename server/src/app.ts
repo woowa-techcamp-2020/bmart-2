@@ -1,6 +1,5 @@
 import express, { Request, Response } from 'express';
 import path from 'path';
-import dotenv from 'dotenv';
 
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -10,7 +9,6 @@ import { startDB } from './models';
 
 const app = express();
 
-dotenv.config();
 startDB();
 
 app.use(logger('dev'));
