@@ -30,7 +30,7 @@ Category.init(
       allowNull: false,
     },
     img_url: {
-      type: DataTypes.STRING(45),
+      type: DataTypes.STRING(255),
       allowNull: false,
     },
     removed: {

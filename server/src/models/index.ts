@@ -40,6 +40,7 @@ const startDev = () => {
       sequelize
         .authenticate()
         .then(() => console.log('🚀Connection Created!'))
+        .then(() => sequelize.sync({ force: false }))
         .catch((err) => {
           console.error('unable establish connection', err);
         });
@@ -51,6 +52,7 @@ const startProd = () => {
   sequelize
     .authenticate()
     .then(() => console.log('🚀Connection Created!'))
+    .then(() => sequelize.sync({ force: false }))
     .catch((err) => {
       console.error('unable establish connection', err);
     });
@@ -63,7 +65,6 @@ const startDB = (): void => {
     startDev();
   }
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
-  sequelize.sync({ force: false });
 };
 
 export { startDB, sequelize };

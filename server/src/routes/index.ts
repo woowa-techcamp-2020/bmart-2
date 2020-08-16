@@ -1,10 +1,10 @@
 import express from 'express';
+import categoryRouter from './category';
+import subCategoryRouter from './subCategory';
 
 const router = express.Router();
 
-/* GET home page. */
-router.get('/', (req, res, next) => {
-  res.render('index', { title: 'Express' });
-});
+router.use('/category', categoryRouter);
+router.use('/sub-category', subCategoryRouter);
 
 export default router;
