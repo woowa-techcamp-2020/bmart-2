@@ -1,12 +1,12 @@
 import { Model } from 'sequelize';
 import { sequelize } from './index';
 
-class Order extends Model {
+class Dib extends Model {
   public readonly createdAt!: Date;
 
   public readonly updatedAt!: Date;
 }
 
-Order.init({}, { timestamps: true, tableName: 'dib', sequelize });
+Dib.init({}, { timestamps: true, tableName: 'dib', sequelize });
 
-export default Order;
+export default Dib;

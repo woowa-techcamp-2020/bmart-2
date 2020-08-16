@@ -38,7 +38,6 @@ SubCategory.init(
 SubCategory.hasMany(Product, {
   sourceKey: 'id',
   foreignKey: { name: 'subCategoryId', allowNull: false },
-  as: 'products',
 });
 
 export default SubCategory;
