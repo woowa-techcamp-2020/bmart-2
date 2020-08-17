@@ -49,6 +49,7 @@ const datas: {
 ];
 const Pull = ({ boxHeight, isPulling }: IPull) => {
   const [topHeight, setTopHeight] = useState(defaultTopHeight);
+  const [topMargin, setTopMargin] = useState(0);
   const [isFinishPull, setIsFinishPull] = useState(false);
   const [dataIdx, setDataIdx] = useState(0);
 
@@ -78,6 +79,10 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
         changeTopHeight();
       };
       slotAnimation();
+      setTopMargin(30);
+      setTimeout(() => {
+        setTopMargin(0);
+      }, 1990);
     } else {
       setTopHeight((boxHeight % range) - rangeHalf);
       setDataIdx(
@@ -89,7 +94,9 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
   const slotsOpacity = 1 - Math.abs(topHeight / rangeHalf);
 
   return (
-    <StyledPullContainer style={{ top: `${50 + boxHeight}px` }}>
+    <StyledPullContainer
+      style={{ height: `${boxHeight}px`, marginTop: `${topMargin}px` }}
+    >
       <StyledSlotsWrap style={{ top: `${topHeight}px`, opacity: slotsOpacity }}>
         {dataIdx === -1 ? '핫도그가' : datas[dataIdx].emoji}
       </StyledSlotsWrap>
