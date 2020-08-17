@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import Product from '../models/product';
+import Product from '../models/Product';
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const product = await Product.create(req.body);

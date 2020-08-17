@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import Category from '../models/category';
+import Category from '../models/Category';
 
 const create = async (req: Request, res: Response, next: NextFunction) => {
   const category = await Category.create(req.body);
