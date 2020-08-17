@@ -5,18 +5,22 @@ const StyledWrapper = styled.div`
   background-color: blue;
   position: relative;
   overflow: hidden;
+  ::-webkit-scrollbar {
+    height: 0px; /* Remove scrollbar space */
+  }
 `;
 
 const StyledCarousel = styled.div`
-  width: 1000%;
-  transform: translate(-7.5%);
+  display: flex;
+  overflow-x: auto;
 `;
 
 const StyledHourse = styled.div`
-  width: 8%;
-  margin-right: 0.5%;
+  width: 80%;
+  padding-right: 5%;
   display: inline-block;
   border-radius: 15px;
+  flex: 0 0 auto;
 `;
 
 const StyledThumb = styled.img`
