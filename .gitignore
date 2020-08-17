@@ -1,5 +1,8 @@
 #ignore file config
 .DS_Store
+/package.json
+/yarn.lock
+.idea
 
 .ide 
 
