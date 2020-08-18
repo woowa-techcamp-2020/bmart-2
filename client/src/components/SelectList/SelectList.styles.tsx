@@ -9,6 +9,7 @@ interface SelectListType {
   imageWidth?: number;
   clickbtn?: string;
   open?: boolean;
+  count?: number;
 }
 
 export const StyledCountDown = styled(RemoveIcon)`
@@ -22,13 +23,26 @@ export const StyledCountDown = styled(RemoveIcon)`
   padding: 4px;
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.shadow};
+  transition: transform 0.4s;
+  &:active {
+    transform: scale(0.95);
+  }
+  ${(props: SelectListType) =>
+    props.count &&
+    props.count === 1 &&
+    css`
+      pointer-events: none;
+      color: #ccc;
+    `}
 `;
 
 export const StyledCountText = styled.div`
   line-height: 32px;
   font-size: 17px;
   font-weight: bold;
-  margin: 0 12px;
+  margin: 0 10px;
+  width: 20px;
+  text-align: center;
 `;
 
 export const StyledCountUp = styled(AddIcon)`
@@ -42,6 +56,17 @@ export const StyledCountUp = styled(AddIcon)`
   padding: 4px;
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.shadow};
+  transition: transform 0.4s;
+  &:active {
+    transform: scale(0.95);
+  }
+  ${(props: SelectListType) =>
+    props.count &&
+    props.count === 10 &&
+    css`
+      pointer-events: none;
+      background: #ccc;
+    `}
 `;
 
 function goCartImage(height: number | undefined) {
@@ -128,6 +153,18 @@ const cancelContainer = keyframes`
   }
 `;
 
+const cancelCartButton = keyframes`
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  80% {
+    transform: translate3d(0, 100px, 0);
+  }
+  100% {
+    transform: translate3d(0, 100px, 0);
+  }
+`;
+
 export const StyledSelectListContaienr = styled.div`
   position: fixed;
   left: 0;
@@ -139,7 +176,7 @@ export const StyledSelectListContaienr = styled.div`
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column-reverse;
-  transition: opacity 0.3s;
+  transition: opacity 0.4s;
   ${(props: SelectListType) =>
     props.open &&
     css`
@@ -166,7 +203,7 @@ export const StyledSelectList = styled.div`
   background: white;
   padding: 32px;
   transform: translate3d(0, 320px, 0);
-  transition: all 0.3s;
+  transition: all 0.2s;
   ${(props: SelectListType) =>
     props.open &&
     css`
@@ -243,7 +280,7 @@ export const StyledSelectListButton = styled(ShoppingCartIcon)`
   background: #dd4470;
   border-radius: 50%;
   transform: translate3d(0, 100px, 0);
-  transition: all 0.3s;
+  transition: all 0.2s;
   padding: 16px;
   color: white;
   box-sizing: border-box;
