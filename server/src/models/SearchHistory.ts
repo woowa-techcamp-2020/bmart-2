@@ -18,7 +18,7 @@ SearchHistory.init(
       autoIncrement: true,
     },
   },
-  { timestamps: true, tableName: 'search_history', sequelize }
+  { timestamps: true, tableName: 'searchHistory', sequelize }
 );
 
 export default SearchHistory;

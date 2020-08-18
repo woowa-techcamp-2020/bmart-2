@@ -5,7 +5,7 @@ import { sequelize } from './index';
 class Banner extends Model {
   public id!: number;
 
-  public img_url!: string;
+  public imgUrl!: string;
 
   public removed!: boolean;
 
@@ -22,7 +22,7 @@ Banner.init(
       allowNull: false,
       autoIncrement: true,
     },
-    img_url: {
+    imgUrl: {
       type: DataTypes.STRING(255),
       allowNull: false,
     },

@@ -8,8 +8,6 @@ class SubCategory extends Model {
 
   public name!: string;
 
-  public category_id!: number;
-
   public removed!: boolean;
 
   public readonly createdAt!: Date;
@@ -25,10 +23,6 @@ SubCategory.init(
       allowNull: false,
       autoIncrement: true,
     },
-    category_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false,
-    },
     name: {
       type: DataTypes.STRING(45),
       allowNull: false,
@@ -38,12 +32,7 @@ SubCategory.init(
       allowNull: false,
     },
   },
-  { timestamps: true, tableName: 'sub_category', sequelize }
+  { timestamps: true, tableName: 'subCategory', sequelize }
 );
-
-// SubCategory.hasMany(Product, {
-//   sourceKey: 'id',
-//   foreignKey: { name: 'subCategoryId', allowNull: false },
-// });
 
 export default SubCategory;

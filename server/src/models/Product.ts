@@ -10,11 +10,11 @@ class Product extends Model {
 
   public price!: number;
 
-  public subcategory_id!: number;
+  public subcategoryId!: number;
 
-  public thum_img_url!: string;
+  public thumImgUrl!: string;
 
-  public main_img_url!: string;
+  public mainImgUrl!: string;
 
   public description!: string;
 
@@ -22,15 +22,15 @@ class Product extends Model {
 
   public name!: string;
 
-  public max_quantity!: number;
+  public maxQuantity!: number;
 
   public stock!: number;
 
   public removed!: number;
 
-  public readonly createdAt!: Date;
+  public readonly created_at!: Date;
 
-  public readonly updatedAt!: Date;
+  public readonly updated_at!: Date;
 }
 
 Product.init(
@@ -41,15 +41,15 @@ Product.init(
       allowNull: false,
       autoIncrement: true,
     },
-    subcategory_id: {
+    subcategoryId: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    thum_img_url: {
+    thumImgUrl: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
-    main_img_url: {
+    mainImgUrl: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
@@ -69,7 +69,7 @@ Product.init(
       type: DataTypes.STRING(45),
       allowNull: true,
     },
-    max_quantity: {
+    maxQuantity: {
       type: DataTypes.INTEGER,
       allowNull: true,
     },
@@ -97,7 +97,7 @@ Product.hasMany(Dib, {
 
 Product.hasMany(Order, {
   sourceKey: 'id',
-  foreignKey: { name: 'product_Id', allowNull: false },
+  foreignKey: { name: 'productID', allowNull: false },
 });
 
 export default Product;
