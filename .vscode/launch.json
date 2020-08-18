@@ -8,11 +8,13 @@
           "skipFiles": [
               "<node_internals>/**"
           ],
+
           "program": "${workspaceFolder}/server/src/bin/www.ts",
           "preLaunchTask": "tsc: build - server/tsconfig.json",
           "outFiles": [
               "${workspaceFolder}/server/dist/**/*.js"
-          ]
+          ],
+          "envFile": "${workspaceFolder}/server/.env"
         
       }
   ]
