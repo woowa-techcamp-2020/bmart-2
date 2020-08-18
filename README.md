@@ -6,7 +6,7 @@
 - [![title](https://img.shields.io/badge/DEVLOPER-김유영-123456)](https://github.com/yuda1124)
 
 ## ERD
-![ERD](https://user-images.githubusercontent.com/18456572/89965106-ea214a00-dc86-11ea-85f6-704d5ddb596a.png)
+![ERD](https://user-images.githubusercontent.com/18456572/90493851-d5105380-e17d-11ea-8ad9-de0dd86b2051.png)
 
 ## Wiki
 [우리들의 위키](https://github.com/woowa-techcamp-2020/bmart-2/wiki)
