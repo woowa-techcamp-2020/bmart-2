@@ -12,7 +12,7 @@ class Product extends Model {
 
   public subcategoryId!: number;
 
-  public thumImgUrl!: string;
+  public thumbImgUrl!: string;
 
   public mainImgUrl!: string;
 
@@ -28,9 +28,9 @@ class Product extends Model {
 
   public removed!: number;
 
-  public readonly created_at!: Date;
+  public readonly createdAt!: Date;
 
-  public readonly updated_at!: Date;
+  public readonly updatedAt!: Date;
 }
 
 Product.init(
@@ -45,7 +45,7 @@ Product.init(
       type: DataTypes.INTEGER,
       allowNull: true,
     },
-    thumImgUrl: {
+    thumbImgUrl: {
       type: DataTypes.STRING(255),
       allowNull: true,
     },
