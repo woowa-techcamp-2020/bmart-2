@@ -10,15 +10,23 @@ class Product extends Model {
 
   public price!: number;
 
-  public subcategory!: number;
+  public subcategoryId!: number;
+
+  public thumbImgUrl!: string;
+
+  public mainImgUrl!: string;
+
+  public description!: string;
 
   public discount!: number;
 
   public name!: string;
 
-  public max_quantity!: number;
+  public maxQuantity!: number;
 
   public stock!: number;
+
+  public removed!: number;
 
   public readonly createdAt!: Date;
 
@@ -33,24 +41,44 @@ Product.init(
       allowNull: false,
       autoIncrement: true,
     },
+    subcategoryId: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    thumbImgUrl: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    mainImgUrl: {
+      type: DataTypes.STRING(255),
+      allowNull: true,
+    },
+    description: {
+      type: DataTypes.TEXT,
+      allowNull: true,
+    },
     price: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     discount: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     name: {
       type: DataTypes.STRING(45),
-      allowNull: false,
+      allowNull: true,
     },
-    max_quantity: {
+    maxQuantity: {
       type: DataTypes.INTEGER,
-      allowNull: false,
+      allowNull: true,
     },
     stock: {
       type: DataTypes.INTEGER,
+      allowNull: true,
+    },
+    removed: {
+      type: DataTypes.TINYINT,
       allowNull: false,
     },
   },
@@ -69,7 +97,7 @@ Product.hasMany(Dib, {
 
 Product.hasMany(Order, {
   sourceKey: 'id',
-  foreignKey: { name: 'product_Id', allowNull: false },
+  foreignKey: { name: 'productID', allowNull: false },
 });
 
 export default Product;

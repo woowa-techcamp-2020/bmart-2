@@ -8,7 +8,7 @@ class Category extends Model {
 
   public name!: string;
 
-  public img_url!: string;
+  public imgUrl!: string;
 
   public removed!: boolean;
 
@@ -29,9 +29,9 @@ Category.init(
       type: DataTypes.STRING(45),
       allowNull: false,
     },
-    img_url: {
+    imgUrl: {
       type: DataTypes.STRING(255),
-      allowNull: false,
+      allowNull: true,
     },
     removed: {
       type: DataTypes.BOOLEAN,
