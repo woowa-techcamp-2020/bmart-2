@@ -1,6 +1,6 @@
 #ignore file config
 .DS_Store
-
+.idea
 .ide 
 
 # Logs
