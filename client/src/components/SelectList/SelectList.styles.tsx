@@ -168,7 +168,7 @@ const cancelCartButton = keyframes`
 export const StyledSelectListContaienr = styled.div`
   position: fixed;
   left: 0;
-  top: 0;
+  bottom: 0;
   opacity: 0;
   z-index: -1;
   width: 100%;
@@ -176,11 +176,11 @@ export const StyledSelectListContaienr = styled.div`
   background: rgba(0, 0, 0, 0.3);
   display: flex;
   flex-direction: column-reverse;
-  transition: opacity 0.4s;
+  transition: all 0.4s;
   ${(props: SelectListType) =>
     props.open &&
     css`
-      z-index: 1;
+      z-index: 2;
       opacity: 1;
     `}
   ${(props: SelectListType) =>
@@ -203,7 +203,7 @@ export const StyledSelectList = styled.div`
   background: white;
   padding: 32px;
   transform: translate3d(0, 320px, 0);
-  transition: all 0.2s;
+  transition: all 0.4s;
   ${(props: SelectListType) =>
     props.open &&
     css`
@@ -280,7 +280,7 @@ export const StyledSelectListButton = styled(ShoppingCartIcon)`
   background: #dd4470;
   border-radius: 50%;
   transform: translate3d(0, 100px, 0);
-  transition: all 0.2s;
+  transition: all 0.4s;
   padding: 16px;
   color: white;
   box-sizing: border-box;

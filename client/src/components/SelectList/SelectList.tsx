@@ -1,4 +1,4 @@
-import React, { useEffect, useCallback } from 'react';
+import React, { useCallback } from 'react';
 import {
   StyledSelectListContaienr,
   StyledSelectListWrapper,
@@ -23,6 +23,9 @@ interface SelectListPropType {
   data: any;
 }
 
+// TODO
+// Util폴더에서 numberToString 함수 만들어서 가격 표시하기
+
 const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
   const [clickbtn, setClicked] = React.useState(false);
   const [count, setCount] = React.useState(1);
@@ -30,6 +33,7 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
 
   const clickedButton = useCallback(
     (e) => {
+      if (clickbtn) return;
       setClicked(true);
       setTimeout(() => {
         setOpenList(false);
@@ -40,30 +44,30 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
     [clickbtn]
   );
 
-  const countDown = () => {
+  const countDown = useCallback(() => {
     setCount(count - 1);
-  };
-  const countUp = () => {
+  }, [count]);
+  const countUp = useCallback(() => {
     setCount(count + 1);
-  };
+  }, [count]);
 
-  const cancelList = () => {
+  const cancelList = useCallback(() => {
     setOpenList(false);
-  };
+  }, [openList]);
 
   return (
     <StyledSelectListContaienr open={openList} clickbtn={clickbtn.toString()}>
       <StyledSelectListWrapper>
         <StyledSelectList clickbtn={clickbtn.toString()} open={openList}>
           <StyledImageContentWrapper ref={detailContainer}>
-            <StyledImageContent url="https://img-cf.kurly.com/shop/data/goods/1530775904381y0.jpg"></StyledImageContent>
+            <StyledImageContent url={data.imgUrl}></StyledImageContent>
           </StyledImageContentWrapper>
           <StyledProductName>{data.name}</StyledProductName>
           <StyledProductMaxCount>
             1회 최대 구매 수량: {data.max_quantity}개
           </StyledProductMaxCount>
           <StyledSelectProductCartContent>
-            <StyledProductPrice>3,700원</StyledProductPrice>
+            <StyledProductPrice>{data.price * count}원</StyledProductPrice>
             <StyledProductCountWrapper>
               <StyledCountUp
                 onPointerUp={countUp}
@@ -71,7 +75,7 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
               ></StyledCountUp>
               <StyledCountText>{count}</StyledCountText>
               <StyledCountDown
-                onPointerDown={countDown}
+                onPointerUp={countDown}
                 count={count}
               ></StyledCountDown>
             </StyledProductCountWrapper>
