@@ -1,12 +1,14 @@
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 
 interface DetailPageType {
   src?: string;
+  open?: boolean;
 }
 
 export const StyledDetialWrapper = styled.div`
   width: 100%;
   min-height: calc(100vh - 60px);
+  transition: filter 0.2;
 `;
 
 export const StyledImage = styled.div`

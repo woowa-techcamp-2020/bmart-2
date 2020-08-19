@@ -25,9 +25,6 @@ interface SelectListPropType {
   data: any;
 }
 
-// TODO
-// Util폴더에서 numberToString 함수 만들어서 가격 표시하기
-
 const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
   const [clickbtn, setClicked] = React.useState(false);
   const [count, setCount] = React.useState(1);
@@ -46,16 +43,16 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
     [clickbtn]
   );
 
-  const countDown = useCallback(() => {
+  const countDown = () => {
     setCount(count - 1);
-  }, [count]);
-  const countUp = useCallback(() => {
+  };
+  const countUp = () => {
     setCount(count + 1);
-  }, [count]);
+  };
 
-  const cancelList = useCallback(() => {
+  const cancelList = () => {
     setOpenList(false);
-  }, [openList]);
+  };
 
   return (
     <StyledSelectListContaienr open={openList} clickbtn={clickbtn.toString()}>

@@ -22,10 +22,6 @@ const data = {
   imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1530775904381y0.jpg',
 };
 
-// TODO
-// Util > 가격 string으로 변환 후 보여줘야함
-// 상세 페이지 내용 추가되어야 함
-
 const Detail = () => {
   const [openList, setOpenList] = React.useState(false);
 
@@ -34,21 +30,23 @@ const Detail = () => {
   }, [openList]);
 
   return (
-    <StyledDetialWrapper>
-      <StyledImage className="image" src={data.imgUrl} />
-      <StyledNameText>{data.name}</StyledNameText>
-      <StyledPriceText>{numberToString(data.price)}원</StyledPriceText>
-      <InfoContent>
-        <InfoTitle>배달 정보</InfoTitle>
-        <div> 😢 지금은 운영 시간이 아니에요</div>
-      </InfoContent>
-      <StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
+    <>
+      <StyledDetialWrapper>
+        <StyledImage className="image" src={data.imgUrl} />
+        <StyledNameText>{data.name}</StyledNameText>
+        <StyledPriceText>{numberToString(data.price)}원</StyledPriceText>
+        <InfoContent>
+          <InfoTitle>배달 정보</InfoTitle>
+          <div> 😢 지금은 운영 시간이 아니에요</div>
+        </InfoContent>
+        <StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
+      </StyledDetialWrapper>
       <SelectList
         openList={openList}
         setOpenList={setOpenList}
         data={data}
       ></SelectList>
-    </StyledDetialWrapper>
+    </>
   );
 };
 
