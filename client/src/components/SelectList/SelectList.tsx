@@ -17,6 +17,8 @@ import {
   StyledCountText,
 } from './SelectList.styles';
 
+import { numberToString } from '../../util/common';
+
 interface SelectListPropType {
   openList: boolean;
   setOpenList: Function;
@@ -67,7 +69,9 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
             1회 최대 구매 수량: {data.max_quantity}개
           </StyledProductMaxCount>
           <StyledSelectProductCartContent>
-            <StyledProductPrice>{data.price * count}원</StyledProductPrice>
+            <StyledProductPrice>
+              {numberToString(data.price * count)}원
+            </StyledProductPrice>
             <StyledProductCountWrapper>
               <StyledCountUp
                 onPointerUp={countUp}

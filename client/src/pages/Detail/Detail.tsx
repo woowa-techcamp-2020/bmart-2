@@ -10,6 +10,7 @@ import {
 } from './Detail.styles';
 
 import SelectList from '../../components/SelectList';
+import { numberToString } from '../../util/common';
 
 const data = {
   price: 3400,
@@ -36,7 +37,7 @@ const Detail = () => {
     <StyledDetialWrapper>
       <StyledImage className="image" src={data.imgUrl} />
       <StyledNameText>{data.name}</StyledNameText>
-      <StyledPriceText>{data.price}원</StyledPriceText>
+      <StyledPriceText>{numberToString(data.price)}원</StyledPriceText>
       <InfoContent>
         <InfoTitle>배달 정보</InfoTitle>
         <div> 😢 지금은 운영 시간이 아니에요</div>
