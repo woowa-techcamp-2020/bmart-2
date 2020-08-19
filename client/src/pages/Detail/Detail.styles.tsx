@@ -8,17 +8,12 @@ interface DetailPageType {
 export const StyledDetialWrapper = styled.div`
   width: 100%;
   min-height: calc(100vh - 60px);
-  transition: filter 0.2;
 `;
 
 export const StyledImage = styled.div`
-  width: 100%;
   padding: 16px;
   margin: 16px 0;
-  height: 600px;
-  @media (max-width: 600px) {
-    height: 380px;
-  }
+  height: 50vh;
   border-radius: 12px;
   background-image: url('${(props: DetailPageType) => props.src}');
   background-position: 50% 50%;
