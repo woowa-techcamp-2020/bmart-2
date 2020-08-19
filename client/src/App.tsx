@@ -24,8 +24,8 @@ function App() {
   const dispatch = useCategoryDispatch();
   useEffect(() => {
     const fetchCategory = async () => {
-      const categories = await category.get('/api/category');
-      dispatch!({ type: 'INIT', payload: { key: 'hello' } as any });
+      const categories = await category.get('/api/category?sub=true');
+      dispatch!({ type: 'INIT', payload: categories as any });
     };
     fetchCategory();
   }, []);
