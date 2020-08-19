@@ -1,6 +1,6 @@
 import express, { Request, Response, NextFunction } from 'express';
 import path from 'path';
-
+import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
 import router from './routes';
@@ -13,6 +13,7 @@ interface Error {
 }
 startDB();
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

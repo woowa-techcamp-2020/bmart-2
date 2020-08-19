@@ -4,8 +4,6 @@
 /yarn.lock
 .idea
 
-.ide 
-
 # Logs
 logs
 *.log

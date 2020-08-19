@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { GlobalStyle, theme } from './global.styles';
 import { ThemeProvider } from 'styled-components';
 import Container from '@material-ui/core/Container';
+import { GlobalStyle, theme } from './global.styles';
 
 import Header from './components/Header';
 import Main from './pages/Main';
@@ -13,8 +13,22 @@ import Menu from './pages/Menu';
 import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import {
+  CategoryContextProvider,
+  useCategoryDispatch,
+  TCategoryState,
+} from './context/categoryContext';
+import category from './apis/category';
 
 function App() {
+  const dispatch = useCategoryDispatch();
+  useEffect(() => {
+    const fetchCategory = async () => {
+      const categories = await category.get('/api/category?sub=true');
+      dispatch!({ type: 'INIT', payload: categories as any });
+    };
+    fetchCategory();
+  }, []);
   return (
     <>
       <ThemeProvider theme={theme}>
