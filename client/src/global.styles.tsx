@@ -12,6 +12,7 @@ interface BMartTheme {
 }
 
 declare module 'styled-components' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
   export interface DefaultTheme extends BMartTheme {}
 }
 
@@ -86,6 +87,11 @@ em {
 html, body {
   width: 100%;
   height: 100%;
+}
+body{
+ /* Disables pull-to-refresh but allows overscroll glow effects. */
+ overscroll-behavior-y: none;
+ overflow-y: hidden; 
 }
 `;
 

@@ -53,9 +53,9 @@ const SaleNow = () => {
   };
 
   const productsList = () =>
-    products.map((product) => {
+    products.map((product, i) => {
       return (
-        <Grid item xs={3} key={uuidv4()}>
+        <Grid item xs={3} key={`sale-now-${i}}`}>
           <ListImage
             alt={product.title}
             src={product.url}
