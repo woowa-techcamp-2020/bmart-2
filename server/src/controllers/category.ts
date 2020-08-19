@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { CategoryService } from '../services';
 import Category from '../models/Category';
 
 const create = async (
@@ -15,7 +16,13 @@ const findAll = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const categories = await Category.findAll();
+  const isSub = req.query.sub;
+  let categories = null;
+  if (isSub === 'true') {
+    categories = await CategoryService.findCategoryIncludeSub();
+  } else {
+    categories = await Category.findAll();
+  }
   res.status(200).send(categories);
 };
 

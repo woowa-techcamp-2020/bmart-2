@@ -19,6 +19,17 @@ const findAll = async (
   res.status(200).send({ success: true, products });
 };
 
+const find = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { params } = req;
+  const id = parseInt(params.id, 10);
+  const products = await Product.findByPk(id);
+  res.status(200).send({ success: true, products });
+};
+
 const softDelete = async (
   req: Request,
   res: Response,
@@ -30,4 +41,4 @@ const softDelete = async (
   res.status(200).send({ success: true });
 };
 
-export default { create, findAll, softDelete };
+export default { create, findAll, softDelete, find };
