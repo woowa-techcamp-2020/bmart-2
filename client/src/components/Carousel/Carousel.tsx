@@ -6,6 +6,9 @@ import {
   StyledCarousel,
   StyledThumb,
   StyledPaginationWrapper,
+  StyledBullet,
+  StyledCheckedBullet,
+  StyledCurrentThumb,
 } from './Carousel.styles';
 
 interface bannerInfo {
@@ -107,29 +110,33 @@ export default function Carousel({ banners }: CarouselProps) {
 
   const renderHorses = () => {
     return createRenderData(banners).map((info, i) => {
+      const Thumb = info.id === index ? StyledCurrentThumb : StyledThumb;
       return (
         <StyledHourse key={`horse_${i}`}>
-          <StyledThumb src={info.img_url} key={`img_${i}`} />
+          <Thumb src={info.img_url} key={`img_${i}`} />
         </StyledHourse>
       );
     });
   };
 
   const renderBullet = (info: bannerInfo) => {
+    const Bullet = index === info.id ? StyledCheckedBullet : StyledBullet;
     return (
-      <input
-        type="radio"
-        key={`bullet_${info.id + 1}`}
-        value={info.id + 1}
-        name="page"
-        ref={(el) => (bulletRef.current[info.id] = el)}
-        onChange={(e) => {
-          clearSwiperInterval();
-          translateByIndex(parseInt(e.target.value));
-          setSwiperInterval();
-        }}
-        checked={index === info.id}
-      ></input>
+      <Bullet key={`label_${info.id + 1}`}>
+        <input
+          type="radio"
+          key={`bullet_${info.id + 1}`}
+          value={info.id + 1}
+          name="page"
+          ref={(el) => (bulletRef.current[info.id] = el)}
+          onChange={(e) => {
+            clearSwiperInterval();
+            translateByIndex(parseInt(e.target.value));
+            setSwiperInterval();
+          }}
+          checked={index === info.id}
+        ></input>
+      </Bullet>
     );
   };
   const renderPagination = () => {
