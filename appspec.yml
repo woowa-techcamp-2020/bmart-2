@@ -1,8 +1,9 @@
-pwd>/home/ubuntu/location
-
-cd /home/ubuntu/build
-
-cd server/src
-
-pm2 stop app.js
-pm2 start app.js
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/build
+hooks:
+  AfterInstall:
+    - location: /start.sh
+      runas: root
