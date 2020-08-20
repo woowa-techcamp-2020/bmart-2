@@ -16,8 +16,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: initil-setting
-        run: sudo npm install -g yarn
-          cd client
+        run: |
+          sudo apt remove cmdtest
+          sudo apt remove yarn
+          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+          sudo apt-get update  
+          sudo apt-get install yarn
       - name: client-setting
         run: |
           cd client
