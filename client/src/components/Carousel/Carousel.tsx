@@ -22,7 +22,6 @@ interface CarouselProps {
 
 export default function Carousel({ banners }: CarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
-  const bulletRef = useRef(new Array(banners.length));
   const intervalId = useRef(0);
   const [index, setIndex] = useState(0);
 
@@ -128,7 +127,6 @@ export default function Carousel({ banners }: CarouselProps) {
           key={`bullet_${info.id + 1}`}
           value={info.id + 1}
           name="page"
-          ref={(el) => (bulletRef.current[info.id] = el)}
           onChange={(e) => {
             clearSwiperInterval();
             translateByIndex(parseInt(e.target.value));
