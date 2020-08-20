@@ -4,6 +4,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
+  margin-top: 1vh;
 `;
 
 const StyledCarousel = styled.div`
