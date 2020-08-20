@@ -13,7 +13,7 @@ const CategoryIcons = () => {
     categories.map((category) => (
       <StyledCategoryIconsCol key={category.id}>
         <div>
-          <img src="https://i.imgur.com/JM73vdR.png" alt="category img" />
+          <img src={category.imgUrl} alt="category img" />
         </div>
         <div>{category.name}</div>
       </StyledCategoryIconsCol>

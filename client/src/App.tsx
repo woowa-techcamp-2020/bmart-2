@@ -18,13 +18,13 @@ import {
   useCategoryDispatch,
   TCategoryState,
 } from './context/categoryContext';
-import category from './apis/category';
+import category from './apis';
 
 function App() {
   const dispatch = useCategoryDispatch();
   useEffect(() => {
     const fetchCategory = async () => {
-      const res = await category.get('/api/category?sub=true');
+      const res = await category.get('/category?sub=true');
       dispatch!({ type: 'INIT', payload: res?.data as any });
     };
     fetchCategory();

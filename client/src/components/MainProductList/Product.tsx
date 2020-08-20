@@ -2,15 +2,14 @@ import * as React from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
 
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
-import { Checkbox } from '@material-ui/core';
-import { useEffect } from 'react';
 import {
   StyledProduct,
   ImageWrapper,
   ProductTitle,
   ProductPrice,
   StyledFavoriteCheck,
-} from './Product.styles';
+} from '../Product/Product.styles';
+import { IProduct } from '../../../../types/modelTypes';
 
 interface ProductType {
   url: string;
@@ -22,26 +21,20 @@ interface ProductType {
   discount: number;
 }
 
-const Product = () => {
-  const [image, setImage] = React.useState<ProductType | null>({
-    url: 'https://image.auction.co.kr/itemimage/1a/c1/04/1ac1047af6.jpg',
-    id: 1,
-    name: '페브리즈 333ml',
-    price: 2400,
-    subcategory_id: 1,
-    stock: 123,
-    discount: 0,
-  });
+interface IProductProps {
+  product: IProduct;
+}
 
+const Product = ({ product }: IProductProps) => {
   return (
     <>
-      {image ? (
+      {product ? (
         <StyledProduct>
           <ImageWrapper>
             <img
               style={{ width: '100%', height: '100%' }}
-              alt="asdf"
-              src={image.url}
+              alt={product.name}
+              src={product.thumbImgUrl}
             />
             <StyledFavoriteCheck
               icon={<FavoriteBorder />}
@@ -49,8 +42,8 @@ const Product = () => {
               name="checked"
             />
           </ImageWrapper>
-          <ProductTitle>페브리즈 탈취제 370ml </ProductTitle>
-          <ProductPrice>2,700원</ProductPrice>
+          <ProductTitle>{product.name}</ProductTitle>
+          <ProductPrice>{product.price}원</ProductPrice>
         </StyledProduct>
       ) : (
         <StyledProduct>
