@@ -29,4 +29,17 @@ const StyledHourse = styled.div`
 const StyledThumb = styled.img`
   width: 100%;
 `;
-export { StyledWrapper, StyledCarousel, StyledHourse, StyledThumb };
+
+const StyledPaginationWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: center;
+`;
+
+export {
+  StyledWrapper,
+  StyledCarousel,
+  StyledHourse,
+  StyledThumb,
+  StyledPaginationWrapper,
+};

@@ -5,6 +5,7 @@ import {
   StyledHourse,
   StyledCarousel,
   StyledThumb,
+  StyledPaginationWrapper,
 } from './Carousel.styles';
 
 interface bannerInfo {
@@ -18,6 +19,7 @@ interface CarouselProps {
 
 export default function Carousel({ banners }: CarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
+
   let swiperInterval: any = null;
 
   useEffect(() => {
@@ -109,9 +111,35 @@ export default function Carousel({ banners }: CarouselProps) {
       );
     });
   };
+
+  const renderBullet = (info: bannerInfo) => {
+    return (
+      <input
+        type="radio"
+        value={info.id + 1}
+        name="page"
+        onChange={(e) => {
+          clearSwiperInterval();
+          translateByIndex(parseInt(e.target.value));
+          setSwiperInterval();
+          console.log(e.target.value);
+        }}
+      ></input>
+    );
+  };
+  const renderPagination = () => {
+    return (
+      <StyledPaginationWrapper>
+        {banners.map((info) => {
+          return renderBullet(info);
+        })}
+      </StyledPaginationWrapper>
+    );
+  };
   return (
     <StyledWrapper>
       <StyledCarousel ref={carouselRef}>{renderHorses()}</StyledCarousel>
+      {renderPagination()}
     </StyledWrapper>
   );
 }
