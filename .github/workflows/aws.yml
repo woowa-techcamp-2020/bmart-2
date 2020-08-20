@@ -16,8 +16,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@master
       - name: initil-setting
+        run: sudo npm install -g yarn
+          cd client
+      - name: client-setting
         run: |
-          npm install -g yarn
           cd client
           yarn install
           yarn build
