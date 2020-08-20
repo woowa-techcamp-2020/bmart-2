@@ -15,22 +15,22 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@master
-      - name: initil-setting
-        run: |
-          sudo apt remove cmdtest
-          sudo apt remove yarn
-          curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
-          echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
-          sudo apt-get update  
-          sudo apt-get install yarn
+      # - name: initil-setting
+      #   run: |
+      #     sudo apt remove cmdtest
+      #     sudo apt remove yarn
+      #     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+      #     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+      #     sudo apt-get update
+      #     sudo apt-get install yarn
       - name: client-setting
         run: |
           cd client
-          yarn install
-          yarn build
+          npm install
+          npm run build
           cd ..
           cd server
-          yarn install
+          npm install
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
