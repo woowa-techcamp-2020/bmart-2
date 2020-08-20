@@ -17,8 +17,13 @@ jobs:
         uses: actions/checkout@master
       - name: initil-setting
         run: |
+          npm install -g yarn
+          cd client
+          yarn install
+          yarn build
+          cd ..
           cd server
-          npm install
+          yarn install
       - name: Make zip file
         run: zip -qq -r ./$GITHUB_SHA.zip .
         shell: bash
