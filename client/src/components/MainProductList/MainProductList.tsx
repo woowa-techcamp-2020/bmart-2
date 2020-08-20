@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import apis from '../../apis';
 import {
@@ -20,6 +20,7 @@ import {
   StyledListWrapper,
   StyledSortList,
 } from '../ProductSortList/ProductSortList.styles';
+import CategoryList from './CategoryList';
 
 const MainProductList = () => {
   const [curCategory, setCurCategory] = useState(0);
@@ -27,6 +28,7 @@ const MainProductList = () => {
     []
   );
   const categories = useCategoryState();
+
   useEffect(() => {
     const getProductByCategory = async () => {
       const res = await apis.get('/category?product=true');
@@ -34,13 +36,6 @@ const MainProductList = () => {
     };
     getProductByCategory();
   }, []);
-
-  const categoryList = () =>
-    categories.map((category) => (
-      <StyledCategoryWrap item key={category.id}>
-        {category.name}
-      </StyledCategoryWrap>
-    ));
 
   const renderProduct = (products: IProduct[]) => {
     return products.map((product) => {
@@ -58,7 +53,7 @@ const MainProductList = () => {
         <StyledProductListWrap key={productsInCategory.id}>
           <StyledProductTitle>{productsInCategory.name}</StyledProductTitle>
           <StyledSortList container spacing={2}>
-            {renderProduct(productsInCategory.Products!)}
+            {renderProduct(productsInCategory.Products as IProduct[])}
           </StyledSortList>
         </StyledProductListWrap>
       );
@@ -71,9 +66,7 @@ const MainProductList = () => {
         B마트 대표 상품
       </StyledTitleWrap>
       <StyledCategoryListWrap>
-        <StyledSlideList container spacing={2} wrap="nowrap">
-          {categoryList()}
-        </StyledSlideList>
+        <CategoryList curCategory={curCategory} />
         {productList()}
       </StyledCategoryListWrap>
     </div>

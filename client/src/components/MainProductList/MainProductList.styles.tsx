@@ -20,7 +20,14 @@ export const StyledCategoryListWrap = styled(Grid)`
   }
 `;
 
-export const StyledCategoryWrap = styled(Grid)`
+export const StyledCategoryWrap = styled(Grid)<{ selected: boolean }>`
+  > div {
+    border-radius: 20px;
+    box-shadow: ${(props) => props.theme.shadow};
+    line-height: 25px;
+    background-color: ${(props: any) => (props.selected ? '#FE72A9' : 'white')};
+    color: ${(props: any) => (props.selected ? 'white' : 'black')};
+  }
   min-width: 100px;
 `;
 
