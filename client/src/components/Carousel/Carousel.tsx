@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import {
   StyledWrapper,
@@ -20,25 +20,26 @@ interface CarouselProps {
 export default function Carousel({ banners }: CarouselProps) {
   const carouselRef = useRef<HTMLDivElement>(null);
   const bulletRef = useRef(new Array(banners.length));
-  let swiperInterval: any = null;
+  const intervalId = useRef(0);
+  const [index, setIndex] = useState(0);
 
   useEffect(() => {
     translateByIndex(1);
     initScrollEvent();
     setSwiperInterval();
-  });
+  }, []);
 
   const setSwiperInterval = () => {
     const carouselElement = carouselRef.current;
     if (!carouselElement) return;
 
-    swiperInterval = setInterval(() => {
+    intervalId.current = setInterval(() => {
       swipe();
     }, 3000);
   };
 
   const clearSwiperInterval = () => {
-    clearInterval(swiperInterval);
+    clearInterval(intervalId.current);
   };
 
   const translateByIndex = (i: number) => {
@@ -93,7 +94,7 @@ export default function Carousel({ banners }: CarouselProps) {
         if (getIndexByScrollLeft() === banners.length + 1) translateByIndex(1);
         else if (getIndexByScrollLeft() === 0) translateByIndex(banners.length);
         const curIndex = getIndexByScrollLeft();
-        if (curIndex) bulletRef.current[curIndex - 1].checked = true;
+        if (curIndex && curIndex - 1 >= 0) setIndex(curIndex - 1);
       }, 150);
     });
     carouselElement.addEventListener('touchstart', () => {
@@ -126,8 +127,8 @@ export default function Carousel({ banners }: CarouselProps) {
           clearSwiperInterval();
           translateByIndex(parseInt(e.target.value));
           setSwiperInterval();
-          console.log(e.target.value);
         }}
+        checked={index === info.id}
       ></input>
     );
   };
