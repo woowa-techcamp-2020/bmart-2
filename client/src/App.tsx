@@ -13,11 +13,7 @@ import Menu from './pages/Menu';
 import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
-import {
-  CategoryContextProvider,
-  useCategoryDispatch,
-  TCategoryState,
-} from './context/categoryContext';
+import { useCategoryDispatch } from './context/categoryContext';
 import category from './apis/category';
 
 function App() {
@@ -28,7 +24,7 @@ function App() {
       dispatch!({ type: 'INIT', payload: categories as any });
     };
     fetchCategory();
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <ThemeProvider theme={theme}>

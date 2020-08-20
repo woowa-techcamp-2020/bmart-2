@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Grid } from '@material-ui/core';
-import { v4 as uuidv4 } from 'uuid';
 import {
   StyledProduct,
   ListImage,
@@ -17,7 +16,7 @@ type Product = {
 };
 
 const SaleNow = () => {
-  const [products, setProducts] = useState<Product[]>([
+  const [products] = useState<Product[]>([
     {
       title: '[KF365] 햇 감자 1kg',
       url: 'https://img-cf.kurly.com/shop/data/goods/1530172373295l0.jpg',
@@ -46,7 +45,7 @@ const SaleNow = () => {
     if (products[0]) {
       setSelectedProduct(products[0]);
     }
-  }, []);
+  }, [products]);
 
   const onSelectProduct = (product: Product) => {
     setSelectedProduct(product);
@@ -60,7 +59,7 @@ const SaleNow = () => {
             alt={product.title}
             src={product.url}
             onClick={() => onSelectProduct(product)}
-            selected={product == selectedProduct}
+            selected={product === selectedProduct}
           />
         </Grid>
       );
@@ -69,7 +68,11 @@ const SaleNow = () => {
   return (
     <div>
       <SaleText>
-        지금사면 ⚡<span>번쩍 할인</span>
+        지금사면
+        <span role="img" aria-label="thunder">
+          ⚡
+        </span>
+        <span>번쩍 할인</span>
       </SaleText>
       <Grid container spacing={1}>
         {productsList()}
@@ -81,7 +84,7 @@ const SaleNow = () => {
               <ProductPrice> {selectedProduct.price}원⚡</ProductPrice>
             </StyledProduct>
           ) : (
-            <img />
+            <div></div>
           )}
         </Grid>
       </Grid>
