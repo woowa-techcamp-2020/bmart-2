@@ -7,5 +7,5 @@ cp ../../.env .env
 sudo rm -rf node_modules
 sudo yarn
 
-iptables -I INPUT 1 -p tcp --dport 3000 -j ACCEPT
+sudo fuser -k -n tcp 3000
 sudo yarn start
