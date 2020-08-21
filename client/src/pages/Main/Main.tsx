@@ -1,5 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { start } from 'repl';
+import React, { useEffect, useState } from 'react';
 import SaleNow from '../../components/SaleNow';
 import Pull from '../../components/Pull';
 import Carousel from '../../components/Carousel';

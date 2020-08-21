@@ -68,7 +68,6 @@ export const StyledCountUp = styled(AddIcon)`
       background: #ccc;
     `}
 `;
-
 function goCartImage(height: number | undefined) {
   return keyframes`
   0% {
@@ -153,18 +152,6 @@ const cancelContainer = keyframes`
   }
 `;
 
-const cancelCartButton = keyframes`
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  80% {
-    transform: translate3d(0, 100px, 0);
-  }
-  100% {
-    transform: translate3d(0, 100px, 0);
-  }
-`;
-
 export const StyledSelectListContaienr = styled.div`
   position: fixed;
   left: 0;
@@ -222,6 +209,7 @@ export const StyledImageContentWrapper = styled.div`
 
 export const StyledImageContent = styled.div`
   height: 100%;
+  width: 100%;
   border-radius: 40px;
   background-image: url('${(props: SelectListType) => props.url}'); 
   background-position: 50% 50%;

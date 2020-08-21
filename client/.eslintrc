@@ -11,11 +11,14 @@
     "prettier/@typescript-eslint",
     "plugin:prettier/recommended"
   ],
-  "rules":  {
+  "rules": {
     "import/no-unresolved": "off",
-    "import/extensions": [
-      "off"
-    ],
-    "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+    "import/extensions": ["off"],
+    "semi": "warning",
+    "no-console": "off",
+    "react/jsx-filename-extension": [
+      2,
+      { "extensions": [".js", ".jsx", ".ts", ".tsx"] }
+    ]
   }
 }
