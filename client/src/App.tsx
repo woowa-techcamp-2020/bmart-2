@@ -14,7 +14,6 @@ import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import {
-  CategoryContextProvider,
   useCategoryDispatch,
   TCategoryState,
 } from './context/categoryContext';
@@ -28,26 +27,24 @@ function App() {
       dispatch!({ type: 'INIT', payload: res?.data as TCategoryState });
     };
     fetchCategory();
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <Header title="B-MART" page="main" />
-        <Container maxWidth="md">
-          <BrowserRouter>
-            <Switch>
-              <Route path="/" exact component={Main} />
-              <Route path="/cart" exact component={Cart} />
-              <Route path="/category" exact component={Category} />
-              <Route path="/detail" exact component={Detail} />
-              <Route path="/menu" exact component={Menu} />
-              <Route path="/search" exact component={Search} />
-              <Route path="/signin" exact component={Signin} />
-              <Route path="/signup" exact component={Signup} />
-            </Switch>
-          </BrowserRouter>
-        </Container>
+        <BrowserRouter>
+          <Switch>
+            <Route path="/" exact component={Main} />
+            <Route path="/cart" exact component={Cart} />
+            <Route path="/category" exact component={Category} />
+            <Route path="/detail" exact component={Detail} />
+            <Route path="/menu" exact component={Menu} />
+            <Route path="/search" exact component={Search} />
+            <Route path="/signin" exact component={Signin} />
+            <Route path="/signup" exact component={Signup} />
+          </Switch>
+        </BrowserRouter>
       </ThemeProvider>
     </>
   );

@@ -1,0 +1,49 @@
+on:
+  push:
+    branches:
+      - action-test
+
+name: Deploy to Amazon ECS
+env:
+  PROJECT_NAME: bmart-2-real-test
+
+jobs:
+  deploy:
+    name: DEPLOY
+    runs-on: ubuntu-18.04
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@master
+      # - name: initil-setting
+      #   run: |
+      #     sudo apt remove cmdtest
+      #     sudo apt remove yarn
+      #     curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+      #     echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list
+      #     sudo apt-get update
+      #     sudo apt-get install yarn
+      - name: client and server-setting
+        run: |
+          cd client
+          npm install
+          npm run build
+          cd ..
+          cd server
+          npm install
+      - name: Make zip file
+        run: zip -qq -r ./$GITHUB_SHA.zip .
+        shell: bash
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
+      - name: Upload to S3
+        run: aws s3 cp --region ap-northeast-2 ./$GITHUB_SHA.zip s3://bmart-2/$PROJECT_NAME/$GITHUB_SHA.zip
+
+      - name: Code Deploy
+        run: aws deploy create-deployment --application-name bmart-2-deploy --deployment-config-name CodeDeployDefault.OneAtATime --deployment-group-name bmart-2-code-deploy --s3-location bucket=bmart-2,bundleType=zip,key=$PROJECT_NAME/$GITHUB_SHA.zip

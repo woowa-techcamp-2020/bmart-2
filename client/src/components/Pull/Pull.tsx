@@ -50,7 +50,6 @@ const datas: {
 const Pull = ({ boxHeight, isPulling }: IPull) => {
   const [topHeight, setTopHeight] = useState(defaultTopHeight);
   const [topMargin, setTopMargin] = useState(0);
-  const [isFinishPull, setIsFinishPull] = useState(false);
   const [dataIdx, setDataIdx] = useState(0);
 
   const isPullingFinished = boxHeight === minBoxSize && !isPulling;
@@ -89,7 +88,7 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
         Math.round(Math.abs((boxHeight + rangeHalf) / range)) % datas.length
       );
     }
-  }, [boxHeight]);
+  }, [boxHeight, isPullingFinished]);
 
   const slotsOpacity = 1 - Math.abs(topHeight / rangeHalf);
 
