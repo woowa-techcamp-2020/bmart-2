@@ -4,7 +4,7 @@ const StyledWrapper = styled.div`
   width: 100%;
   position: relative;
   overflow: hidden;
-  margin-top: 1vh;
+  margin: 4vh 0;
 `;
 
 const StyledCarousel = styled.div`
@@ -32,7 +32,7 @@ const StyledThumb = styled.img`
   width: 100%;
   border-radius: 6vw;
   box-shadow: ${(props) => props.theme.shadow};
-  height: 90%;
+  height: 100%;
 `;
 
 const bigger = keyframes`
@@ -49,9 +49,10 @@ const StyledCurrentThumb = styled.img`
   height: 100%;
   border-radius: 6vw;
   box-shadow: ${(props) => props.theme.shadow};
-  ${css`
+  // 추후 자연스럽게 구현!!!!!!!!!!
+  /* ${css`
     animation: ${bigger} 0.3s forwards;
-  `}}
+  `}} */
 `;
 
 const StyledPaginationWrapper = styled.div`
