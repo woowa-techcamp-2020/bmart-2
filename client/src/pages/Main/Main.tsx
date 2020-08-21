@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { start } from 'repl';
 import SaleNow from '../../components/SaleNow';
 import Pull from '../../components/Pull';
+import Carousel from '../../components/Carousel';
 import { StyledMainWrap } from './Main.styles';
 
 const Main = () => {
@@ -68,6 +69,7 @@ const Main = () => {
       onTouchEnd={onTouchEnd}
     >
       <Pull boxHeight={boxHeight} isPulling={isPulling} />
+      <Carousel />
       <SaleNow />
     </StyledMainWrap>
   );
