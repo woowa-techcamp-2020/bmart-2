@@ -1,3 +1,3 @@
-import CategoryService from './category';
+import CategoryService from './categoryService';
 
 export { CategoryService };
