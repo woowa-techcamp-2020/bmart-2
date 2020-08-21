@@ -1,8 +1,9 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import apis from '../../apis';
 import {
   StyledCategoryListWrap,
+  StyledCategoryWrap,
   StyledGridContainer,
   StyledMainTitle,
   StyledProductListWrap,
@@ -41,8 +42,15 @@ const MainProductList = () => {
     });
   };
 
+  const observer = useMemo(() => {
+    const options = {
+      threshold: 1.0,
+    };
+    return new IntersectionObserver(() => console.log('see!'), options);
+  }, []);
+
   const productList = () =>
-    productsInCategories.map((productsInCategory) => {
+    productsInCategories.map((productsInCategory, i) => {
       return (
         <StyledProductListWrap key={productsInCategory.id}>
           <StyledProductTitle>{productsInCategory.name}</StyledProductTitle>

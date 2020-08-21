@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useCategoryState } from '../../context/categoryContext';
 import {
   StyledCategoryListWrap,
@@ -19,7 +19,6 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
   useEffect(() => {
     if (categories.length === 0) return;
     const basePos = categoryListWrapRef.current!.offsetTop;
-    const prevValue = 0;
     window.addEventListener('scroll', () => {
       if (window.pageYOffset > basePos) {
         setIsTop(true);
@@ -30,11 +29,13 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
   }, [categories]);
 
   const categoryList = () =>
-    categories.map((category, i) => (
-      <StyledCategoryWrap item key={category.id} selected={i === curCategory}>
-        <div>{category.name}</div>
-      </StyledCategoryWrap>
-    ));
+    categories.map((category, i) => {
+      return (
+        <StyledCategoryWrap item key={category.id} selected={i === curCategory}>
+          <div>{category.name}</div>
+        </StyledCategoryWrap>
+      );
+    });
 
   return (
     <StyledCategoryListWrap
