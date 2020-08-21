@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Container from '@material-ui/core/Container';
+import Toolbar from '@material-ui/core/Toolbar';
 import { GlobalStyle, theme } from './global.styles';
 
 import Header from './components/Header';
@@ -33,7 +34,8 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Header title="B-MART" page="main" />
+        <Header title="B mart" page="main" />
+        <Toolbar />
         <Container maxWidth="md">
           <BrowserRouter>
             <Switch>
