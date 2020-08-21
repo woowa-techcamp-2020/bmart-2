@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useCategoryState } from '../../context/categoryContext';
 import {
   StyledCategoryListWrap,
@@ -11,15 +11,24 @@ interface ICategoryList {
 }
 
 const CategoryList = ({ curCategory }: ICategoryList) => {
+  const [isTop, setIsTop] = useState(false);
+
   const categories = useCategoryState();
   const categoryListWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (categories.length === 0) return;
+    const basePos = categoryListWrapRef.current!.offsetTop;
+    const prevValue = 0;
     window.addEventListener('scroll', () => {
-      const basePos = categoryListWrapRef.current!.offsetTop;
-      console.log(window.pageYOffset > basePos);
+      if (window.pageYOffset > basePos) {
+        setIsTop(true);
+      } else {
+        setIsTop(false);
+      }
     });
-  }, []);
+  }, [categories]);
+
   const categoryList = () =>
     categories.map((category, i) => (
       <StyledCategoryWrap item key={category.id} selected={i === curCategory}>
@@ -28,14 +37,14 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
     ));
 
   return (
-    <StyledSlideList
-      container
-      spacing={2}
-      wrap="nowrap"
+    <StyledCategoryListWrap
+      style={{ position: isTop ? 'fixed' : 'static' }}
       ref={categoryListWrapRef}
     >
-      {categoryList()}
-    </StyledSlideList>
+      <StyledSlideList container spacing={2} wrap="nowrap">
+        {categoryList()}
+      </StyledSlideList>
+    </StyledCategoryListWrap>
   );
 };
 

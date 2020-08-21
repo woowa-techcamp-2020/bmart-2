@@ -25,7 +25,7 @@ function App() {
   useEffect(() => {
     const fetchCategory = async () => {
       const res = await category.get('/category?sub=true');
-      dispatch!({ type: 'INIT', payload: res?.data as any });
+      dispatch!({ type: 'INIT', payload: res?.data as TCategoryState });
     };
     fetchCategory();
   }, []);

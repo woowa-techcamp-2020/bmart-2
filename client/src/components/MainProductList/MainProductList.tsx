@@ -3,23 +3,17 @@ import { Grid } from '@material-ui/core';
 import apis from '../../apis';
 import {
   StyledCategoryListWrap,
-  StyledCategoryWrap,
+  StyledGridContainer,
   StyledMainTitle,
   StyledProductListWrap,
   StyledProductTitle,
   StyledTitleWrap,
 } from './MainProductList.styles';
-import {
-  StyledSlideList,
-  StyledSlideListWrapper,
-} from '../ProductSlideList/ProductSlideList.styles';
+
 import Product from './Product';
 import { useCategoryState } from '../../context/categoryContext';
 import { ICategory, IProduct } from '../../../../types/modelTypes';
-import {
-  StyledListWrapper,
-  StyledSortList,
-} from '../ProductSortList/ProductSortList.styles';
+import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
 
 const MainProductList = () => {
@@ -65,10 +59,8 @@ const MainProductList = () => {
         <StyledMainTitle>번쩍하면 배달오는</StyledMainTitle>
         B마트 대표 상품
       </StyledTitleWrap>
-      <StyledCategoryListWrap>
-        <CategoryList curCategory={curCategory} />
-        {productList()}
-      </StyledCategoryListWrap>
+      <CategoryList curCategory={curCategory} />
+      <StyledGridContainer>{productList()}</StyledGridContainer>
     </div>
   );
 };
