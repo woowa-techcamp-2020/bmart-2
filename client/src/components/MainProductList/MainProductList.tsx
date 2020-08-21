@@ -2,8 +2,6 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import apis from '../../apis';
 import {
-  StyledCategoryListWrap,
-  StyledCategoryWrap,
   StyledGridContainer,
   StyledMainTitle,
   StyledProductListWrap,
@@ -22,8 +20,6 @@ const MainProductList = () => {
   const [productsInCategories, setProductsInCategories] = useState<ICategory[]>(
     []
   );
-  const categories = useCategoryState();
-
   useEffect(() => {
     const getProductByCategory = async () => {
       const res = await apis.get('/category?product=true');
@@ -43,16 +39,34 @@ const MainProductList = () => {
   };
 
   const observer = useMemo(() => {
+    let productLists: Element[] = [];
     const options = {
-      threshold: 1.0,
+      threshold: 0.6,
     };
-    return new IntersectionObserver(() => console.log('see!'), options);
+    return new IntersectionObserver((entries) => {
+      if (entries.length > 1) {
+        productLists = entries.map((entry) => entry.target);
+      } else if (entries.length === 1) {
+        const curProductList = entries[0].target;
+        const curIdx = productLists.findIndex(
+          (productList) => productList === curProductList
+        );
+        setCurCategory(curIdx);
+      }
+    }, options);
   }, []);
+
+  const addObserverToProductList = (element: HTMLDivElement) => {
+    if (element) observer.observe(element);
+  };
 
   const productList = () =>
     productsInCategories.map((productsInCategory, i) => {
       return (
-        <StyledProductListWrap key={productsInCategory.id}>
+        <StyledProductListWrap
+          key={productsInCategory.id}
+          ref={addObserverToProductList}
+        >
           <StyledProductTitle>{productsInCategory.name}</StyledProductTitle>
           <StyledSortList container spacing={2}>
             {renderProduct(productsInCategory.Products as IProduct[])}

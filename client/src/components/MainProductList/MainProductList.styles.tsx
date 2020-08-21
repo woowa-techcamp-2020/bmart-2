@@ -18,16 +18,15 @@ export const StyledCategoryListWrap = styled(Grid)`
   background-color: #ffffff;
   z-index: 2;
   width: 100%;
-  height: 30px;
-  padding: 15px;
+  height: 40px;
   top: -10px;
+  padding-top: 10px;
   > div {
     text-align: center;
   }
 `;
 
 export const StyledGridContainer = styled(Grid)`
-  margin: 10px 0;
   top: 0;
   > div {
     text-align: center;
@@ -39,6 +38,7 @@ interface IStyledCategoryWrap {
 }
 export const StyledCategoryWrap = styled(Grid)<IStyledCategoryWrap>`
   > div {
+    margin: 0 10px;
     border-radius: 20px;
     box-shadow: ${(props) => props.theme.shadow};
     line-height: 30px;
@@ -47,7 +47,7 @@ export const StyledCategoryWrap = styled(Grid)<IStyledCategoryWrap>`
     color: ${(props: IStyledCategoryWrap) =>
       props.selected ? 'white' : 'black'};
   }
-  min-width: 100px;
+  min-width: 120px;
 `;
 
 export const StyledProductTitle = styled.div`

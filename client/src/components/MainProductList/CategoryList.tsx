@@ -15,6 +15,8 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
 
   const categories = useCategoryState();
   const categoryListWrapRef = useRef<HTMLDivElement>(null);
+  const curCategoryRef = useRef<HTMLDivElement>(null);
+  const categorySlideListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (categories.length === 0) return;
@@ -28,10 +30,27 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
     });
   }, [categories]);
 
+  useEffect(() => {
+    const widthOfScroll = 70;
+    if (categorySlideListRef.current) {
+      if (curCategory === 0) {
+        categorySlideListRef.current.scrollLeft = 0;
+      } else {
+        categorySlideListRef.current.scrollLeft = curCategory * widthOfScroll;
+      }
+    }
+  }, [curCategory]);
+
   const categoryList = () =>
     categories.map((category, i) => {
+      const selected = i === curCategory;
       return (
-        <StyledCategoryWrap item key={category.id} selected={i === curCategory}>
+        <StyledCategoryWrap
+          item
+          key={category.id}
+          selected={selected}
+          ref={selected ? curCategoryRef : null}
+        >
           <div>{category.name}</div>
         </StyledCategoryWrap>
       );
@@ -42,7 +61,12 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
       style={{ position: isTop ? 'fixed' : 'static' }}
       ref={categoryListWrapRef}
     >
-      <StyledSlideList container spacing={2} wrap="nowrap">
+      <StyledSlideList
+        container
+        spacing={2}
+        wrap="nowrap"
+        ref={categorySlideListRef}
+      >
         {categoryList()}
       </StyledSlideList>
     </StyledCategoryListWrap>
