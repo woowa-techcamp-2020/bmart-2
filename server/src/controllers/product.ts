@@ -16,10 +16,15 @@ const findAll = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const { count, categoryId } = req.query;
-  if (typeof count === 'string' && typeof categoryId === 'string') {
+  const { categoryId, subcategoryId } = req.query;
+  if (typeof subcategoryId === 'string') {
+    const products = await ProcutService.findProductBySubcategory({
+      subcategoryId,
+    });
+    res.status(200).send({ success: true, products });
+  }
+  if (typeof categoryId === 'string') {
     const products = await ProcutService.findProductByCategory({
-      count,
       categoryId,
     });
     res.status(200).send({ success: true, products });

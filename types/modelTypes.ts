@@ -9,7 +9,7 @@ export interface ICategory {
 export interface ISubcategory {
   id: number;
   name: string;
-  categoryId: number;
+  categoryId?: number;
   Products?: IProduct[];
 }
 
