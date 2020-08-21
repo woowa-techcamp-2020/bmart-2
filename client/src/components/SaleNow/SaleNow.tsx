@@ -81,7 +81,7 @@ const SaleNow = () => {
             <StyledProduct>
               <SelectedImage alt="asdf" src={selectedProduct.url} />
               <ProductTitle> {selectedProduct.title} </ProductTitle>
-              <ProductPrice> {selectedProduct.price}원*(^0^)*</ProductPrice>
+              <ProductPrice> {selectedProduct.price}원*(^0^)*~!!</ProductPrice>
             </StyledProduct>
           ) : (
             <div></div>
