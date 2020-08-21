@@ -190,13 +190,11 @@ export const StyledSelectListContaienr = styled.div`
     `}
 `;
 export const StyledSelectListWrapper = styled.div`
-  width: 100%;
   height: 320px;
 `;
 
 export const StyledSelectList = styled.div`
   margin: 0 auto;
-  width: 100%;
   height: 100%;
   border-top-left-radius: 40px;
   border-top-right-radius: 40px;
