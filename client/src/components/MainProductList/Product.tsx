@@ -11,16 +11,6 @@ import {
 } from '../Product/Product.styles';
 import { IProduct } from '../../../../types/modelTypes';
 
-interface ProductType {
-  url: string;
-  id: number;
-  name: string;
-  price: number;
-  subcategory_id: number;
-  stock: number;
-  discount: number;
-}
-
 interface IProductProps {
   product: IProduct;
 }
