@@ -27,7 +27,8 @@ export const StyledCategoryIconsCol = styled.div`
   img {
     box-shadow: ${(props) => props.theme.shadow};
     border-radius: 20px;
-    width: 55px;
-    height: 55px;
+    width: 50px;
+    height: 50px;
+
   }
 `;

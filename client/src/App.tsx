@@ -13,15 +13,19 @@ import Menu from './pages/Menu';
 import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
-import { useCategoryDispatch } from './context/categoryContext';
-import category from './apis/category';
+import {
+  useCategoryDispatch,
+  TCategoryState,
+} from './context/categoryContext';
+import category from './apis';
 
 function App() {
   const dispatch = useCategoryDispatch();
   useEffect(() => {
     const fetchCategory = async () => {
-      const res = await category.get('/api/category?sub=true');
-      dispatch!({ type: 'INIT', payload: res?.data as any });
+      const res = await category.get('/category?sub=true');
+      dispatch!({ type: 'INIT', payload: res?.data as TCategoryState });
+
     };
     fetchCategory();
   }, [dispatch]);

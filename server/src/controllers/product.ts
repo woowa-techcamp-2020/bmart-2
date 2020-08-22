@@ -1,4 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
+import { ProcutService } from '../services';
 import Product from '../models/Product';
 
 const create = async (
@@ -15,8 +16,22 @@ const findAll = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const products = await Product.findAll();
-  res.status(200).send({ success: true, products });
+  const { categoryId, subcategoryId } = req.query;
+  if (typeof subcategoryId === 'string') {
+    const products = await ProcutService.findProductBySubcategory({
+      subcategoryId,
+    });
+    res.status(200).send({ success: true, products });
+  }
+  if (typeof categoryId === 'string') {
+    const products = await ProcutService.findProductByCategory({
+      categoryId,
+    });
+    res.status(200).send({ success: true, products });
+  } else {
+    const products = await Product.findAll();
+    res.status(200).send({ success: true, products });
+  }
 };
 
 const find = async (
