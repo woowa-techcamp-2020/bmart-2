@@ -29,5 +29,6 @@ export const StyledCategoryIconsCol = styled.div`
     border-radius: 20px;
     width: 50px;
     height: 50px;
+
   }
 `;

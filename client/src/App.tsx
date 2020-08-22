@@ -25,6 +25,7 @@ function App() {
     const fetchCategory = async () => {
       const res = await category.get('/category?sub=true');
       dispatch!({ type: 'INIT', payload: res?.data as TCategoryState });
+
     };
     fetchCategory();
   }, [dispatch]);

@@ -6,6 +6,7 @@ import { StyledMainWrap } from './Main.styles';
 import CategoryIcons from '../../components/CategoryIcons';
 import MainProductList from '../../components/MainProductList';
 
+
 const Main = () => {
   const [lastTouch, setLastTouch] = useState({ x: 0, y: 0 });
   const [startTouch, setStartTouch] = useState({ x: 0, y: 0 });
@@ -73,6 +74,7 @@ const Main = () => {
       <CategoryIcons />
       {/* <SaleNow /> */}
       <Carousel />
+      <CategoryIcons />
       <SaleNow />
       <MainProductList />
     </StyledMainWrap>

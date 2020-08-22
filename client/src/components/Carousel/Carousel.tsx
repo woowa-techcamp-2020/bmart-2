@@ -52,6 +52,7 @@ export default function Carousel({ banners }: CarouselProps) {
     const initWidth = (carouselElementWidth * 75) / 100;
     carouselElement.style.scrollBehavior = 'initial';
     carouselElement.scrollLeft = initWidth + hourseWidth * i;
+    carouselElement.style.scrollBehavior = 'smooth';
   };
 
   const swipe = () => {
@@ -64,7 +65,7 @@ export default function Carousel({ banners }: CarouselProps) {
     carouselElement.scrollLeft += hourseWidth;
   };
   const createRenderData = (banners: Array<bannerInfo>) => {
-    const length = banners.length;
+    const { length } = banners;
     return [
       banners[length - 2],
       banners[length - 1],
@@ -74,14 +75,14 @@ export default function Carousel({ banners }: CarouselProps) {
     ];
   };
 
-  const getIndexByScrollLeft = () => {
+  const getIndexByScrollLeft = (): number => {
     const carouselElement = carouselRef.current;
-    if (!carouselElement) return;
+    if (!carouselElement) return -1;
     const carouselElementWidth = carouselElement.clientWidth;
     const hourseWidth = (carouselElementWidth * 85) / 100;
     const initWidth = (carouselElementWidth * 75) / 100;
-    const scrollLeft = carouselElement.scrollLeft;
-    return Math.floor((scrollLeft - initWidth) / hourseWidth);
+    const { scrollLeft } = carouselElement;
+    return Math.round((scrollLeft - initWidth) / hourseWidth);
   };
 
   const initScrollEvent = () => {
@@ -89,15 +90,23 @@ export default function Carousel({ banners }: CarouselProps) {
     if (!carouselElement) return;
     let timer: any = null;
     carouselElement.addEventListener('scroll', () => {
+      const curIndex = getIndexByScrollLeft();
+      if (getIndexByScrollLeft() >= banners.length + 1)
+        setIndex(curIndex - 1 - banners.length);
+      else if (getIndexByScrollLeft() <= 0)
+        setIndex(banners.length + curIndex - 1);
+      else if (curIndex && curIndex - 1 >= 0 && curIndex <= banners.length)
+        setIndex(curIndex - 1);
       if (timer !== null) {
         clearTimeout(timer);
       }
       timer = setTimeout(function () {
-        if (getIndexByScrollLeft() === banners.length + 1) translateByIndex(1);
-        else if (getIndexByScrollLeft() === 0) translateByIndex(banners.length);
-        const curIndex = getIndexByScrollLeft();
-        if (curIndex && curIndex - 1 >= 0) setIndex(curIndex - 1);
-      }, 150);
+        if (getIndexByScrollLeft() >= banners.length + 1) {
+          translateByIndex(getIndexByScrollLeft() - banners.length);
+        } else if (getIndexByScrollLeft() <= 0) {
+          translateByIndex(banners.length + getIndexByScrollLeft());
+        }
+      }, 50);
     });
     carouselElement.addEventListener('touchstart', () => {
       clearSwiperInterval();
@@ -133,7 +142,7 @@ export default function Carousel({ banners }: CarouselProps) {
             setSwiperInterval();
           }}
           checked={index === info.id}
-        ></input>
+        />
       </Bullet>
     );
   };
