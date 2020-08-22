@@ -10,10 +10,10 @@ import {
 } from './MainProductList.styles';
 
 import Product from './Product';
-import { useCategoryState } from '../../context/categoryContext';
 import { ICategory, IProduct } from '../../../../types/modelTypes';
 import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
+import history from '../../history';
 
 const MainProductList = () => {
   const [curCategory, setCurCategory] = useState(0);
@@ -28,10 +28,23 @@ const MainProductList = () => {
     getProductByCategory();
   }, []);
 
+  const productClickHandler = (product: IProduct) => {
+    history.push({
+      pathname: '/detail',
+      state: { product },
+    });
+  };
+
   const renderProduct = (products: IProduct[]) => {
     return products.map((product) => {
       return (
-        <Grid item xs={6} sm={4} key={product.id}>
+        <Grid
+          item
+          xs={6}
+          sm={4}
+          key={product.id}
+          onClick={() => productClickHandler(product)}
+        >
           <Product product={product} />
         </Grid>
       );
