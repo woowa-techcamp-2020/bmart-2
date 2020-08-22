@@ -3,7 +3,7 @@ import { Sort } from '@material-ui/icons';
 import { Grid } from '@material-ui/core';
 
 export const StyledListTitle = styled.div`
-  padding: 6px 0;
+  padding: 6px 0 12px;
   font-size: 15px;
   text-align: right;
   width: 100%;

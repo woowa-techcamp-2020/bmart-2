@@ -3,6 +3,16 @@ import Typography from '@material-ui/core/Typography';
 import Toolbar from '@material-ui/core/Toolbar';
 import Button from '@material-ui/core/Button';
 
+const StyledAppBar = styled.div`
+  width: 100%;
+  height: 62px;
+  position: fixed;
+  left: 0;
+  top: 0;
+  background: white;
+  z-index: 2;
+`;
+
 const StyledLogoH = styled(Typography)`
   && {
     flex-grow: 1;
@@ -16,11 +26,7 @@ const StyledButton = styled(Button)`
   }
 `;
 
-const StyledToolbar = styled(Toolbar)`
-  && {
-    padding: 0;
-  }
-`;
+const StyledToolbar = styled(Toolbar)``;
 
 const StyledInput = styled.input.attrs({
   placeholder: '어떤 상품을 찾으시나요?',
@@ -30,4 +36,4 @@ const StyledInput = styled.input.attrs({
   border-width: 0;
 `;
 
-export { StyledLogoH, StyledInput, StyledToolbar, StyledButton };
+export { StyledLogoH, StyledInput, StyledToolbar, StyledButton, StyledAppBar };

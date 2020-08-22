@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Container from '@material-ui/core/Container';
+import Toolbar from '@material-ui/core/Toolbar';
 import { GlobalStyle, theme } from './global.styles';
 
 import Header from './components/Header';
@@ -33,19 +34,23 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Header title="B-MART" page="main" />
-        <BrowserRouter>
-          <Switch>
-            <Route path="/" exact component={Main} />
-            <Route path="/cart" exact component={Cart} />
-            <Route path="/category" exact component={Category} />
-            <Route path="/detail" exact component={Detail} />
-            <Route path="/menu" exact component={Menu} />
-            <Route path="/search" exact component={Search} />
-            <Route path="/signin" exact component={Signin} />
-            <Route path="/signup" exact component={Signup} />
-          </Switch>
-        </BrowserRouter>
+        <Header title="B mart" page="main" />
+        <Toolbar />
+        <Container maxWidth="md">
+          <BrowserRouter>
+            <Switch>
+              <Route path="/" exact component={Main} />
+              <Route path="/cart" exact component={Cart} />
+              <Route path="/category" exact component={Category} />
+              <Route path="/detail" exact component={Detail} />
+              <Route path="/menu" exact component={Menu} />
+              <Route path="/search" exact component={Search} />
+              <Route path="/signin" exact component={Signin} />
+              <Route path="/signup" exact component={Signup} />
+            </Switch>
+          </BrowserRouter>
+        </Container>
+
       </ThemeProvider>
     </>
   );
