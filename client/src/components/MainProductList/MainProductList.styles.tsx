@@ -38,7 +38,7 @@ interface IStyledCategoryWrap {
 }
 export const StyledCategoryWrap = styled(Grid)<IStyledCategoryWrap>`
   > div {
-    margin: 0 10px;
+    margin-right: 20px;
     border-radius: 20px;
     box-shadow: ${(props) => props.theme.shadow};
     line-height: 30px;
