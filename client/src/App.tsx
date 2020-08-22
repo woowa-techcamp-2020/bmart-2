@@ -15,21 +15,21 @@ import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import {
-  CategoryContextProvider,
   useCategoryDispatch,
   TCategoryState,
 } from './context/categoryContext';
-import category from './apis/category';
+import category from './apis';
 
 function App() {
   const dispatch = useCategoryDispatch();
   useEffect(() => {
     const fetchCategory = async () => {
-      const categories = await category.get('/api/category?sub=true');
-      dispatch!({ type: 'INIT', payload: categories as any });
+      const res = await category.get('/category?sub=true');
+      dispatch!({ type: 'INIT', payload: res?.data as TCategoryState });
+
     };
     fetchCategory();
-  }, []);
+  }, [dispatch]);
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -50,6 +50,7 @@ function App() {
             </Switch>
           </BrowserRouter>
         </Container>
+
       </ThemeProvider>
     </>
   );

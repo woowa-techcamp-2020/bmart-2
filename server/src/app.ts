@@ -18,7 +18,13 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(express.static(path.join(__dirname, '../../client/build')));
+app.set('views', path.join(__dirname, '../../client/build'));
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+
+app.get('/', (req: Request, res: Response) => res.render('index'));
 
 app.use('/api', router);
 

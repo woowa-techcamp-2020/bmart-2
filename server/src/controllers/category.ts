@@ -16,9 +16,11 @@ const findAll = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const isSub = req.query.sub;
+  const { sub, product } = req.query;
   let categories = null;
-  if (isSub === 'true') {
+  if (product === 'true') {
+    categories = await CategoryService.findCategoryIncludeProduct();
+  } else if (sub === 'true') {
     categories = await CategoryService.findCategoryIncludeSub();
   } else {
     categories = await Category.findAll();

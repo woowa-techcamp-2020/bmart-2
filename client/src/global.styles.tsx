@@ -92,6 +92,10 @@ html, body {
   position: relative;
 }
 
+body{
+ /* Disables pull-to-refresh but allows overscroll glow effects. */
+ overscroll-behavior-y: none;
+}
 `;
 
 export { theme, GlobalStyle };

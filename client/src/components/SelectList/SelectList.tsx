@@ -40,7 +40,7 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
         setCount(1);
       }, 1500);
     },
-    [clickbtn]
+    [clickbtn, setOpenList]
   );
 
   const countDown = () => {
