@@ -3,6 +3,7 @@ import SaleNow from '../../components/SaleNow';
 import Pull from '../../components/Pull';
 import Carousel from '../../components/Carousel';
 import { StyledMainWrap } from './Main.styles';
+import CategoryIcons from '../../components/CategoryIcons';
 
 const Main = () => {
   const [lastTouch, setLastTouch] = useState({ x: 0, y: 0 });
@@ -69,6 +70,7 @@ const Main = () => {
     >
       <Pull boxHeight={boxHeight} isPulling={isPulling} />
       <Carousel />
+      <CategoryIcons />
       <SaleNow />
     </StyledMainWrap>
   );
