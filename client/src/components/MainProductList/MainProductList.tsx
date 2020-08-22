@@ -15,6 +15,17 @@ import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
 import history from '../../history';
 
+const debounce = (
+  func: (entries: IntersectionObserverEntry[]) => void,
+  delay: number
+) => {
+  let debounceTimer: number;
+  return (entries: IntersectionObserverEntry[]) => {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => func(entries), delay);
+  };
+};
+
 const MainProductList = () => {
   const [curCategory, setCurCategory] = useState(0);
   const [productsInCategories, setProductsInCategories] = useState<ICategory[]>(
@@ -52,21 +63,22 @@ const MainProductList = () => {
   };
 
   const observer = useMemo(() => {
-    let productLists: Element[] = [];
+    const debounceDelay = 300;
     const options = {
-      threshold: 0.6,
+      threshold: 0.7,
     };
-    return new IntersectionObserver((entries) => {
-      if (entries.length > 1) {
-        productLists = entries.map((entry) => entry.target);
-      } else if (entries.length === 1) {
-        const curProductList = entries[0].target;
-        const curIdx = productLists.findIndex(
-          (productList) => productList === curProductList
-        );
-        setCurCategory(curIdx);
-      }
-    }, options);
+    const observerHandler = (entries: IntersectionObserverEntry[]) => {
+      let curProductList = null;
+      if (entries.length === 2) curProductList = entries[1].target;
+      else curProductList = entries[0].target;
+
+      const curIdx = (curProductList as HTMLDivElement).dataset.order;
+      setCurCategory(parseInt(curIdx!, 10));
+    };
+    return new IntersectionObserver(
+      debounce(observerHandler, debounceDelay),
+      options
+    );
   }, []);
 
   const addObserverToProductList = (element: HTMLDivElement) => {
@@ -79,6 +91,7 @@ const MainProductList = () => {
         <StyledProductListWrap
           key={productsInCategory.id}
           ref={addObserverToProductList}
+          data-order={i}
         >
           <StyledProductTitle>{productsInCategory.name}</StyledProductTitle>
           <StyledSortList container spacing={2}>
