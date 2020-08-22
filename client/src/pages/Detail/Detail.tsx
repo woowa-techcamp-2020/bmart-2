@@ -46,11 +46,7 @@ const Detail = () => {
         </InfoContent>
         ㅎ<StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
       </StyledDetialWrapper>
-      <SelectList
-        openList={openList}
-        setOpenList={setOpenList}
-        data={data}
-      ></SelectList>
+      <SelectList openList={openList} setOpenList={setOpenList} data={data} />
     </>
   );
 };
