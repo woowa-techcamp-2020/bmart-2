@@ -19,15 +19,19 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
   const categorySlideListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    if (categories.length === 0) return;
+    if (categories.length === 0) return () => null;
     const basePos = categoryListWrapRef.current!.offsetTop;
-    window.addEventListener('scroll', () => {
+    const handleScroll = () => {
       if (window.pageYOffset > basePos) {
         setIsTop(true);
       } else {
         setIsTop(false);
       }
-    });
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
   }, [categories]);
 
   useEffect(() => {

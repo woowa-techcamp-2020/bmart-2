@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useLocation } from 'react-router-dom';
 import {
   StyledDetialWrapper,
   StyledCartButton,
@@ -11,6 +12,7 @@ import {
 
 import SelectList from '../../components/SelectList';
 import { numberToString } from '../../util/common';
+import { IProduct } from '../../../../types/modelTypes';
 
 const data = {
   price: 3400,
@@ -22,9 +24,14 @@ const data = {
   imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1530775904381y0.jpg',
 };
 
+interface ILocationState {
+  product: IProduct;
+}
+
 const Detail = () => {
   const [openList, setOpenList] = React.useState(false);
-
+  const location = useLocation<ILocationState>();
+  const { product } = location?.state;
   const onClick = () => {
     setOpenList(true);
   };
@@ -32,9 +39,9 @@ const Detail = () => {
   return (
     <>
       <StyledDetialWrapper>
-        <StyledImage className="image" src={data.imgUrl} />
-        <StyledNameText>{data.name}</StyledNameText>
-        <StyledPriceText>{numberToString(data.price)}원</StyledPriceText>
+        <StyledImage className="image" src={product.mainImgUrl} />
+        <StyledNameText>{product.name}</StyledNameText>
+        <StyledPriceText>{numberToString(product.price)}원</StyledPriceText>
         <InfoContent>
           <InfoTitle>배달 정보</InfoTitle>
           <div>
@@ -46,11 +53,7 @@ const Detail = () => {
         </InfoContent>
         ㅎ<StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
       </StyledDetialWrapper>
-      <SelectList
-        openList={openList}
-        setOpenList={setOpenList}
-        data={data}
-      ></SelectList>
+      <SelectList openList={openList} setOpenList={setOpenList} data={data} />
     </>
   );
 };
