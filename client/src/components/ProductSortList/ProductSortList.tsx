@@ -8,8 +8,7 @@ import {
 import Product from '../Product';
 
 import { Grid } from '@material-ui/core';
-
-interface ProductSortListType {}
+import { IProduct } from '../../../../types/modelTypes';
 
 const sortType = [
   '기본 정렬순',
@@ -19,12 +18,12 @@ const sortType = [
   '신규 상품순',
   '할인율 순',
 ];
-const items = [1, 2, 3, 4, 5, 6];
-const ProductSortList = () => {
+
+const ProductSortList = ({ products }: { products: IProduct[] }) => {
   const renderProduct = () => {
-    return items.map((item, index) => (
+    return products.map((item: IProduct, index) => (
       <Grid item xs={6} sm={4} key={'sort-list' + index}>
-        <Product />
+        <Product product={item} />
       </Grid>
     ));
   };
