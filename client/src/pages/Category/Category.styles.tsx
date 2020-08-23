@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components';
 
 interface SubCategoryType {
   selected: boolean;
-  listId: number;
 }
 
 export const CategoryPageWrapper = styled.div``;
