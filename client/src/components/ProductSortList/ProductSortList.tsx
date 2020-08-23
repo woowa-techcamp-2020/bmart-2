@@ -21,6 +21,9 @@ const sortType = [
 
 const ProductSortList = ({ products }: { products: IProduct[] }) => {
   const renderProduct = () => {
+    if (products.length === 0) {
+      products = new Array(6).fill(0);
+    }
     return products.map((item: IProduct, index) => (
       <Grid item xs={6} sm={4} key={'sort-list' + index}>
         <Product product={item} />
