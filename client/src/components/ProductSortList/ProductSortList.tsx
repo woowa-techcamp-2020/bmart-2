@@ -19,9 +19,9 @@ const sortType = [
   '할인율 순',
 ];
 
-const ProductSortList = ({ products }: { products: IProduct[] }) => {
+const ProductSortList = ({ products }: { products: IProduct[] | null }) => {
   const renderProduct = () => {
-    if (products.length === 0) {
+    if (!products) {
       products = new Array(6).fill(0);
     }
     return products.map((item: IProduct, index) => (

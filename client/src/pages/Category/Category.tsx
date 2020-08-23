@@ -23,7 +23,7 @@ const Category = () => {
   const location = useLocation<ICategoryLocationState>();
   const { category } = location.state;
   const [selected, setSelected] = React.useState(0);
-  const [products, setProducts] = React.useState<IProduct[]>([]);
+  const [products, setProducts] = React.useState<IProduct[] | null>(null);
   React.useEffect(() => {
     const fetchCategoryProducts = async () => {
       const res = await categoryApi.get(`/product?categoryId=${category.id}`);
@@ -46,8 +46,11 @@ const Category = () => {
     ));
   };
 
-  const filteredProduct: IProduct[] = React.useMemo(
-    () => products.filter((product) => product.subcategoryId === selected),
+  const filteredProduct: IProduct[] | null = React.useMemo(
+    () =>
+      products
+        ? products.filter((product) => product.subcategoryId === selected)
+        : null,
     [selected]
   );
 
