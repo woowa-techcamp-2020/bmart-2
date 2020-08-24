@@ -1,3 +1,4 @@
 import CategoryService from './categoryService';
+import ProcutService from './product';
 
-export { CategoryService };
+export { CategoryService, ProcutService };

@@ -35,4 +35,9 @@ SubCategory.init(
   { timestamps: true, tableName: 'subCategory', sequelize }
 );
 
+SubCategory.hasMany(Product, {
+  sourceKey: 'id',
+  foreignKey: { name: 'subcategoryId', allowNull: false },
+});
+
 export default SubCategory;

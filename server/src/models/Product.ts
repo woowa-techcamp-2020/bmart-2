@@ -4,6 +4,7 @@ import { sequelize } from './index';
 import Cart from './Cart';
 import Dib from './Dib';
 import Order from './Order';
+import SubCategory from './SubCategory';
 
 class Product extends Model {
   public id!: number;

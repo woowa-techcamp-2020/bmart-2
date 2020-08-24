@@ -1,18 +1,11 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
+import { ICategory, ISubcategory } from '../../../types/modelTypes';
 
-export interface ISubCategory {
-  id: number;
-  name: string;
+export interface ICategoryInContext extends ICategory {
+  subCategories: ISubcategory[];
 }
 
-export interface ICategory {
-  id: number;
-  name: string;
-  imgUrl: string;
-  subCategories: ISubCategory[];
-}
-
-export type TCategoryState = ICategory[];
+export type TCategoryState = ICategoryInContext[];
 
 const CategoryStateContext = createContext<TCategoryState | undefined>(
   undefined

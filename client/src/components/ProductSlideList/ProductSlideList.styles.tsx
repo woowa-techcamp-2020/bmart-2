@@ -11,6 +11,7 @@ export const StyledSlideList = styled(Grid)`
   width: 100%;
   overflow-x: auto;
   flex-wrap: noWrap;
+  scroll-behavior: smooth;
   &&::-webkit-scrollbar {
     display: none;
   }
