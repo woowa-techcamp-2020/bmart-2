@@ -19,23 +19,26 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
   const categorySlideListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const headerHeight = 60;
     if (categories.length === 0) return () => null;
     const basePos = categoryListWrapRef.current!.offsetTop;
     const handleScroll = () => {
-      if (window.pageYOffset > basePos) {
+      console.log(window.pageYOffset);
+      if (window.pageYOffset > basePos - headerHeight) {
         setIsTop(true);
       } else {
         setIsTop(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+
+    window.addEventListener('scroll', handleScroll, false);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll, false);
     };
-  }, [categories]);
+  }, [categories.length]);
 
   useEffect(() => {
-    const widthOfScroll = 70;
+    const widthOfScroll = 100;
     if (categorySlideListRef.current) {
       if (curCategory === 0) {
         categorySlideListRef.current.scrollLeft = 0;

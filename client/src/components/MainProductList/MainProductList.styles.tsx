@@ -19,7 +19,7 @@ export const StyledCategoryListWrap = styled(Grid)`
   z-index: 2;
   width: 100%;
   height: 40px;
-  top: -10px;
+  top: 40px;
   padding-top: 10px;
   > div {
     text-align: center;

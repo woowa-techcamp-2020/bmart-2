@@ -15,22 +15,12 @@ import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
 import history from '../../history';
 
-const debounce = (
-  func: (entries: IntersectionObserverEntry[]) => void,
-  delay: number
-) => {
-  let debounceTimer: number;
-  return (entries: IntersectionObserverEntry[]) => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => func(entries), delay);
-  };
-};
-
 const MainProductList = () => {
   const [curCategory, setCurCategory] = useState(0);
   const [productsInCategories, setProductsInCategories] = useState<ICategory[]>(
     []
   );
+
   useEffect(() => {
     const getProductByCategory = async () => {
       const res = await apis.get('/category?product=true');
@@ -75,10 +65,7 @@ const MainProductList = () => {
       const curIdx = (curProductList as HTMLDivElement).dataset.order;
       setCurCategory(parseInt(curIdx!, 10));
     };
-    return new IntersectionObserver(
-      debounce(observerHandler, debounceDelay),
-      options
-    );
+    return new IntersectionObserver(observerHandler, options);
   }, []);
 
   const addObserverToProductList = (element: HTMLDivElement) => {
