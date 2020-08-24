@@ -1,3 +1,5 @@
 import styled from 'styled-components';
 
-export default {};
+export const StyledSearchWrap = styled.div`
+  margin-top: 10px;
+`;
