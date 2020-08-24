@@ -4,42 +4,63 @@ import {
   CategoryTitle,
   SubCategory,
 } from './Category.styles';
+import { useLocation } from 'react-router-dom';
 
 import ProductSortList from '../../components/ProductSortList';
+import { ICategory, IProduct } from '../../../../types/modelTypes';
 
-const test = [
-  '안녕하세요',
-  '저는 이수정',
-  '입니다ㅎㅎ',
-  'api 연동을',
-  '못했어요',
-];
-const title = '채소, 쌀';
-const img =
-  'https://bmart-2.s3.ap-northeast-2.amazonaws.com/category_images/%E1%84%8E%E1%85%A2%E1%84%89%E1%85%A9.png';
+import categoryApi from '../../apis';
+
+interface ICategoryLocationState {
+  category: ICategory;
+}
+const selectedAll = {
+  id: 0,
+  name: '전체보기',
+};
+
 const Category = () => {
+  const location = useLocation<ICategoryLocationState>();
+  const { category } = location.state;
   const [selected, setSelected] = React.useState(0);
+  const [products, setProducts] = React.useState<IProduct[]>([]);
+  React.useEffect(() => {
+    const fetchCategoryProducts = async () => {
+      const res = await categoryApi.get(`/product?categoryId=${category.id}`);
+      setProducts(res.data.products);
+    };
+    fetchCategoryProducts();
+  }, []);
+
   const addSubCategory = () => {
-    return test.map((item, index) => (
+    if (!category.SubCategories) return;
+    const subCategory = [selectedAll, ...category.SubCategories];
+    return subCategory.map((item) => (
       <SubCategory
-        selected={selected === index}
-        onPointerUp={() => setSelected(index)}
-        listId={index}
-        key={`category-page-sub-category-${index}`}
+        selected={selected === item.id}
+        onPointerUp={() => setSelected(item.id)}
+        key={`category-page-sub-category-${item.id}`}
       >
-        {item}
+        {item.name}
       </SubCategory>
     ));
   };
 
+  const filteredProduct: IProduct[] = React.useMemo(
+    () => products.filter((product) => product.subcategoryId === selected),
+    [selected]
+  );
+
   return (
     <CategoryPageWrapper>
       <CategoryTitle>
-        <img src={img}></img>
-        {title}
+        <img src={category.imgUrl}></img>
+        {category.name}
       </CategoryTitle>
       {addSubCategory()}
-      <ProductSortList></ProductSortList>
+      <ProductSortList
+        products={selected ? filteredProduct : products}
+      ></ProductSortList>
     </CategoryPageWrapper>
   );
 };

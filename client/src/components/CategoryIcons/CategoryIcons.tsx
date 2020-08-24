@@ -6,12 +6,23 @@ import {
   StyledCategoryIconsWrap,
 } from './CategoryIcons.styles';
 import { useCategoryState } from '../../context/categoryContext';
+import history from '../../history';
+import { ICategory } from '../../../../types/modelTypes';
 
 const CategoryIcons = () => {
   const categories = useCategoryState();
+  const categoryClickHandler = (category: ICategory) => {
+    history.push({
+      pathname: '/category',
+      state: { category },
+    });
+  };
   const categoryGrid = () =>
     categories.map((category) => (
-      <StyledCategoryIconsCol key={category.id}>
+      <StyledCategoryIconsCol
+        key={category.id}
+        onClick={() => categoryClickHandler(category)}
+      >
         <div>
           <img src={category.imgUrl} alt="category img" />
         </div>
