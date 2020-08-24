@@ -46,6 +46,13 @@ export const StyledCategoryWrap = styled(Grid)<IStyledCategoryWrap>`
       props.selected ? '#FE72A9' : 'white'};
     color: ${(props: IStyledCategoryWrap) =>
       props.selected ? 'white' : 'black'};
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
   min-width: 120px;
 `;
