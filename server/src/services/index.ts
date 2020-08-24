@@ -1,4 +1,4 @@
 import CategoryService from './categoryService';
-import ProcutService from './product';
+import ProcutService from './productService';
 
 export { CategoryService, ProcutService };
