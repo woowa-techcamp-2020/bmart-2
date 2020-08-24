@@ -31,6 +31,9 @@ export default function Header({ title, page }: HeaderProps) {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
+        <StyledButton aria-label="search">
+          <SearchIcon />
+        </StyledButton>
         <StyledButton aria-label="menu">
           <MenuIcon />
         </StyledButton>
@@ -42,11 +45,11 @@ export default function Header({ title, page }: HeaderProps) {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
-        <StyledButton aria-label="menu">
-          <MenuIcon />
-        </StyledButton>
         <StyledButton aria-label="search">
           <SearchIcon />
+        </StyledButton>
+        <StyledButton aria-label="menu">
+          <MenuIcon />
         </StyledButton>
       </>
     );
