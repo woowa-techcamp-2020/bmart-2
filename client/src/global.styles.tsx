@@ -84,14 +84,9 @@ ul {
 em {
   font-style: normal;
 }
-html, body {
+html, body , .root{
   width: 100%;
   height: 100%;
-}
-body{
- /* Disables pull-to-refresh but allows overscroll glow effects. */
- overscroll-behavior-y: none;
- overflow-y: hidden; 
 }
 `;
 
