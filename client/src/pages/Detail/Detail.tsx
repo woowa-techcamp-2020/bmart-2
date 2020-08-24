@@ -44,7 +44,7 @@ const Detail = () => {
             지금은 운영 시간이 아니에요
           </div>
         </InfoContent>
-        ㅎ<StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
+        <StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
       </StyledDetialWrapper>
       <SelectList
         openList={openList}
