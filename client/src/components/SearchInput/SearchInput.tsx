@@ -19,7 +19,6 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     setKeyword(event.target.value);
-    setPath(history.location.pathname);
   };
 
   const onKeyDownHandler = (

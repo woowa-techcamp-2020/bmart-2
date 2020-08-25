@@ -29,7 +29,6 @@ function App() {
     };
     fetchCategory();
   }, [dispatch]);
-  console.log(history.location.pathname);
   return (
     <>
       <ThemeProvider theme={theme}>
