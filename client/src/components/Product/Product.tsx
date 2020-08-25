@@ -39,6 +39,7 @@ const Product = ({ product }: IProductProps) => {
               alt={product.name}
               src={product.thumbImgUrl}
             />
+            {product.discount > 0 ? <div>{product.discount}%</div> : <></>}
             <StyledFavoriteCheck
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite />}
@@ -47,7 +48,17 @@ const Product = ({ product }: IProductProps) => {
             />
           </ImageWrapper>
           <ProductTitle>{product.name} </ProductTitle>
-          <ProductPrice>{numberToString(product.price)}원</ProductPrice>
+          <ProductPrice>
+            {product.discount > 0 ? (
+              <span>{numberToString(product.price)}원</span>
+            ) : (
+              <></>
+            )}
+            {numberToString(
+              Math.floor((product.price * (100 - product.discount)) / 100)
+            )}
+            원
+          </ProductPrice>
         </StyledProduct>
       ) : (
         <StyledProduct>

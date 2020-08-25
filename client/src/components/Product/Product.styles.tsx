@@ -14,6 +14,16 @@ const ImageWrapper = styled.div`
   margin-bottom: 12px;
   overflow: hidden;
   position: relative;
+  div {
+    position: absolute;
+    padding: 0.6rem 1rem;
+    top: 0.6rem;
+    left: 0.6rem;
+    background: #dd4470;
+    font-weight: bold;
+    color: white;
+    border-radius: 12px;
+  }
 `;
 
 const ProductTitle = styled.div`
@@ -25,8 +35,12 @@ const ProductTitle = styled.div`
 
 const ProductPrice = styled.div`
   width: 100%;
-  color: #777;
-  font-size: 1.05em;
+  font-size: 1.1em;
+  span {
+    text-decoration: line-through;
+    margin-right: 4px;
+    color: #999;
+  }
 `;
 
 const StyledFavoriteCheck = styled(Checkbox)`
