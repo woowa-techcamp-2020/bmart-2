@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
-export const StyledCartButton = styled.div`
+export const StyledCartButton = styled.button`
   width: 100%;
   border-radius: 3vh;
   background: #dd4470;
   bottom: 1vh;
   height: 8vh;
   color: white;
-  font-size: 16px;
   font-weight: 700;
   line-height: 48px;
   text-align: center;
