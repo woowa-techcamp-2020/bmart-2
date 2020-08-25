@@ -128,11 +128,6 @@ const Cart = () => {
   const [carts, setcarts] = useState<CartType[]>([]);
 
   useEffect(() => {
-    // const getcarts = async () => {
-    //   const res = await apis.get('/cart/1');
-    //   setcarts(res.data);
-    // };
-    // getcarts();
     setcarts(defaultCart);
   }, []);
 
