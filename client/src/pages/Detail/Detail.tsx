@@ -8,21 +8,20 @@ import {
   StyledPriceText,
   InfoContent,
   InfoTitle,
+  MainImage,
+  Description,
+  StyledDivider,
+  StyledCardButtonWrapper,
+  StyledFormatQuoteIcon,
+  StyledLeftformatQueteIcon,
+  StyledPriceDiscount,
+  StyledFavoriteCheck,
 } from './Detail.styles';
 
 import SelectList from '../../components/SelectList';
 import { numberToString } from '../../util/common';
 import { IProduct } from '../../../../types/modelTypes';
-
-const data = {
-  price: 3400,
-  max_quantity: 10,
-  name: '[다담] 찌개 양념장 6종',
-  discount: 0,
-  subCategory: '서브카테고리',
-  stock: 100,
-  imgUrl: 'https://img-cf.kurly.com/shop/data/goods/1530775904381y0.jpg',
-};
+import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
 interface ILocationState {
   product: IProduct;
@@ -39,9 +38,28 @@ const Detail = () => {
   return (
     <>
       <StyledDetialWrapper>
-        <StyledImage className="image" src={product.mainImgUrl} />
+        <StyledImage className="image" src={product.mainImgUrl}>
+          <StyledFavoriteCheck
+            icon={<FavoriteBorder />}
+            checkedIcon={<Favorite />}
+            name="checked"
+          />
+        </StyledImage>
         <StyledNameText>{product.name}</StyledNameText>
-        <StyledPriceText>{numberToString(product.price)}원</StyledPriceText>
+        <StyledPriceText>
+          {product.discount > 0 ? (
+            <>
+              <span>{product.discount}%</span>
+              <StyledPriceDiscount>{product.price}원</StyledPriceDiscount>{' '}
+            </>
+          ) : (
+            <></>
+          )}
+          {numberToString(
+            Math.floor((product.price * (100 - product.discount)) / 100)
+          )}
+          원
+        </StyledPriceText>
         <InfoContent>
           <InfoTitle>배달 정보</InfoTitle>
           <div>
@@ -51,9 +69,26 @@ const Detail = () => {
             </span>
           </div>
         </InfoContent>
-        ㅎ<StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
+        <InfoContent>
+          <InfoTitle>적립 혜택</InfoTitle>
+          <div>배민 페이로 결제하면 0.5% 적립</div>
+        </InfoContent>
+        <StyledDivider />
+        <Description>
+          <StyledLeftformatQueteIcon />
+          {product.description}
+          <StyledFormatQuoteIcon />
+        </Description>
+        <MainImage src={product.mainImgUrl} />
+        <StyledCardButtonWrapper>
+          <StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>
+        </StyledCardButtonWrapper>
       </StyledDetialWrapper>
-      <SelectList openList={openList} setOpenList={setOpenList} data={data} />
+      <SelectList
+        openList={openList}
+        setOpenList={setOpenList}
+        product={product}
+      />
     </>
   );
 };
