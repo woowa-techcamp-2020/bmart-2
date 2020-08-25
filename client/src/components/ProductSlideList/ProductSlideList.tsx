@@ -17,7 +17,7 @@ const ProductSlideList = ({}: ProductSlideListType) => {
   const renderProduct = () => {
     return items.map((item, index) => (
       <Grid item style={{ minWidth: '150px' }} key={'slide-list' + index}>
-        <Product />
+        {/* <Product /> */}
       </Grid>
     ));
   };

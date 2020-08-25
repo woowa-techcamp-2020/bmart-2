@@ -19,7 +19,7 @@ const ProductRecommendList = ({}: ProductRecommendListType) => {
   const renderProduct = () => {
     return items.map((item, index) => (
       <Grid item xs={4} sm={3} key={'recommand-list' + index}>
-        <Product />
+        {/* <Product /> */}
       </Grid>
     ));
   };

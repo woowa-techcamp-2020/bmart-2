@@ -1,5 +1,4 @@
 import React from 'react';
-import AppBar from '@material-ui/core/AppBar';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
@@ -8,6 +7,7 @@ import {
   StyledInput,
   StyledToolbar,
   StyledButton,
+  StyledAppBar,
 } from './Header.styles';
 
 interface HeaderProps {
@@ -77,19 +77,19 @@ export default function Header({ title, page }: HeaderProps) {
 
   return (
     <div>
-      <AppBar position="static" color="inherit">
+      <StyledAppBar>
         <StyledToolbar>
           <StyledButton color="inherit">
             <ArrowBackIcon />
           </StyledButton>
           {renderByPage()}
         </StyledToolbar>
-      </AppBar>
+      </StyledAppBar>
     </div>
   );
 }
 
 Header.defaultProps = {
-  title: 'B-MART',
+  title: 'B mart',
   page: 'category',
 };

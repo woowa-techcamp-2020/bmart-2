@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Grid, Checkbox } from '@material-ui/core';
 
 const StyledProduct = styled(Grid)`
-  box-shadow: ${(props) => props.theme.shadow};
+  filter: drop-shadow(${(props) => props.theme.dropShadow});
   padding: 14px !important;
   border-radius: 12px;
   background: white;
