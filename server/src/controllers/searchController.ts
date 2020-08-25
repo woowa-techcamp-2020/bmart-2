@@ -9,12 +9,14 @@ const findAll = async (
   next: NextFunction
 ): Promise<any> => {
   const { keyword } = req.query;
+  if (typeof keyword !== 'string') next();
+  if ((keyword as string).trim() === '') next();
   const body = {
     size: 200,
     from: 0,
     query: {
       match: {
-        description: req.query.keyword,
+        description: keyword,
       },
     },
   };
