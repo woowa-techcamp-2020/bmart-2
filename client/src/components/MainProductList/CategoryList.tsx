@@ -6,11 +6,12 @@ import {
 } from './MainProductList.styles';
 import { StyledSlideList } from '../ProductSlideList/ProductSlideList.styles';
 
-interface ICategoryList {
+interface ICategoryListProps {
   curCategory: number;
+  productListRefs: React.MutableRefObject<HTMLDivElement[]>;
 }
 
-const CategoryList = ({ curCategory }: ICategoryList) => {
+const CategoryList = ({ curCategory, productListRefs }: ICategoryListProps) => {
   const [isTop, setIsTop] = useState(false);
 
   const categories = useCategoryState();
@@ -19,23 +20,24 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
   const categorySlideListRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    const headerHeight = 60;
     if (categories.length === 0) return () => null;
     const basePos = categoryListWrapRef.current!.offsetTop;
     const handleScroll = () => {
-      if (window.pageYOffset > basePos) {
+      if (window.pageYOffset > basePos - headerHeight) {
         setIsTop(true);
       } else {
         setIsTop(false);
       }
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, false);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('scroll', handleScroll, false);
     };
-  }, [categories]);
+  }, [categories.length]);
 
   useEffect(() => {
-    const widthOfScroll = 70;
+    const widthOfScroll = 100;
     if (categorySlideListRef.current) {
       if (curCategory === 0) {
         categorySlideListRef.current.scrollLeft = 0;
@@ -44,6 +46,18 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
       }
     }
   }, [curCategory]);
+
+  const categoryListHandler = (idx: number) => {
+    if (idx >= productListRefs.current.length) return;
+    const target = productListRefs.current[idx];
+    const fixedSize = 50;
+    const padding = 120 + (curCategory === 0 ? fixedSize : 0);
+    window.scrollTo({
+      top: target.offsetTop - padding,
+      left: 0,
+      behavior: 'smooth',
+    });
+  };
 
   const categoryList = () =>
     categories.map((category, i) => {
@@ -54,6 +68,7 @@ const CategoryList = ({ curCategory }: ICategoryList) => {
           key={category.id}
           selected={selected}
           ref={selected ? curCategoryRef : null}
+          onClick={() => categoryListHandler(i)}
         >
           <div>{category.name}</div>
         </StyledCategoryWrap>

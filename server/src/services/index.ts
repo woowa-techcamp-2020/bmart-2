@@ -1,5 +1,5 @@
-import CategoryService from './category';
-import ProcutService from './product';
-import CartService from './cart';
+import CategoryService from './categoryService';
+import ProcutService from './productService';
+import CartService from './cartService';
 
 export { CategoryService, ProcutService, CartService };

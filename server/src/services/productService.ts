@@ -27,12 +27,11 @@ const findProductByCategory = async ({
 }: {
   categoryId: string;
 }): Promise<IProduct[]> => {
-  const numberOfItem = 6;
+  const numberOfItem = 30;
   const productsByCategory = (await Category.findAll({
     include: [
       {
         model: SubCategory,
-        limit: 1,
         include: [
           {
             model: Product,

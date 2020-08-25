@@ -26,7 +26,7 @@ const CategoryIcons = () => {
         <div>
           <img src={category.imgUrl} alt="category img" />
         </div>
-        <div>{category.name}</div>
+        <p>{category.name}</p>
       </StyledCategoryIconsCol>
     ));
   return (

@@ -13,22 +13,25 @@ export const StyledCategoryIconsRow = styled.div`
 export const StyledCategoryIconsCol = styled.div`
   flex: 1 0 20%;
   flex-direction: column;
-  height: 95px;
-  color: white;
   display: flex;
   align-items: center;
   justify-content: center;
 
   div {
+    padding: 8px;
     font-size: 0.7rem;
     font-weight: bolder;
     margin-top: 5px;
+    border-radius: 20px;
+    width: 9vw;
+    height: 9vw;
+    box-shadow: ${(props) => props.theme.shadow};
   }
   img {
-    box-shadow: ${(props) => props.theme.shadow};
-    border-radius: 20px;
-    width: 50px;
-    height: 50px;
-
+    width: 100%;
+  }
+  p {
+    font-size: 0.7rem;
+    margin: 8px 0;
   }
 `;

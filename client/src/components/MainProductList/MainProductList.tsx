@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { RefObject, useEffect, useMemo, useRef, useState } from 'react';
 import { Grid } from '@material-ui/core';
 import apis from '../../apis';
 import {
@@ -15,22 +15,12 @@ import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
 import history from '../../history';
 
-const debounce = (
-  func: (entries: IntersectionObserverEntry[]) => void,
-  delay: number
-) => {
-  let debounceTimer: number;
-  return (entries: IntersectionObserverEntry[]) => {
-    clearTimeout(debounceTimer);
-    debounceTimer = setTimeout(() => func(entries), delay);
-  };
-};
-
 const MainProductList = () => {
   const [curCategory, setCurCategory] = useState(0);
   const [productsInCategories, setProductsInCategories] = useState<ICategory[]>(
     []
   );
+  const productListRefs = useRef<HTMLDivElement[]>([]);
   useEffect(() => {
     const getProductByCategory = async () => {
       const res = await apis.get('/category?product=true');
@@ -38,6 +28,25 @@ const MainProductList = () => {
     };
     getProductByCategory();
   }, []);
+
+  const observer = useMemo(() => {
+    const options = {
+      threshold: 0.6,
+    };
+    const observerHandler = (entries: IntersectionObserverEntry[]) => {
+      let curProductList = null;
+      if (entries.length === 2) curProductList = entries[1].target;
+      else curProductList = entries[0].target;
+
+      const curIdx = (curProductList as HTMLDivElement).dataset.order;
+      setCurCategory(parseInt(curIdx!, 10));
+    };
+    return new IntersectionObserver(observerHandler, options);
+  }, []);
+
+  useEffect(() => {
+    productListRefs.current.map((productList) => observer.observe(productList));
+  }, [productsInCategories.length, observer]);
 
   const productClickHandler = (product: IProduct) => {
     history.push({
@@ -62,35 +71,14 @@ const MainProductList = () => {
     });
   };
 
-  const observer = useMemo(() => {
-    const debounceDelay = 300;
-    const options = {
-      threshold: 0.7,
-    };
-    const observerHandler = (entries: IntersectionObserverEntry[]) => {
-      let curProductList = null;
-      if (entries.length === 2) curProductList = entries[1].target;
-      else curProductList = entries[0].target;
-
-      const curIdx = (curProductList as HTMLDivElement).dataset.order;
-      setCurCategory(parseInt(curIdx!, 10));
-    };
-    return new IntersectionObserver(
-      debounce(observerHandler, debounceDelay),
-      options
-    );
-  }, []);
-
-  const addObserverToProductList = (element: HTMLDivElement) => {
-    if (element) observer.observe(element);
-  };
-
   const productList = () =>
     productsInCategories.map((productsInCategory, i) => {
       return (
         <StyledProductListWrap
           key={productsInCategory.id}
-          ref={addObserverToProductList}
+          ref={(e) => {
+            productListRefs.current[i] = e!;
+          }}
           data-order={i}
         >
           <StyledProductTitle>{productsInCategory.name}</StyledProductTitle>
@@ -101,13 +89,18 @@ const MainProductList = () => {
       );
     });
 
+  console.log(productListRefs.current);
+
   return (
     <div>
       <StyledTitleWrap>
         <StyledMainTitle>번쩍하면 배달오는</StyledMainTitle>
         B마트 대표 상품
       </StyledTitleWrap>
-      <CategoryList curCategory={curCategory} />
+      <CategoryList
+        curCategory={curCategory}
+        productListRefs={productListRefs}
+      />
       <StyledGridContainer>{productList()}</StyledGridContainer>
     </div>
   );
