@@ -11,6 +11,7 @@ import {
 
 import { IProduct } from '../../../../types/modelTypes';
 import { numberToString } from '../../util/common';
+import history from '../../history';
 
 interface IProductProps {
   product: IProduct;
@@ -21,10 +22,17 @@ const Product = ({ product }: IProductProps) => {
     e.stopPropagation();
   };
 
+  const productClickHandler = () => {
+    history.push({
+      pathname: '/detail',
+      state: { product },
+    });
+  };
+
   return (
     <>
       {product ? (
-        <StyledProduct>
+        <StyledProduct onClick={productClickHandler}>
           <ImageWrapper>
             <img
               style={{ width: '100%', height: '100%' }}

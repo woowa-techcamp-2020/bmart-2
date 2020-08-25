@@ -11,7 +11,6 @@ import Product from '../Product';
 import { Grid } from '@material-ui/core';
 import { IProduct } from '../../../../types/modelTypes';
 import SelectSortList from '../../components/SelectSortList';
-import history from '../../history';
 
 interface IProudctSortListProps {
   products: IProduct[] | null;
@@ -30,25 +29,12 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
   const [open, setOpen] = React.useState(false);
   const [selected, setSelected] = React.useState(0);
 
-  const productClickHandler = (product: IProduct) => {
-    history.push({
-      pathname: '/detail',
-      state: { product },
-    });
-  };
-
   const renderProduct = () => {
     if (!products) {
       products = new Array(6).fill(0);
     }
     return filterProduct(products).map((item: IProduct, index) => (
-      <Grid
-        item
-        xs={6}
-        sm={4}
-        key={'sort-list' + index}
-        onClick={() => productClickHandler(item)}
-      >
+      <Grid item xs={6} sm={4} key={'sort-list' + index}>
         <Product product={item} />
       </Grid>
     ));
