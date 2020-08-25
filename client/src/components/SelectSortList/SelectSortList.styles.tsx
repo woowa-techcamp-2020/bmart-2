@@ -5,9 +5,6 @@ interface SelectListType {
   open?: boolean;
 }
 
-// TODO
-// 애니메이션 자연스럽게 바꿔야함.
-
 export const StyledSelectListContaienr = styled.div`
   position: fixed;
   left: 0;
