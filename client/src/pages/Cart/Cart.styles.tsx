@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 export const StyledCartButton = styled.div`
-  width: calc(100% - 6vh);
+  width: 100%;
   border-radius: 3vh;
   background: #dd4470;
   bottom: 1vh;
@@ -26,11 +26,13 @@ export const StyledCartButtonWrapper = styled.div`
   height: 9vh;
   bottom: 0;
   padding: 0 3vh;
+  left: 0;
+  box-sizing: border-box;
 `;
 
 export const StyledCartHeader = styled.div`
   display: flex;
-  padding: 3vh 0 0 3vh;
+  padding: 3vh 0 0 1vh;
   div {
     display: flex;
     align-items: center;
