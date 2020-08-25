@@ -17,6 +17,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import { useCategoryDispatch, TCategoryState } from './context/categoryContext';
 import category from './apis';
+import SearchResult from './pages/SearchResult';
 
 function App() {
   const dispatch = useCategoryDispatch();
@@ -39,6 +40,7 @@ function App() {
               <Route path="/cart" exact component={Cart} />
               <Route path="/category" exact component={Category} />
               <Route path="/detail" exact component={Detail} />
+              <Route path="/result" exact component={SearchResult} />
               <Route path="/menu" exact component={Menu} />
               <Route path="/search" exact component={Search} />
               <Route path="/signin" exact component={Signin} />
