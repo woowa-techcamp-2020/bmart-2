@@ -10,4 +10,15 @@ const create = async (
   res.status(200).send(cart);
 };
 
-export default { create };
+const remove = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { params } = req;
+  const productId = parseInt(params.productId, 10);
+  await Cart.destroy({ where: { productId } });
+  res.status(200).send({ success: true });
+};
+
+export default { create, remove };
