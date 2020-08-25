@@ -1,20 +1,14 @@
 import React from 'react';
-import {
-  List,
-  ListSubheader,
-  ListItem,
-  ListItemText,
-  ListItemIcon,
-} from '@material-ui/core';
+import { List, ListItem, ListItemText } from '@material-ui/core';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import InputAdornment from '@material-ui/core/InputAdornment';
 import {
   StyledDeleteIcon,
   StyledListHeader,
   StyledSearchHistoryWrap,
+  StyledListItem,
 } from './SearchHistory.styles';
 
 const datas = ['과자', '두유', '우유', '라면', '야채'];
@@ -22,12 +16,12 @@ const datas = ['과자', '두유', '우유', '라면', '야채'];
 const SearchHistory = () => {
   const historyList = () =>
     datas.map((text, idx) => (
-      <ListItem key={idx}>
+      <StyledListItem key={idx} button>
         <ListItemText primary={text} />
         <StyledDeleteIcon>
           <FontAwesomeIcon icon={faTimes} size="lg" />
         </StyledDeleteIcon>
-      </ListItem>
+      </StyledListItem>
     ));
   return (
     <StyledSearchHistoryWrap>
