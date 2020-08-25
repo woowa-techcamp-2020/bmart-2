@@ -57,17 +57,18 @@ export const StyledProductPurchaseWrapper = styled.div`
 `;
 
 export const StyledProductImgWrapper = styled.div`
-  flex: 1;
   margin-right: 2vh;
 `;
 
 export const StyledProductImg = styled.img`
-  width: 100%;
+  width: 10vh;
+  height: 10vh;
   border-radius: 3vh;
+  object-fit: cover;
 `;
 
 export const StyledPurchaseWrapper = styled.div`
-  flex: 4;
+  flex: 1;
   display: flex;
   flex-direction: column;
 `;
