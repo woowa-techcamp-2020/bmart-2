@@ -41,4 +41,14 @@ const find = async (
   res.status(200).send(carts);
 };
 
-export default { create, remove, find };
+const update = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { userId, productId, count } = req.body;
+  await Cart.update({ count }, { where: { userId, productId } });
+  res.status(200).send({ success: true });
+};
+
+export default { create, remove, find, update };
