@@ -6,6 +6,9 @@ import {
   StyledCartButton,
   StyledCartWrapper,
   StyledCartButtonWrapper,
+  StyledCartIcon,
+  StyledCartIconWrapper,
+  StyledCartHeader,
 } from './Cart.styles';
 
 const defaultCart = [
@@ -151,7 +154,14 @@ const Cart = () => {
 
   return (
     <StyledCartWrapper>
-      <h1>Cart</h1>
+      <StyledCartHeader>
+        <StyledCartIconWrapper>
+          <StyledCartIcon />
+        </StyledCartIconWrapper>
+        <div>
+          <h2>장바구니</h2>
+        </div>
+      </StyledCartHeader>
       <CartProductList carts={carts} changeCount={changeCount} />
       <CartSummary totalPrice={getTotalPrice()} />
       <StyledCartButtonWrapper>

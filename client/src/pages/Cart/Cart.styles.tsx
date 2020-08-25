@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 export const StyledCartButton = styled.div`
   width: calc(100% - 6vh);
@@ -25,4 +26,36 @@ export const StyledCartButtonWrapper = styled.div`
   height: 9vh;
   bottom: 0;
   padding: 0 3vh;
+`;
+
+export const StyledCartHeader = styled.div`
+  display: flex;
+  padding: 3vh 0 0 3vh;
+  div {
+    display: flex;
+    align-items: center;
+    h2 {
+      font-weight: bold;
+      display: inline-block;
+      height: 3vh;
+      line-height: 3vh;
+    }
+  }
+`;
+
+export const StyledCartIconWrapper = styled.div`
+  height: 5vh !important;
+  width: 5vh !important;
+  background: #dd4470;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 2vh;
+`;
+
+export const StyledCartIcon = styled(ShoppingCartIcon)`
+  height: 3vh !important;
+  width: 3vh !important;
+  color: white;
 `;
