@@ -89,8 +89,6 @@ const MainProductList = () => {
       );
     });
 
-  console.log(productListRefs.current);
-
   return (
     <div>
       <StyledTitleWrap>
