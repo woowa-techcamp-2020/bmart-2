@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import { elasticClient } from '../models';
+import { IProduct } from '../../../types/modelTypes';
 
 const findAll = async (
   req: Request,
@@ -18,11 +19,18 @@ const findAll = async (
     },
   };
   try {
-    const result = await elasticClient.search({
-      index: 'product',
+    const elasticRes = await elasticClient.search({
+      index: 'products',
       body,
       type: '',
     });
+    const result: IProduct[] = [];
+
+    elasticRes.hits?.hits.map((data) => {
+      // eslint-disable-next-line no-underscore-dangle
+      result.push(data._source as IProduct);
+    });
+
     res.json(result);
   } catch (err) {
     console.log(err);
