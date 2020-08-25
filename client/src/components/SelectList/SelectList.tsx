@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import {
   StyledSelectListContaienr,
   StyledSelectListWrapper,
@@ -18,14 +18,18 @@ import {
 } from './SelectList.styles';
 
 import { numberToString } from '../../util/common';
+import { IProduct } from '../../../../types/modelTypes';
 
 interface SelectListPropType {
   openList: boolean;
   setOpenList: Function;
-  data: any;
+  product: IProduct;
 }
 
-const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
+// TODO
+// 장바구니에 있는 것까지 카운트하기
+
+const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
   const [clickbtn, setClicked] = React.useState(false);
   const [count, setCount] = React.useState(1);
   const detailContainer = React.useRef<HTMLDivElement>(null);
@@ -52,6 +56,7 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
 
   const cancelList = () => {
     setOpenList(false);
+    setCount(1);
   };
 
   return (
@@ -59,15 +64,19 @@ const SelectList = ({ openList, setOpenList, data }: SelectListPropType) => {
       <StyledSelectListWrapper>
         <StyledSelectList clickbtn={clickbtn.toString()} open={openList}>
           <StyledImageContentWrapper ref={detailContainer}>
-            <StyledImageContent url={data.imgUrl}></StyledImageContent>
+            <StyledImageContent url={product.mainImgUrl}></StyledImageContent>
           </StyledImageContentWrapper>
-          <StyledProductName>{data.name}</StyledProductName>
+          <StyledProductName>{product.name}</StyledProductName>
           <StyledProductMaxCount>
-            1회 최대 구매 수량: {data.max_quantity}개
+            1회 최대 구매 수량: {product.maxQuantity}개
           </StyledProductMaxCount>
           <StyledSelectProductCartContent>
             <StyledProductPrice>
-              {numberToString(data.price * count)}원
+              {numberToString(
+                Math.floor((product.price * (100 - product.discount)) / 100) *
+                  count
+              )}
+              원
             </StyledProductPrice>
             <StyledProductCountWrapper>
               <StyledCountUp

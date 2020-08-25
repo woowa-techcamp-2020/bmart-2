@@ -11,35 +11,54 @@ import {
 
 import { IProduct } from '../../../../types/modelTypes';
 import { numberToString } from '../../util/common';
-interface ProductType {
-  url: string;
-  id: number;
-  name: string;
-  price: number;
-  subcategory_id: number;
-  stock: number;
-  discount: number;
+import history from '../../history';
+
+interface IProductProps {
+  product: IProduct;
 }
 
-const Product = ({ product }: { product: IProduct }) => {
+const Product = ({ product }: IProductProps) => {
+  const clickDibIcon = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+  };
+
+  const productClickHandler = () => {
+    history.push({
+      pathname: '/detail',
+      state: { product },
+    });
+  };
+
   return (
     <>
       {product ? (
-        <StyledProduct>
+        <StyledProduct onClick={productClickHandler}>
           <ImageWrapper>
             <img
               style={{ width: '100%', height: '100%' }}
-              alt="asdf"
+              alt={product.name}
               src={product.thumbImgUrl}
             />
+            {product.discount > 0 ? <div>{product.discount}%</div> : <></>}
             <StyledFavoriteCheck
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite />}
               name="checked"
+              onClick={clickDibIcon}
             />
           </ImageWrapper>
           <ProductTitle>{product.name} </ProductTitle>
-          <ProductPrice>{numberToString(product.price)}원</ProductPrice>
+          <ProductPrice>
+            {product.discount > 0 ? (
+              <span>{numberToString(product.price)}원</span>
+            ) : (
+              <></>
+            )}
+            {numberToString(
+              Math.floor((product.price * (100 - product.discount)) / 100)
+            )}
+            원
+          </ProductPrice>
         </StyledProduct>
       ) : (
         <StyledProduct>

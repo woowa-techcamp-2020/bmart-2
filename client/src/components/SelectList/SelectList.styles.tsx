@@ -38,7 +38,7 @@ export const StyledCountDown = styled(RemoveIcon)`
 
 export const StyledCountText = styled.div`
   line-height: 32px;
-  font-size: 17px;
+  font-size: 1.2rem;
   font-weight: bold;
   margin: 0 10px;
   width: 20px;
@@ -157,7 +157,7 @@ export const StyledSelectListContaienr = styled.div`
   left: 0;
   bottom: 0;
   opacity: 0;
-  z-index: -1;
+  visibility: hidden;
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
@@ -167,7 +167,7 @@ export const StyledSelectListContaienr = styled.div`
   ${(props: SelectListType) =>
     props.open &&
     css`
-      z-index: 2;
+      visibility: visible;
       opacity: 1;
     `}
   ${(props: SelectListType) =>
@@ -177,7 +177,7 @@ export const StyledSelectListContaienr = styled.div`
     `}
 `;
 export const StyledSelectListWrapper = styled.div`
-  height: 320px;
+  height: 360px;
 `;
 
 export const StyledSelectList = styled.div`
@@ -187,7 +187,7 @@ export const StyledSelectList = styled.div`
   border-top-right-radius: 40px;
   background: white;
   padding: 32px;
-  transform: translate3d(0, 320px, 0);
+  transform: translate3d(0, 360px, 0);
   transition: all 0.4s;
   ${(props: SelectListType) =>
     props.open &&
@@ -197,7 +197,7 @@ export const StyledSelectList = styled.div`
   ${(props: SelectListType) =>
     props.clickbtn === 'true' &&
     css`
-      animation: ${goCartImage(230)} 1.4s forwards;
+      animation: ${goCartImage(270)} 1.4s forwards;
     `}
   overflow: hidden;
 `;
@@ -220,13 +220,13 @@ export const StyledImageContent = styled.div`
 export const StyledProductName = styled.div`
   width: 100%;
   padding: 12px 0 4px;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bold;
 `;
 
 export const StyledProductMaxCount = styled.div`
   width: 100%;
-  font-size: 14px;
+  font-size: 1rem;
   padding-bottom: 12px;
 `;
 
@@ -238,7 +238,7 @@ export const StyledSelectProductCartContent = styled.div`
 export const StyledProductPrice = styled.div`
   flex: 1;
   height: 100%;
-  font-size: 18px;
+  font-size: 1.1rem;
   font-weight: bold;
   line-height: 32px;
 `;

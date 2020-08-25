@@ -25,7 +25,7 @@ const theme: BMartTheme = {
   border: {
     radius: '10px',
   },
-  shadow: '0px 0px 6px 2px rgba(0, 0, 0, 0.065)',
+  shadow: '0px 4px 4px 1px rgba(0, 0, 0, 0.1)',
   dropShadow: '0px 3px 3px rgba(100, 100, 100, 0.25)',
 };
 
