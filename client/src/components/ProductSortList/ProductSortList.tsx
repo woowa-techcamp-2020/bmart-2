@@ -31,7 +31,7 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
 
   const renderProduct = () => {
     if (!products) {
-      products = new Array(6).fill(0);
+      products = new Array(12).fill(0);
     }
     return filterProduct(products).map((item: IProduct, index) => (
       <Grid item xs={6} sm={4} key={'sort-list' + index}>

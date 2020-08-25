@@ -9,14 +9,14 @@ const StyledProduct = styled(Grid)`
 
 const ImageWrapper = styled.div`
   width: 100%;
-  min-height: 80px;
+  height: 28vh;
   border-radius: 12px;
   margin-bottom: 12px;
   overflow: hidden;
   position: relative;
   div {
     position: absolute;
-    padding: 0.6rem 1rem;
+    padding: 0.6em 0.8em;
     top: 0.6rem;
     left: 0.6rem;
     background: #dd4470;
@@ -46,10 +46,13 @@ const ProductPrice = styled.div`
 const StyledFavoriteCheck = styled(Checkbox)`
   && {
     position: absolute;
-    bottom: 4px;
-    right: 4px;
-    transform: scale(1.1);
+    bottom: 0.3rem;
+    right: 0.3rem;
     margin: 0;
+    svg {
+      width: 8vw !important;
+      height: 8vw !important;
+    }
   }
 ` as typeof Checkbox;
 
