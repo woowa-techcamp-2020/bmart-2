@@ -5,7 +5,6 @@ import {
   SubCategory,
 } from './Category.styles';
 import { useLocation } from 'react-router-dom';
-
 import ProductSortList from '../../components/ProductSortList';
 import { ICategory, IProduct } from '../../../../types/modelTypes';
 
@@ -24,6 +23,7 @@ const Category = () => {
   const { category } = location.state;
   const [selected, setSelected] = React.useState(0);
   const [products, setProducts] = React.useState<IProduct[] | null>(null);
+
   React.useEffect(() => {
     const fetchCategoryProducts = async () => {
       const res = await categoryApi.get(`/product?categoryId=${category.id}`);
@@ -38,7 +38,7 @@ const Category = () => {
     return subCategory.map((item) => (
       <SubCategory
         selected={selected === item.id}
-        onPointerUp={() => setSelected(item.id)}
+        onClick={() => setSelected(item.id)}
         key={`category-page-sub-category-${item.id}`}
       >
         {item.name}
