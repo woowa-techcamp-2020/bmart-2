@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import Toolbar from '@material-ui/core/Toolbar';
+import { ThemeProvider } from 'styled-components';
 import {
   StyledLogoH,
+  StyledInput,
   StyledToolbar,
   StyledButton,
   StyledAppBar,
@@ -13,29 +15,12 @@ import history from '../../history';
 
 const title = 'B mart';
 
-interface IHeaderProps {
-  path: string;
-  setPath: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function Header({ path, setPath }: IHeaderProps) {
-  const searchHandler = () => {
-    history.push('/search');
-    setPath(history.location.pathname);
-  };
-
-  useEffect(() => {
-    const setPathHandler = () => {
-      setPath(history.location.pathname);
-    };
-    window.onpopstate = setPathHandler;
-  }, []);
-
+export default function Header() {
   const renderInMainPage = () => {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
-        <StyledButton aria-label="search" onClick={searchHandler}>
+        <StyledButton aria-label="search">
           <SearchIcon />
         </StyledButton>
         <StyledButton aria-label="menu">
@@ -49,7 +34,7 @@ export default function Header({ path, setPath }: IHeaderProps) {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
-        <StyledButton aria-label="search" onClick={searchHandler}>
+        <StyledButton aria-label="search">
           <SearchIcon />
         </StyledButton>
         <StyledButton aria-label="menu">
@@ -68,7 +53,7 @@ export default function Header({ path, setPath }: IHeaderProps) {
   };
 
   const renderByPage = () => {
-    switch (path) {
+    switch (history.location.pathname) {
       case '/':
         return renderInMainPage();
       case '/category':
@@ -76,20 +61,14 @@ export default function Header({ path, setPath }: IHeaderProps) {
       case '/cart':
         return renderInCartPage();
       default:
-        return renderInMainPage();
+        return <></>;
     }
   };
-
-  const backSpaceHandler = () => {
-    history.goBack();
-    setPath(history.location.pathname);
-  };
-
   return history.location.pathname !== '/search' ? (
     <div>
       <StyledAppBar>
         <StyledToolbar>
-          <StyledButton color="inherit" onClick={backSpaceHandler}>
+          <StyledButton color="inherit">
             <ArrowBackIcon />
           </StyledButton>
           {renderByPage()}
