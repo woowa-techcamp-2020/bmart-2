@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Route, Router, Switch } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
 import Container from '@material-ui/core/Container';
@@ -20,6 +20,7 @@ import category from './apis';
 import SearchResult from './pages/SearchResult';
 
 function App() {
+  const [path, setPath] = useState(history.location.pathname);
   const dispatch = useCategoryDispatch();
   useEffect(() => {
     const fetchCategory = async () => {
@@ -28,13 +29,14 @@ function App() {
     };
     fetchCategory();
   }, [dispatch]);
+  console.log(history.location.pathname);
   return (
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Header />
         <Container maxWidth="md">
           <Router history={history}>
+            <Header path={path} setPath={setPath} />
             <Switch>
               <Route path="/" exact component={Main} />
               <Route path="/cart" exact component={Cart} />
@@ -42,7 +44,11 @@ function App() {
               <Route path="/detail" exact component={Detail} />
               <Route path="/result" exact component={SearchResult} />
               <Route path="/menu" exact component={Menu} />
-              <Route path="/search" exact component={Search} />
+              <Route
+                path="/search"
+                exact
+                component={() => <Search setPath={setPath} />}
+              />
               <Route path="/signin" exact component={Signin} />
               <Route path="/signup" exact component={Signup} />
             </Switch>
