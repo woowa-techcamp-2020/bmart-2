@@ -1,6 +1,7 @@
 import tunnel from 'tunnel-ssh';
 import { Sequelize } from 'sequelize';
 import dotenv from 'dotenv';
+import elasticClient from './Elasticsearch';
 
 dotenv.config();
 const config = {
@@ -67,4 +68,4 @@ const startDB = (): void => {
   // eslint-disable-next-line @typescript-eslint/no-floating-promises
 };
 
-export { startDB, sequelize };
+export { startDB, sequelize, elasticClient };
