@@ -14,7 +14,7 @@ interface SelectListType {
 export const StyledProductWrapper = styled.div`
   width: 100%;
   box-sizing: border-box;
-  padding: 2vh;
+  padding: 2vh 3vh;
 `;
 
 export const StyledProductContent = styled.div`
@@ -58,7 +58,7 @@ export const StyledProductPurchaseWrapper = styled.div`
 
 export const StyledProductImgWrapper = styled.div`
   flex: 1;
-  margin-right: 1vh;
+  margin-right: 2vh;
 `;
 
 export const StyledProductImg = styled.img`

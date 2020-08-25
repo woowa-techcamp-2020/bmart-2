@@ -33,17 +33,10 @@ interface ProductType {
 
 interface CarProductProps {
   product: ProductType;
+  count: number;
 }
 
-export default function CartProduct({ product }: CarProductProps) {
-  const [count, setCount] = React.useState(1);
-  const countDown = () => {
-    setCount(count - 1);
-  };
-  const countUp = () => {
-    setCount(count + 1);
-  };
-
+export default function CartProduct({ product, count }: CarProductProps) {
   return (
     <StyledProductWrapper>
       <StyledProductContent>
@@ -63,9 +56,9 @@ export default function CartProduct({ product }: CarProductProps) {
               <span>{numberToString(product.price * count)}원</span>
             </StyledTotalPrice>
             <StyledProductCountWrapper>
-              <StyledCountUp onPointerUp={countUp} count={count} />
+              <StyledCountUp onPointerUp={() => {}} count={count} />
               <StyledCountText>{count}</StyledCountText>
-              <StyledCountDown onPointerUp={countDown} count={count} />
+              <StyledCountDown onPointerUp={() => {}} count={count} />
             </StyledProductCountWrapper>
           </StyledProductPurchaseWrapper>
         </StyledPurchaseWrapper>

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const StyledCartButton = styled.div`
-  width: calc(100% - 4vh);
+  width: calc(100% - 6vh);
   border-radius: 3vh;
   background: #dd4470;
   bottom: 1vh;
@@ -24,5 +24,5 @@ export const StyledCartButtonWrapper = styled.div`
   background-color: white;
   height: 9vh;
   bottom: 0;
-  padding: 0 2vh;
+  padding: 0 3vh;
 `;
