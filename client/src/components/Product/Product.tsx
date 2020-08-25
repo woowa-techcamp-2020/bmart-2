@@ -17,6 +17,10 @@ interface IProductProps {
 }
 
 const Product = ({ product }: IProductProps) => {
+  const clickDibIcon = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    e.stopPropagation();
+  };
+
   return (
     <>
       {product ? (
@@ -31,6 +35,7 @@ const Product = ({ product }: IProductProps) => {
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite />}
               name="checked"
+              onClick={clickDibIcon}
             />
           </ImageWrapper>
           <ProductTitle>{product.name} </ProductTitle>
