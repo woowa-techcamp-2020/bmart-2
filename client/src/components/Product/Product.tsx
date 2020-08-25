@@ -11,17 +11,12 @@ import {
 
 import { IProduct } from '../../../../types/modelTypes';
 import { numberToString } from '../../util/common';
-interface ProductType {
-  url: string;
-  id: number;
-  name: string;
-  price: number;
-  subcategory_id: number;
-  stock: number;
-  discount: number;
+
+interface IProductProps {
+  product: IProduct;
 }
 
-const Product = ({ product }: { product: IProduct }) => {
+const Product = ({ product }: IProductProps) => {
   return (
     <>
       {product ? (
@@ -29,7 +24,7 @@ const Product = ({ product }: { product: IProduct }) => {
           <ImageWrapper>
             <img
               style={{ width: '100%', height: '100%' }}
-              alt="asdf"
+              alt={product.name}
               src={product.thumbImgUrl}
             />
             <StyledFavoriteCheck
