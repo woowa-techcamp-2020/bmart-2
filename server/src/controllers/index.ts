@@ -1,11 +1,11 @@
-import CategoryController from './category';
-import SubCategoryController from './subCategory';
-import BannerController from './banner';
-import ProductController from './product';
-import UserController from './user';
-import DibController from './dib';
-import OrderController from './order';
-import CartController from './cart';
+import CategoryController from './categoryController';
+import SubCategoryController from './subCategoryController';
+import BannerController from './bannerController';
+import ProductController from './productController';
+import UserController from './userController';
+import DibController from './dibController';
+import OrderController from './orderController';
+import CartController from './cartController';
 
 export {
   CategoryController,

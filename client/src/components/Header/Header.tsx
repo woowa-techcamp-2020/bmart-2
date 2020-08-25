@@ -2,6 +2,8 @@ import React from 'react';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import Toolbar from '@material-ui/core/Toolbar';
+import { ThemeProvider } from 'styled-components';
 import {
   StyledLogoH,
   StyledInput,
@@ -9,28 +11,18 @@ import {
   StyledButton,
   StyledAppBar,
 } from './Header.styles';
+import history from '../../history';
 
-interface HeaderProps {
-  title: string;
-  page: string;
-}
+const title = 'B mart';
 
-export default function Header({ title, page }: HeaderProps) {
-  const renderInSearchPage = () => {
-    return (
-      <>
-        <StyledInput />
-        <StyledButton aria-label="search">
-          <SearchIcon />
-        </StyledButton>
-      </>
-    );
-  };
-
+export default function Header() {
   const renderInMainPage = () => {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
+        <StyledButton aria-label="search">
+          <SearchIcon />
+        </StyledButton>
         <StyledButton aria-label="menu">
           <MenuIcon />
         </StyledButton>
@@ -42,11 +34,11 @@ export default function Header({ title, page }: HeaderProps) {
     return (
       <>
         <StyledLogoH variant="h6">{title}</StyledLogoH>
-        <StyledButton aria-label="menu">
-          <MenuIcon />
-        </StyledButton>
         <StyledButton aria-label="search">
           <SearchIcon />
+        </StyledButton>
+        <StyledButton aria-label="menu">
+          <MenuIcon />
         </StyledButton>
       </>
     );
@@ -61,21 +53,18 @@ export default function Header({ title, page }: HeaderProps) {
   };
 
   const renderByPage = () => {
-    switch (page) {
-      case 'main':
+    switch (history.location.pathname) {
+      case '/':
         return renderInMainPage();
-      case 'category':
+      case '/category':
         return renderInCategoryPage();
-      case 'search':
-        return renderInSearchPage();
-      case 'cart':
+      case '/cart':
         return renderInCartPage();
       default:
-        return '';
+        return <></>;
     }
   };
-
-  return (
+  return history.location.pathname !== '/search' ? (
     <div>
       <StyledAppBar>
         <StyledToolbar>
@@ -85,7 +74,10 @@ export default function Header({ title, page }: HeaderProps) {
           {renderByPage()}
         </StyledToolbar>
       </StyledAppBar>
+      <Toolbar />
     </div>
+  ) : (
+    <div />
   );
 }
 

@@ -31,8 +31,7 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Header title="B mart" page="main" />
-        <Toolbar />
+        <Header />
         <Container maxWidth="md">
           <Router history={history}>
             <Switch>
