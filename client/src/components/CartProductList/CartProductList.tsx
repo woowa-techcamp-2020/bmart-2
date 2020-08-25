@@ -26,12 +26,20 @@ interface CartType {
 
 interface CartProductListProp {
   carts: CartType[];
+  changeCount: (productId: number, count: number) => void;
 }
 
-export default function CartProductList({ carts }: CartProductListProp) {
+export default function CartProductList({
+  carts,
+  changeCount,
+}: CartProductListProp) {
   const renderCartProduct = () => {
     return carts.map((cart) => (
-      <CartProduct product={cart.product} count={cart.count} />
+      <CartProduct
+        product={cart.product}
+        count={cart.count}
+        changeCount={changeCount}
+      />
     ));
   };
 

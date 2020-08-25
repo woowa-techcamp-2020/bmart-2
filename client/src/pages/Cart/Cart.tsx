@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import CartProductList from '../../components/CartProductList';
 import CartSummary from '../../components/CartSummary';
-import apis from '../../apis';
+
 import {
   StyledCartButton,
   StyledCartWrapper,
@@ -122,22 +122,38 @@ interface CartType {
 }
 
 const Cart = () => {
-  const [cartInfo, setCartInfo] = useState<CartType[]>([]);
+  const [carts, setcarts] = useState<CartType[]>([]);
 
   useEffect(() => {
-    // const getCartInfo = async () => {
+    // const getcarts = async () => {
     //   const res = await apis.get('/cart/1');
-    //   setCartInfo(res.data);
+    //   setcarts(res.data);
     // };
-    // getCartInfo();
-    setCartInfo(defaultCart);
-  }, [cartInfo]);
+    // getcarts();
+    setcarts(defaultCart);
+  }, []);
+
+  const changeCount = (productId: number, count: number): void => {
+    setcarts(
+      carts.map((cart) =>
+        cart.product.id === productId ? { ...cart, count: count } : cart
+      )
+    );
+  };
+
+  const getTotalPrice = (): number => {
+    return carts.reduce(
+      (acc: number, cart: CartType): number =>
+        acc + cart.product.price * cart.count,
+      0
+    );
+  };
 
   return (
     <StyledCartWrapper>
       <h1>Cart</h1>
-      <CartProductList carts={cartInfo} />
-      <CartSummary />
+      <CartProductList carts={carts} changeCount={changeCount} />
+      <CartSummary totalPrice={getTotalPrice()} />
       <StyledCartButtonWrapper>
         <StyledCartButton>구매하기</StyledCartButton>
       </StyledCartButtonWrapper>

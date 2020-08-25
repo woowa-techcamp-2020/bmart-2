@@ -4,14 +4,19 @@ import {
   StyledSummaryContent,
   StyledSummaryInfo,
 } from './CartSummary.styles';
+import { numberToString } from '../../util/common';
 
-export default function CartSummary() {
+interface CartSummary {
+  totalPrice: number;
+}
+
+export default function CartSummary({ totalPrice }: CartSummary) {
   return (
     <StyledSummaryWrapper>
       <StyledSummaryContent>
         <StyledSummaryInfo>
           <h4>총 주문 금액</h4>
-          <span>3000</span>
+          <span>{numberToString(totalPrice)}</span>
         </StyledSummaryInfo>
         <StyledSummaryInfo>
           <h4>배달 팁</h4>

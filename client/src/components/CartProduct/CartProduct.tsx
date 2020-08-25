@@ -34,9 +34,14 @@ interface ProductType {
 interface CarProductProps {
   product: ProductType;
   count: number;
+  changeCount: (productId: number, count: number) => void;
 }
 
-export default function CartProduct({ product, count }: CarProductProps) {
+export default function CartProduct({
+  product,
+  count,
+  changeCount,
+}: CarProductProps) {
   return (
     <StyledProductWrapper>
       <StyledProductContent>
@@ -56,9 +61,19 @@ export default function CartProduct({ product, count }: CarProductProps) {
               <span>{numberToString(product.price * count)}원</span>
             </StyledTotalPrice>
             <StyledProductCountWrapper>
-              <StyledCountUp onPointerUp={() => {}} count={count} />
+              <StyledCountUp
+                onPointerUp={() => {
+                  changeCount(product.id, count + 1);
+                }}
+                count={count}
+              />
               <StyledCountText>{count}</StyledCountText>
-              <StyledCountDown onPointerUp={() => {}} count={count} />
+              <StyledCountDown
+                onPointerUp={() => {
+                  changeCount(product.id, count - 1);
+                }}
+                count={count}
+              />
             </StyledProductCountWrapper>
           </StyledProductPurchaseWrapper>
         </StyledPurchaseWrapper>
