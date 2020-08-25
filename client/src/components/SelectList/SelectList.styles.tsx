@@ -157,7 +157,7 @@ export const StyledSelectListContaienr = styled.div`
   left: 0;
   bottom: 0;
   opacity: 0;
-  z-index: -1;
+  visibility: hidden;
   width: 100%;
   height: 100vh;
   background: rgba(0, 0, 0, 0.3);
@@ -167,7 +167,7 @@ export const StyledSelectListContaienr = styled.div`
   ${(props: SelectListType) =>
     props.open &&
     css`
-      z-index: 2;
+      visibility: visible;
       opacity: 1;
     `}
   ${(props: SelectListType) =>
@@ -220,13 +220,13 @@ export const StyledImageContent = styled.div`
 export const StyledProductName = styled.div`
   width: 100%;
   padding: 12px 0 4px;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: bold;
 `;
 
 export const StyledProductMaxCount = styled.div`
   width: 100%;
-  font-size: 14px;
+  font-size: 1rem;
   padding-bottom: 12px;
 `;
 
@@ -238,7 +238,7 @@ export const StyledSelectProductCartContent = styled.div`
 export const StyledProductPrice = styled.div`
   flex: 1;
   height: 100%;
-  font-size: 18px;
+  font-size: 1.1rem;
   font-weight: bold;
   line-height: 32px;
 `;

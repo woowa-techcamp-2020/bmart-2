@@ -45,10 +45,10 @@ const Detail = () => {
         <InfoContent>
           <InfoTitle>배달 정보</InfoTitle>
           <div>
+            지금은 운영 시간이 아니에요{' '}
             <span role="img" aria-label="tt">
               😢
             </span>
-            지금은 운영 시간이 아니에요
           </div>
         </InfoContent>
         ㅎ<StyledCartButton onPointerUp={onClick}>담기</StyledCartButton>

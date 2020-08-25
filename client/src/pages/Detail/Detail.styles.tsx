@@ -6,7 +6,8 @@ interface DetailPageType {
 }
 
 export const StyledDetialWrapper = styled.div`
-  width: 100%;
+  width: 90%;
+  margin: 0 auto;
   min-height: calc(100vh - 60px);
 `;
 
@@ -23,29 +24,29 @@ export const StyledImage = styled.div`
 
 export const StyledCartButton = styled.div`
   position: fixed;
-  width: calc(100% - 32px);
+  width: 80vw;
   border-radius: 16px;
   background: #dd4470;
   bottom: 24px;
-  height: 48px;
+  height: 6vh;
   color: white;
-  font-size: 16px;
+  font-size: 1.1rem;
   font-weight: 700;
-  line-height: 48px;
+  line-height: 6vh;
   text-align: center;
 `;
 
 export const StyledNameText = styled.div`
   width: 100%;
-  font-size: 18px;
-  margin-bottom: 8px;
+  font-size: 1.2rem;
+  margin-bottom: 0.8rem;
 `;
 
 export const StyledPriceText = styled.div`
   width: 100%;
-  font-size: 18px;
+  font-size: 1.2rem;
   font-weight: bold;
-  margin-bottom: 4px;
+  margin-bottom: 0.4rem;
 `;
 
 export const InfoContent = styled.div`
@@ -60,5 +61,7 @@ export const InfoContent = styled.div`
 
 export const InfoTitle = styled.div`
   width: 66px;
+  font-size: 1.1rem;
   font-weight: 600;
+  margin-right: 0.8rem;
 `;
