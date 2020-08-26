@@ -25,3 +25,8 @@ export interface IProduct {
   maxQuantity: number;
   stock: number;
 }
+
+export interface IDib {
+  id: number;
+  productId: number;
+}
