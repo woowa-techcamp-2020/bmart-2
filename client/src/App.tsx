@@ -12,6 +12,7 @@ import Category from './pages/Category';
 import Cart from './pages/Cart';
 import Detail from './pages/Detail';
 import Menu from './pages/Menu';
+import Order from './pages/Order';
 import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -43,6 +44,7 @@ function App() {
               <Route path="/detail" exact component={Detail} />
               <Route path="/result" exact component={SearchResult} />
               <Route path="/menu" exact component={Menu} />
+              <Route path="/Order" exact component={Order} />
               <Route
                 path="/search"
                 exact
