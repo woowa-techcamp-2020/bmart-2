@@ -23,3 +23,8 @@ export const updateCart = async (
   const response = await api.put('cart', { productId, userId, count });
   return response.data;
 };
+
+export const removeCart = async (productId: number) => {
+  const response = await api.delete(`/cart/${productId}`);
+  return response.data;
+};

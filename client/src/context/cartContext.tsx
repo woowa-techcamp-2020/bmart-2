@@ -77,3 +77,8 @@ export async function createCart(
   await api.createCart(productId, userId, count);
   await getCarts(dispatch);
 }
+
+export async function removeCart(dispatch: any, productId: number) {
+  await api.removeCart(productId);
+  await getCarts(dispatch);
+}
