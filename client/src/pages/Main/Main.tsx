@@ -15,8 +15,9 @@ const minBoxSize = 100;
 const defaultTransitionTime = 0;
 const finishTransitionTime = 200;
 let isPulling = false;
-let timeoutId: number | undefined;
+let finishTimeoutId: number | undefined;
 let isFinishing = false;
+let isTouchStart = false;
 
 const Main = () => {
   const [boxHeight, setBoxHeight] = useState(0);
@@ -45,6 +46,7 @@ const Main = () => {
     }
   };
   const onTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    isTouchStart = true;
     if (isPulling) return;
     setTransitionTime(defaultTransitionTime);
     if (event.targetTouches && !isPulling) {
@@ -61,7 +63,6 @@ const Main = () => {
       touch.clientY -
       startTouchY +
       (isFinishing ? minBoxSize + defaultPadding : 0);
-    console.log(heightDiffer);
     const newHeight = Math.round(heightDiffer / 2);
     if (newHeight === boxHeight) return;
     setBoxHeight(newHeight);
@@ -89,10 +90,15 @@ const Main = () => {
     setBoxHeight(minBoxSize);
     isFinishing = true;
     // finish동작은 동작 중 1번만 일어나게
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      setBoxHeight(0);
-      isFinishing = false;
+    clearTimeout(finishTimeoutId);
+    finishTimeoutId = setTimeout(() => {
+      const intervalId = setInterval(() => {
+        if (!isTouchStart) {
+          setBoxHeight(0);
+          isFinishing = false;
+          clearInterval(intervalId);
+        }
+      }, 100);
     }, second * 1000);
   };
 
@@ -103,11 +109,16 @@ const Main = () => {
       setBoxHeight(0);
     }
     isPulling = false;
+    isTouchStart = false;
   };
 
   const getMainProductList = useMemo(() => {
     return <MainProductList productsInCategories={productsInCategories} />;
   }, [productsInCategories.length]);
+
+  const getPull = useMemo(() => {
+    return <Pull boxHeight={boxHeight} isPulling={isPulling} />;
+  }, [boxHeight]);
 
   const transformOption = () => {
     if (boxHeight <= 0) return `translate(0px, 0px)`;
@@ -121,7 +132,7 @@ const Main = () => {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      <Pull boxHeight={boxHeight} isPulling={isPulling} />
+      {getPull}
       <div
         style={{ transform: transformOption() }}
         ref={transitionContainerRef}

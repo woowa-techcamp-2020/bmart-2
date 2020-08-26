@@ -1,5 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { StyledPullContainer, StyledSlotsWrap } from './Pull.styles';
+import {
+  StyledPullContainer,
+  StyledPullText,
+  StyledSlotsWrap,
+} from './Pull.styles';
 import { StyledMainWrap } from '../../pages/Main/Main.styles';
 
 interface IPull {
@@ -11,17 +15,19 @@ const range = 40;
 const rangeHalf = range / 2;
 const defaultTopHeight = 0;
 const minBoxSize = 100;
-const datas: {
+
+interface IData {
   emoji: string;
   text: string;
-}[] = [
+}
+const datas: IData[] = [
   {
     emoji: '🍕',
     text: '피자',
   },
   {
     emoji: '🌭',
-    text: '핫도',
+    text: '핫도그',
   },
   {
     emoji: '🌮',
@@ -45,18 +51,29 @@ const datas: {
   },
   {
     emoji: '🧁',
-    text: '컵케이',
+    text: '컵케잌',
   },
 ];
+
+let isFinishingState = false;
+let isBeforeEnd = false;
+let dataIdx = 0;
+
+const shuffle = (array: IData[]) => {
+  array.sort(() => Math.random() - 0.5);
+};
+
 const Pull = ({ boxHeight, isPulling }: IPull) => {
   const [imgTopHeight, setImgTopHeight] = useState(defaultTopHeight);
-  const [dataIdx, setDataIdx] = useState(0);
-
   const isPullingFinished = boxHeight === minBoxSize && !isPulling;
   const pullContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (boxHeight === 0) isBeforeEnd = false;
+    if (isFinishingState || isBeforeEnd) return;
     if (isPullingFinished) {
+      isFinishingState = true;
+      isBeforeEnd = true;
       const slotAnimation = () => {
         const maxTime = 1000;
         let time = 0;
@@ -64,15 +81,16 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
         const changeTopHeight = () => {
           setTimeout(() => {
             if (time >= maxTime) {
-              setDataIdx(-1);
+              dataIdx = -1;
               setImgTopHeight(0);
+              isFinishingState = false;
+              shuffle(datas);
               return;
             }
             setImgTopHeight(((maxTime - time) % range) - rangeHalf);
-            setDataIdx(
+            dataIdx =
               Math.round(Math.abs((maxTime - time + rangeHalf) / range)) %
-                datas.length
-            );
+              datas.length;
             time += timeDiff;
             changeTopHeight();
           }, timeDiff);
@@ -82,9 +100,8 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
       slotAnimation();
     } else {
       setImgTopHeight((boxHeight % range) - rangeHalf);
-      setDataIdx(
-        Math.round(Math.abs((boxHeight + rangeHalf) / range)) % datas.length
-      );
+      dataIdx =
+        Math.round(Math.abs((boxHeight + rangeHalf) / range)) % datas.length;
     }
   }, [boxHeight, isPullingFinished]);
 
@@ -108,9 +125,9 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
       <StyledSlotsWrap
         style={{ top: `${imgTopHeight}px`, opacity: slotsOpacity }}
       >
-        {dataIdx === -1 ? '핫도그가' : datas[dataIdx].emoji}
+        {dataIdx === -1 ? `${datas[0].text}` : datas[dataIdx].emoji}
       </StyledSlotsWrap>
-      <div>땡겨요</div>
+      <StyledPullText>땡겨요</StyledPullText>
     </StyledPullContainer>
   );
 };
