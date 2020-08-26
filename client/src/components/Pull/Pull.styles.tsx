@@ -4,7 +4,7 @@ export const StyledPullContainer = styled.div`
   position: absolute;
   text-align: center;
   //height: 100px;
-  width: 90%;
+  width: 100%;
   z-index: -1;
   display: flex;
   align-items: center;

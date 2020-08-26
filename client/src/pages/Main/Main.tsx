@@ -8,8 +8,12 @@ import MainProductList from '../../components/MainProductList';
 import { ICategory } from '../../../../types/modelTypes';
 import apis from '../../apis';
 
-let lastTouchY = 0;
-let startTouchY = 0;
+interface IPos {
+  x: number;
+  y: number;
+}
+let lastTouch: IPos = { x: 0, y: 0 };
+let startTouch: IPos = { x: 0, y: 0 };
 const minBoxSize = 100;
 
 const defaultTransitionTime = 0;
@@ -17,6 +21,12 @@ const finishTransitionTime = 200;
 let isPulling = false;
 let isFinishing = false;
 let isTouchStart = false;
+
+function isPullDown(dy: number, dx: number) {
+  const angleDeg = (Math.atan2(dy, dx) * 180) / Math.PI;
+
+  return angleDeg > 60 && angleDeg < 120;
+}
 
 const Main = () => {
   const [boxHeight, setBoxHeight] = useState(0);
@@ -50,8 +60,8 @@ const Main = () => {
     setTransitionTime(defaultTransitionTime);
     if (event.targetTouches && !isPulling) {
       const touch = event.targetTouches[0];
-      lastTouchY = touch.clientY;
-      startTouchY = touch.clientY;
+      lastTouch = { x: touch.clientX, y: touch.clientY };
+      startTouch = { x: touch.clientX, y: touch.clientY };
       isPulling = true;
     }
   };
@@ -60,7 +70,7 @@ const Main = () => {
     const defaultPadding = 80;
     const heightDiffer =
       touch.clientY -
-      startTouchY +
+      startTouch.y +
       (isFinishing ? minBoxSize + defaultPadding : 0);
     const newHeight = Math.round(heightDiffer / 2);
     if (newHeight === boxHeight) return;
@@ -75,10 +85,12 @@ const Main = () => {
     if (!isPulling) return;
     const { touches } = event;
     const touch = touches[0];
-    if (touch.clientY - lastTouchY > 0 && isScrollInTop()) {
+    if (!isPullDown(touch.clientY - lastTouch.y, touch.clientX - lastTouch.x))
+      return;
+    if (touch.clientY - lastTouch.y > 0 && isScrollInTop()) {
       setBoxHeightByDiff(touch);
-      lastTouchY = touch.clientY;
-    } else if (touch.clientY - lastTouchY < 0) {
+      lastTouch = { x: touch.clientX, y: touch.clientY };
+    } else if (touch.clientY - lastTouch.y < 0) {
       setBoxHeightByDiff(touch);
     }
   };
