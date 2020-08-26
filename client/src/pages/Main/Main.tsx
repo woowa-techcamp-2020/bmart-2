@@ -15,7 +15,6 @@ const minBoxSize = 100;
 const defaultTransitionTime = 0;
 const finishTransitionTime = 200;
 let isPulling = false;
-let finishTimeoutId: number | undefined;
 let isFinishing = false;
 let isTouchStart = false;
 
@@ -88,10 +87,10 @@ const Main = () => {
     const second = 2;
     setTransitionTime(finishTransitionTime);
     setBoxHeight(minBoxSize);
+    if (isFinishing) return;
     isFinishing = true;
     // finish동작은 동작 중 1번만 일어나게
-    clearTimeout(finishTimeoutId);
-    finishTimeoutId = setTimeout(() => {
+    setTimeout(() => {
       const intervalId = setInterval(() => {
         if (!isTouchStart) {
           setBoxHeight(0);

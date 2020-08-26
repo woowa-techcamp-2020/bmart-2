@@ -21,5 +21,5 @@ export const StyledSlotsWrap = styled.span`
 
 export const StyledPullText = styled.div`
   font-size: 35px;
-  font-weight: bolder;
+  color: gray;
 `;
