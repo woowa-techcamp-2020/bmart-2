@@ -14,3 +14,12 @@ export const createCart = async (
   const response = await api.post('cart', { productId, userId, count });
   return response.data;
 };
+
+export const updateCart = async (
+  productId: number,
+  userId: number,
+  count: number
+) => {
+  const response = await api.put('cart', { productId, userId, count });
+  return response.data;
+};
