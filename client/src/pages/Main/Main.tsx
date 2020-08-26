@@ -1,17 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import SaleNow from '../../components/SaleNow';
 import Pull from '../../components/Pull';
 import Carousel from '../../components/Carousel';
 import { StyledMainWrap } from './Main.styles';
 import CategoryIcons from '../../components/CategoryIcons';
 import MainProductList from '../../components/MainProductList';
+import { ICategory } from '../../../../types/modelTypes';
+import apis from '../../apis';
 
+let lastTouch: { x: number; y: number } = {
+  x: 0,
+  y: 0,
+};
+let startTouch: { x: number; y: number } = {
+  x: 0,
+  y: 0,
+};
 const Main = () => {
-  const [lastTouch, setLastTouch] = useState({ x: 0, y: 0 });
-  const [startTouch, setStartTouch] = useState({ x: 0, y: 0 });
   const [boxHeight, setBoxHeight] = useState(0);
   const [isPulling, setIsPulling] = useState(false);
   const [transitionTime, setTransitionTime] = useState(0);
+  const [productsInCategories, setProductsInCategories] = useState<ICategory[]>(
+    []
+  );
+
+  useEffect(() => {
+    const getProductByCategory = async () => {
+      const res = await apis.get('/category?product=true');
+      setProductsInCategories(res.data);
+    };
+    getProductByCategory();
+  }, []);
   const defaultTransitionTime = 0;
 
   useEffect(() => {
@@ -22,8 +41,8 @@ const Main = () => {
     setTransitionTime(defaultTransitionTime);
     if (event.targetTouches && !isPulling) {
       const touch = event.targetTouches[0];
-      setLastTouch({ x: touch.clientX, y: touch.clientY });
-      setStartTouch({ x: touch.clientX, y: touch.clientY });
+      lastTouch = { x: touch.clientX, y: touch.clientY };
+      startTouch = { x: touch.clientX, y: touch.clientY };
       setIsPulling(true);
     }
   };
@@ -54,27 +73,40 @@ const Main = () => {
     if (touch.clientY - lastTouch.y > 0 && isScrollInTop()) {
       const heightDiffer = touch.clientY - startTouch.y;
       setBoxHeight(Math.round(heightDiffer / 2));
-      setLastTouch({ x: touch.clientX, y: touch.clientY });
+      lastTouch = { x: touch.clientX, y: touch.clientY };
     } else if (touch.clientY - lastTouch.y < 0) {
       const heightDiffer = touch.clientY - startTouch.y;
-      setBoxHeight(Math.round(heightDiffer / 2));
+      const newHeight = Math.round(heightDiffer / 2);
+      if (newHeight === boxHeight) return;
+      setBoxHeight(newHeight);
     }
   };
 
+  const transformOption = () => {
+    if (boxHeight <= 0) return `translate(0px, 0px)`;
+    return `translate(0px, ${boxHeight}px)`;
+  };
+
+  const getMainProductList = useMemo(() => {
+    return <MainProductList productsInCategories={productsInCategories} />;
+  }, [productsInCategories.length]);
+
   return (
     <StyledMainWrap
-      style={{ paddingTop: `${boxHeight}px` }}
       transitionTime={transitionTime}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
       <Pull boxHeight={boxHeight} isPulling={isPulling} />
-      <CategoryIcons />
-      {/* <SaleNow /> */}
-      <Carousel />
-      <SaleNow />
-      <MainProductList />
+      <div style={{ transform: transformOption() }}>
+        <CategoryIcons />
+        {/* <SearchInput /> */}
+        <Carousel />
+        <SaleNow />
+        {/* {boxHeight <= 0 ? <MainProductList /> : <></>} */}
+        {getMainProductList}
+      </div>
     </StyledMainWrap>
   );
 };

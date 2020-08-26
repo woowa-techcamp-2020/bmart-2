@@ -11,7 +11,7 @@ export const StyledPullContainer = styled.div`
   justify-content: center;
   font-size: 35px;
   font-weight: bolder;
-  top: 30px;
+  top: 15px;
 `;
 
 export const StyledSlotsWrap = styled.span`

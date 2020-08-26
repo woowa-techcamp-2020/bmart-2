@@ -15,19 +15,14 @@ import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
 import history from '../../history';
 
-const MainProductList = () => {
+interface IMainProductList {
+  productsInCategories: ICategory[];
+}
+
+const MainProductList = ({ productsInCategories }: IMainProductList) => {
   const [curCategory, setCurCategory] = useState(0);
-  const [productsInCategories, setProductsInCategories] = useState<ICategory[]>(
-    []
-  );
+
   const productListRefs = useRef<HTMLDivElement[]>([]);
-  useEffect(() => {
-    const getProductByCategory = async () => {
-      const res = await apis.get('/category?product=true');
-      setProductsInCategories(res.data);
-    };
-    getProductByCategory();
-  }, []);
 
   const observer = useMemo(() => {
     const options = {

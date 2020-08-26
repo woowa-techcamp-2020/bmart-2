@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { StyledPullContainer, StyledSlotsWrap } from './Pull.styles';
+import { StyledMainWrap } from '../../pages/Main/Main.styles';
 
 interface IPull {
   boxHeight: number;
@@ -48,55 +49,65 @@ const datas: {
   },
 ];
 const Pull = ({ boxHeight, isPulling }: IPull) => {
-  const [topHeight, setTopHeight] = useState(defaultTopHeight);
-  const [topMargin, setTopMargin] = useState(0);
+  const [imgTopHeight, setImgTopHeight] = useState(defaultTopHeight);
   const [dataIdx, setDataIdx] = useState(0);
 
   const isPullingFinished = boxHeight === minBoxSize && !isPulling;
+  const pullContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (isPullingFinished) {
       const slotAnimation = () => {
         const maxTime = 1000;
         let time = 0;
+        const timeDiff = 30;
         const changeTopHeight = () => {
           setTimeout(() => {
             if (time >= maxTime) {
               setDataIdx(-1);
-              setTopHeight(0);
+              setImgTopHeight(0);
               return;
             }
-            setTopHeight(((maxTime - time) % range) - rangeHalf);
+            setImgTopHeight(((maxTime - time) % range) - rangeHalf);
             setDataIdx(
               Math.round(Math.abs((maxTime - time + rangeHalf) / range)) %
                 datas.length
             );
-            time += 30;
+            time += timeDiff;
             changeTopHeight();
-          }, 30);
+          }, timeDiff);
         };
         changeTopHeight();
       };
       slotAnimation();
-      setTopMargin(30);
-      setTimeout(() => {
-        setTopMargin(0);
-      }, 1990);
     } else {
-      setTopHeight((boxHeight % range) - rangeHalf);
+      setImgTopHeight((boxHeight % range) - rangeHalf);
       setDataIdx(
         Math.round(Math.abs((boxHeight + rangeHalf) / range)) % datas.length
       );
     }
   }, [boxHeight, isPullingFinished]);
 
-  const slotsOpacity = 1 - Math.abs(topHeight / rangeHalf);
+  const slotsOpacity = 1 - Math.abs(imgTopHeight / rangeHalf);
+  const transformOption = () => {
+    const newHight = boxHeight / 4;
+    if (newHight <= 0 || newHight >= window.innerHeight) {
+      return `translate(0px, 0px)`;
+    }
+    if (isPullingFinished) {
+      return `translate(0px, 50px)`;
+    }
+    return `translate(0px, ${newHight}px)`;
+  };
 
   return (
     <StyledPullContainer
-      style={{ height: `${boxHeight}px`, marginTop: `${topMargin}px` }}
+      style={{ height: `${boxHeight}px`, transform: transformOption() }}
+      ref={pullContainerRef}
     >
-      <StyledSlotsWrap style={{ top: `${topHeight}px`, opacity: slotsOpacity }}>
+      <StyledSlotsWrap
+        style={{ top: `${imgTopHeight}px`, opacity: slotsOpacity }}
+      >
         {dataIdx === -1 ? '핫도그가' : datas[dataIdx].emoji}
       </StyledSlotsWrap>
       <div>땡겨요</div>
