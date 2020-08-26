@@ -1,5 +1,6 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 import { IProduct } from '../../../types/modelTypes';
+import * as api from '../apis/cart';
 
 export interface ICartInContext {
   userId: number;
@@ -49,8 +50,20 @@ export function useCartState() {
 
 export function useCartDispatch() {
   const dispatch = useContext(CartDispatchContext);
-  console.log('dispatch: ', dispatch);
-  console.log('CartDispatchContext: ', CartDispatchContext);
-
   return dispatch;
+}
+
+export async function getCarts(dispatch: any) {
+  const carts = await api.getCarts();
+  dispatch({ type: 'GET_CART', payload: carts });
+}
+
+export async function updateCart(
+  dispatch: any,
+  userId: number,
+  productId: number,
+  count: number
+) {
+  await api.updateCart(productId, userId, count);
+  await getCarts(dispatch);
 }
