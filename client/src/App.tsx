@@ -17,13 +17,16 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Dib from './pages/Dib';
 import { useCategoryDispatch, TCategoryState } from './context/categoryContext';
+import { useCartDispatch, TCartState } from './context/cartContext';
 import api from './apis';
 import { getDibs } from './apis/dib';
+import { getCarts } from './apis/cart';
 import SearchResult from './pages/SearchResult';
 
 function App() {
   const [path, setPath] = useState(history.location.pathname);
   const dispatch = useCategoryDispatch();
+  const cartDispatch = useCartDispatch();
   useEffect(() => {
     const fetchInitData = async () => {
       const res = await api.get('/category?sub=true');
@@ -35,6 +38,17 @@ function App() {
 
     fetchInitData();
   }, [dispatch]);
+
+  useEffect(() => {
+    const fetchInitData = async () => {
+      const res = await getCarts();
+      console.log(res);
+      cartDispatch!({ type: 'INIT', payload: res as TCartState });
+    };
+
+    fetchInitData();
+  }, [dispatch]);
+
   return (
     <>
       <ThemeProvider theme={theme}>
