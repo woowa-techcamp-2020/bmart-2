@@ -15,6 +15,7 @@ import Menu from './pages/Menu';
 import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import Dib from './pages/Dib';
 import { useCategoryDispatch, TCategoryState } from './context/categoryContext';
 import category from './apis';
 import SearchResult from './pages/SearchResult';
@@ -43,6 +44,7 @@ function App() {
               <Route path="/detail" exact component={Detail} />
               <Route path="/result" exact component={SearchResult} />
               <Route path="/menu" exact component={Menu} />
+              <Route path="/dib" exact component={Dib} />
               <Route
                 path="/search"
                 exact
