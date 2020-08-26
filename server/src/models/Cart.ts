@@ -12,7 +12,7 @@ class Cart extends Model {
 
 Cart.init(
   {
-    price: {
+    count: {
       type: DataTypes.INTEGER,
       allowNull: false,
     },
