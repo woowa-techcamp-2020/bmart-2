@@ -3,9 +3,6 @@ import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
-import flash from 'connect-flash';
-import session from 'express-session';
-import sessionFileStore from 'session-file-store';
 import passport from 'passport';
 import loginRouter from './routes/loginRouter';
 import router from './routes';
@@ -25,7 +22,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(flash());
 app.use(passport.initialize());
 passportConfig();
 

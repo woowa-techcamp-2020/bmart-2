@@ -42,7 +42,7 @@ opts.jwtFromRequest = function (req: Request) {
   }
   return token;
 };
-opts.secretOrKey = '비밀코드';
+opts.secretOrKey = process.env.JWT_SECRET;
 
 export default (): void => {
   passport.use(
@@ -90,23 +90,49 @@ export default (): void => {
     )
   );
 
+  // // JWT Strategy
+  // passport.use(
+  //   new JWTStrategy(
+  //     {
+  //       jwtFromRequest: ExtrackJWT.fromAuthHeaderAsBearerToken(),
+  //       secretOrKey: 'hello',
+  //     },
+  //     function (jwtPayload, done) {
+  //       console.log('call jwt');
+  //       return userService
+  //         .find(jwtPayload.id)
+  //         .then((user) => {
+  //           return done(null, user);
+  //         })
+  //         .catch((err) => {
+  //           return done(err);
+  //         });
+  //     }
+  //   )
+  // );
+
   // main authentication, our app will rely on it
-  passport.use(
-    new JWTStrategy(opts as StrategyOptions, function (
-      jwtPayload: { data: IUser },
-      done
-    ) {
-      console.log('JWT BASED AUTH GETTING CALLED'); // called everytime a protected URL is being served
-      userService
-        .find(jwtPayload.data.id)
-        .then((user) => {
-          if (user) return done(null, jwtPayload.data);
-          done(null, false);
-        })
-        .catch((e) => {
-          console.log(e);
-          done(null, false);
-        });
-    })
-  );
+  try {
+    passport.use(
+      new JWTStrategy(
+        opts as StrategyOptions,
+        (jwtPayload: { data: IUser }, done) => {
+          console.log('JWT BASED AUTH GETTING CALLED'); // called everytime a protected URL is being served
+          console.log(jwtPayload.data);
+          userService
+            .find(jwtPayload.data.id)
+            .then((user) => {
+              if (user) return done(null, jwtPayload.data);
+              done(null, user);
+            })
+            .catch((e) => {
+              console.log(e);
+              done(null, false);
+            });
+        }
+      )
+    );
+  } catch (e) {
+    console.log(e);
+  }
 };
