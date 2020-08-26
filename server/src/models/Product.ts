@@ -4,6 +4,7 @@ import { sequelize } from './index';
 import Cart from './Cart';
 import Dib from './Dib';
 import Order from './Order';
+import User from './User';
 import SubCategory from './SubCategory';
 
 class Product extends Model {
@@ -85,20 +86,5 @@ Product.init(
   },
   { timestamps: true, tableName: 'product', sequelize }
 );
-
-Product.hasMany(Cart, {
-  sourceKey: 'id',
-  foreignKey: { name: 'productId', allowNull: false },
-});
-
-Product.hasMany(Dib, {
-  sourceKey: 'id',
-  foreignKey: { name: 'productId', allowNull: false },
-});
-
-Product.hasMany(Order, {
-  sourceKey: 'id',
-  foreignKey: { name: 'productID', allowNull: false },
-});
 
 export default Product;
