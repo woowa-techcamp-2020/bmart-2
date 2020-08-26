@@ -31,6 +31,18 @@ export default function Header({ path, setPath }: IHeaderProps) {
     window.onpopstate = setPathHandler;
   }, []);
 
+  const menuHandler = () => {
+    history.push('/menu');
+  };
+
+  const menuPageButton = () => {
+    return (
+      <StyledButton onClick={menuHandler} aria-label="menu">
+        <MenuIcon />
+      </StyledButton>
+    );
+  };
+
   const renderInMainPage = () => {
     return (
       <>
@@ -38,9 +50,7 @@ export default function Header({ path, setPath }: IHeaderProps) {
         <StyledButton aria-label="search" onClick={searchHandler}>
           <SearchIcon />
         </StyledButton>
-        <StyledButton aria-label="menu">
-          <MenuIcon />
-        </StyledButton>
+        {menuPageButton()}
       </>
     );
   };
@@ -52,9 +62,7 @@ export default function Header({ path, setPath }: IHeaderProps) {
         <StyledButton aria-label="search" onClick={searchHandler}>
           <SearchIcon />
         </StyledButton>
-        <StyledButton aria-label="menu">
-          <MenuIcon />
-        </StyledButton>
+        {menuPageButton()}
       </>
     );
   };
@@ -75,6 +83,8 @@ export default function Header({ path, setPath }: IHeaderProps) {
         return renderInCategoryPage();
       case '/cart':
         return renderInCartPage();
+      case '/menu':
+        return <></>;
       default:
         return renderInMainPage();
     }
