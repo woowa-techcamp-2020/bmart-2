@@ -15,6 +15,7 @@ import {
   StyledTotalPrice,
 } from './CartProduct.styles';
 import { numberToString } from '../../util/common';
+import { useCartDispatch, updateCart } from '../../context/cartContext';
 
 interface CarProductProps {
   product: IProduct;
@@ -22,6 +23,7 @@ interface CarProductProps {
 }
 
 export default function CartProduct({ product, count }: CarProductProps) {
+  const dispatch = useCartDispatch();
   return (
     <StyledProductWrapper>
       <StyledProductContent>
@@ -41,9 +43,19 @@ export default function CartProduct({ product, count }: CarProductProps) {
               <span>{numberToString(product.price * count)}원</span>
             </StyledTotalPrice>
             <StyledProductCountWrapper>
-              <StyledCountUp onPointerUp={() => {}} count={count} />
+              <StyledCountUp
+                onPointerUp={() => {
+                  updateCart(dispatch, 1, product.id, count + 1);
+                }}
+                count={count}
+              />
               <StyledCountText>{count}</StyledCountText>
-              <StyledCountDown onPointerUp={() => {}} count={count} />
+              <StyledCountDown
+                onPointerUp={() => {
+                  updateCart(dispatch, 1, product.id, count - 1);
+                }}
+                count={count}
+              />
             </StyledProductCountWrapper>
           </StyledProductPurchaseWrapper>
         </StyledPurchaseWrapper>

@@ -17,10 +17,9 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Dib from './pages/Dib';
 import { useCategoryDispatch, TCategoryState } from './context/categoryContext';
-import { useCartDispatch, TCartState } from './context/cartContext';
+import { useCartDispatch, TCartState, getCarts } from './context/cartContext';
 import api from './apis';
 import { getDibs } from './apis/dib';
-import { getCarts } from './apis/cart';
 import SearchResult from './pages/SearchResult';
 
 function App() {
@@ -41,8 +40,7 @@ function App() {
 
   useEffect(() => {
     const fetchInitData = async () => {
-      const carts = await getCarts();
-      cartDispatch!({ type: 'GET_CART', payload: carts as TCartState });
+      const carts = await getCarts(cartDispatch);
     };
 
     fetchInitData();
