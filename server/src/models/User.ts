@@ -1,6 +1,7 @@
 import { DataTypes, Model } from 'sequelize';
 import { sequelize } from './index';
 import Order from './Order';
+import Product from './Product';
 import Dib from './Dib';
 import SearchHistory from './SearchHistory';
 import Cart from './Cart';
@@ -49,19 +50,21 @@ User.hasMany(Order, {
   foreignKey: { name: 'userId', allowNull: false },
 });
 
-User.hasMany(Dib, {
-  sourceKey: 'id',
-  foreignKey: { name: 'userId', allowNull: false },
-});
-
 User.hasMany(SearchHistory, {
   sourceKey: 'id',
   foreignKey: { name: 'userId', allowNull: false },
 });
 
-User.hasMany(Cart, {
-  sourceKey: 'id',
+User.belongsToMany(Product, {
+  through: Dib,
   foreignKey: { name: 'userId', allowNull: false },
+  otherKey: { name: 'productId', allowNull: false },
+});
+
+User.belongsToMany(Product, {
+  through: Cart,
+  foreignKey: { name: 'userId', allowNull: false },
+  otherKey: { name: 'productId', allowNull: false },
 });
 
 export default User;
