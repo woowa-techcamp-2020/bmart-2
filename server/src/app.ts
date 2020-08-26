@@ -25,18 +25,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-const FileStore = sessionFileStore(session);
-app.use(
-  session({
-    secret: '비밀코드',
-    resave: true,
-    saveUninitialized: false,
-    store: new FileStore(),
-  })
-); // 세션 활성화
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session());
 passportConfig();
 
 app.use(express.static(path.join(__dirname, '../../client/build')));

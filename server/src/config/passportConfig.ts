@@ -1,8 +1,8 @@
 import passport from 'passport';
 import DotEnv from 'dotenv';
 import PassportGithub from 'passport-github2';
-import PassportJWT from 'passport-jwt';
-import {} from '../controllers';
+import PassportJWT, { StrategyOptions } from 'passport-jwt';
+import { Request } from 'express';
 import userService from '../services/userService';
 import { IUser } from '../../../types/modelTypes';
 import { Done } from '../../../types/passportTypes';
@@ -28,6 +28,21 @@ passport.deserializeUser(async (id: number, done: Done) => {
   }
   return done(null, false);
 });
+
+const opts: {
+  jwtFromRequest?: (req: Request) => string;
+  secretOrKey?: string;
+} = {};
+
+opts.jwtFromRequest = function (req: Request) {
+  // tell passport to read JWT from cookies
+  let token = null;
+  if (req && req.cookies) {
+    token = req.cookies?.jwt;
+  }
+  return token;
+};
+opts.secretOrKey = '비밀코드';
 
 export default (): void => {
   passport.use(
@@ -75,21 +90,23 @@ export default (): void => {
     )
   );
 
-  // passport.use(
-  //   new JWTStrategy(
-  //     {
-  //       jwtFromRequest: ExtrackJWT.fromAuthHeaderAsBearerToken(),
-  //       secretOrKey: process.env.JWT_SECRET,
-  //     },
-  //     (jwtPayload, done) => {
-  //       return UserModel.findOneById(jwtPayload.id)
-  //         .then((user) => {
-  //           return done(null, user);
-  //         })
-  //         .catch((err) => {
-  //           return done(err);
-  //         });
-  //     }
-  //   )
-  // );
+  // main authentication, our app will rely on it
+  passport.use(
+    new JWTStrategy(opts as StrategyOptions, function (
+      jwtPayload: { data: IUser },
+      done
+    ) {
+      console.log('JWT BASED AUTH GETTING CALLED'); // called everytime a protected URL is being served
+      userService
+        .find(jwtPayload.data.id)
+        .then((user) => {
+          if (user) return done(null, jwtPayload.data);
+          done(null, false);
+        })
+        .catch((e) => {
+          console.log(e);
+          done(null, false);
+        });
+    })
+  );
 };

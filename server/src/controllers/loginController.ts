@@ -1,5 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import passport from 'passport';
+import jwt from 'jsonwebtoken';
+import { IUser } from '../../../types/modelTypes';
 
 const logout = async (
   req: Request,
@@ -17,7 +19,22 @@ const githubCallback = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  // Successful authentication, redirect home.
+  const { user } = req;
+  if (user !== undefined) {
+    const newUser: IUser = {
+      id: (user as IUser).id,
+      name: (user as IUser).name,
+      email: (user as IUser).email,
+    };
+    const token = jwt.sign(
+      {
+        data: newUser,
+      },
+      'secret',
+      { expiresIn: 60 }
+    );
+    res.cookie('jwt', token);
+  }
   res.redirect('/');
 };
 
