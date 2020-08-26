@@ -90,27 +90,6 @@ export default (): void => {
     )
   );
 
-  // // JWT Strategy
-  // passport.use(
-  //   new JWTStrategy(
-  //     {
-  //       jwtFromRequest: ExtrackJWT.fromAuthHeaderAsBearerToken(),
-  //       secretOrKey: 'hello',
-  //     },
-  //     function (jwtPayload, done) {
-  //       console.log('call jwt');
-  //       return userService
-  //         .find(jwtPayload.id)
-  //         .then((user) => {
-  //           return done(null, user);
-  //         })
-  //         .catch((err) => {
-  //           return done(err);
-  //         });
-  //     }
-  //   )
-  // );
-
   // main authentication, our app will rely on it
   try {
     passport.use(
