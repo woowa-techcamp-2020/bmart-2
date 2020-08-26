@@ -15,7 +15,11 @@ import {
   StyledTotalPrice,
 } from './CartProduct.styles';
 import { numberToString } from '../../util/common';
-import { useCartDispatch, updateCart } from '../../context/cartContext';
+import {
+  useCartDispatch,
+  updateCart,
+  removeCart,
+} from '../../context/cartContext';
 
 interface CarProductProps {
   product: IProduct;
@@ -34,7 +38,13 @@ export default function CartProduct({ product, count }: CarProductProps) {
           <StyledProductInfoWrapper>
             <div>
               <h4>{product.name}</h4>
-              <button>삭제</button>
+              <button
+                onPointerUp={() => {
+                  removeCart(dispatch, product.id);
+                }}
+              >
+                삭제
+              </button>
             </div>
             <span>{numberToString(product.price)}원</span>
           </StyledProductInfoWrapper>
