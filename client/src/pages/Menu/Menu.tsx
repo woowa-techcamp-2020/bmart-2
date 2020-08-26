@@ -16,10 +16,10 @@ import ListAltIcon from '@material-ui/icons/ListAlt';
 const Menu = () => {
   const categories = useCategoryState();
 
-  const pushHistory = (pathname: string, item?: ICategory) => {
+  const pushHistory = (pathname: string, category?: ICategory) => {
     history.push({
       pathname: `/${pathname}`,
-      state: { item },
+      state: { category },
     });
   };
 
