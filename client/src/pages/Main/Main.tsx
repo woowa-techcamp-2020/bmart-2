@@ -108,6 +108,7 @@ const Main = () => {
           setBoxHeight(0);
           isFinishing = false;
           clearInterval(intervalId);
+          window.location.reload(false);
         }
       }, 100);
     }, second * 1000);
