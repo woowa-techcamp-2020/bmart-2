@@ -25,3 +25,10 @@ export interface IProduct {
   maxQuantity: number;
   stock: number;
 }
+
+export interface IUser {
+  id: number;
+  name: string;
+  email?: string;
+  password?: string;
+}

@@ -35,11 +35,9 @@ User.init(
     email: {
       type: DataTypes.STRING(45),
       unique: true,
-      allowNull: false,
     },
     password: {
       type: DataTypes.STRING(45),
-      allowNull: false,
     },
   },
   { timestamps: true, tableName: 'user', sequelize }
