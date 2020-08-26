@@ -67,3 +67,13 @@ export async function updateCart(
   await api.updateCart(productId, userId, count);
   await getCarts(dispatch);
 }
+
+export async function createCart(
+  dispatch: any,
+  userId: number,
+  productId: number,
+  count: number
+) {
+  await api.createCart(productId, userId, count);
+  await getCarts(dispatch);
+}
