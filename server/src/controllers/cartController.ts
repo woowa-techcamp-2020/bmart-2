@@ -34,9 +34,9 @@ const find = async (
   const userId = parseInt(params.userId, 10);
   const result = await CartService.findCartIncludeProductByUserId(userId);
   const carts = result.map((row) => {
-    const { Carts, ...product } = row.dataValues;
-    const cart = Carts[0].dataValues;
-    return { ...cart, product };
+    // eslint-disable-next-line no-shadow
+    const { userId, count, ...product } = row;
+    return { userId, count, product };
   });
   res.status(200).send(carts);
 };
