@@ -59,6 +59,10 @@ let isFinishingState = false;
 let isBeforeEnd = false;
 let dataIdx = 0;
 
+const getRandomIdx = () => {
+  return Math.floor(Math.random() * datas.length);
+};
+
 const shuffle = (array: IData[]) => {
   array.sort(() => Math.random() - 0.5);
 };
@@ -125,7 +129,9 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
       <StyledSlotsWrap
         style={{ top: `${imgTopHeight}px`, opacity: slotsOpacity }}
       >
-        {dataIdx === -1 ? `${datas[0].text}` : datas[dataIdx].emoji}
+        {dataIdx === -1
+          ? `${datas[getRandomIdx()].text}`
+          : datas[dataIdx].emoji}
       </StyledSlotsWrap>
       <StyledPullText>땡겨요</StyledPullText>
     </StyledPullContainer>

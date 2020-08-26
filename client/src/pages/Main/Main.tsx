@@ -103,14 +103,18 @@ const Main = () => {
     isFinishing = true;
     // finish동작은 동작 중 1번만 일어나게
     setTimeout(() => {
+      const intervalDelay = 100;
       const intervalId = setInterval(() => {
         if (!isTouchStart) {
           setBoxHeight(0);
           isFinishing = false;
           clearInterval(intervalId);
-          window.location.reload(false);
+          const reflashDelay = 400;
+          setTimeout(() => {
+            window.location.reload(false);
+          }, reflashDelay);
         }
-      }, 100);
+      }, intervalDelay);
     }, second * 1000);
   };
 
