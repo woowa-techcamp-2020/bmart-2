@@ -1,4 +1,5 @@
 import React from 'react';
+import { IProduct } from '../../../../types/modelTypes';
 import {
   StyledProductCountWrapper,
   StyledCountUp,
@@ -15,33 +16,12 @@ import {
 } from './CartProduct.styles';
 import { numberToString } from '../../util/common';
 
-interface ProductType {
-  id: number;
-  subcategoryId: number;
-  thumbImgUrl: string;
-  mainImgUrl: string;
-  description: string;
-  price: number;
-  discount: number;
-  name: string;
-  maxQuantity: number;
-  stock: number;
-  removed: number;
-  createdAt: string | null;
-  updatedAt: string | null;
-}
-
 interface CarProductProps {
-  product: ProductType;
+  product: IProduct;
   count: number;
-  changeCount: (productId: number, count: number) => void;
 }
 
-export default function CartProduct({
-  product,
-  count,
-  changeCount,
-}: CarProductProps) {
+export default function CartProduct({ product, count }: CarProductProps) {
   return (
     <StyledProductWrapper>
       <StyledProductContent>
@@ -61,19 +41,9 @@ export default function CartProduct({
               <span>{numberToString(product.price * count)}원</span>
             </StyledTotalPrice>
             <StyledProductCountWrapper>
-              <StyledCountUp
-                onPointerUp={() => {
-                  changeCount(product.id, count + 1);
-                }}
-                count={count}
-              />
+              <StyledCountUp onPointerUp={() => {}} count={count} />
               <StyledCountText>{count}</StyledCountText>
-              <StyledCountDown
-                onPointerUp={() => {
-                  changeCount(product.id, count - 1);
-                }}
-                count={count}
-              />
+              <StyledCountDown onPointerUp={() => {}} count={count} />
             </StyledProductCountWrapper>
           </StyledProductPurchaseWrapper>
         </StyledPurchaseWrapper>

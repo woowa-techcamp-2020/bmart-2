@@ -41,9 +41,8 @@ function App() {
 
   useEffect(() => {
     const fetchInitData = async () => {
-      const res = await getCarts();
-      console.log(res);
-      cartDispatch!({ type: 'INIT', payload: res as TCartState });
+      const carts = await getCarts();
+      cartDispatch!({ type: 'GET_CART', payload: carts as TCartState });
     };
 
     fetchInitData();

@@ -3,7 +3,7 @@ import { IProduct } from '../../../types/modelTypes';
 
 export interface ICartInContext {
   userId: number;
-  product: IProduct[];
+  product: IProduct;
   count: number;
 }
 
@@ -11,14 +11,14 @@ export type TCartState = ICartInContext[];
 
 const CartStateContext = createContext<TCartState | undefined>(undefined);
 
-type TAction = { type: 'INIT'; payload: TCartState };
+type TAction = { type: 'GET_CART'; payload: TCartState };
 
 type TCartDispatch = Dispatch<TAction>;
 const CartDispatchContext = createContext<TCartDispatch | undefined>(undefined);
 
 function cartReducer(state: TCartState, action: TAction): TCartState {
   switch (action.type) {
-    case 'INIT':
+    case 'GET_CART':
       return action.payload;
     default:
       throw new Error('Unhandled action');

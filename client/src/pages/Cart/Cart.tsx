@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import {
+  useCartState,
+  useCartDispatch,
+  ICartInContext,
+} from '../../context/cartContext';
 import CartProductList from '../../components/CartProductList';
 import CartSummary from '../../components/CartSummary';
 
@@ -102,46 +107,16 @@ const defaultCart = [
   },
 ];
 
-interface ProductType {
-  id: number;
-  subcategoryId: number;
-  thumbImgUrl: string;
-  mainImgUrl: string;
-  description: string;
-  price: number;
-  discount: number;
-  name: string;
-  maxQuantity: number;
-  stock: number;
-  removed: number;
-  createdAt: string | null;
-  updatedAt: string | null;
-}
-
-interface CartType {
-  userId: number;
-  count: number;
-  product: ProductType;
-}
-
 const Cart = () => {
-  const [carts, setcarts] = useState<CartType[]>([]);
-
-  useEffect(() => {
-    setcarts(defaultCart);
-  }, []);
-
-  const changeCount = (productId: number, count: number): void => {
-    setcarts(
-      carts.map((cart) =>
-        cart.product.id === productId ? { ...cart, count: count } : cart
-      )
-    );
-  };
+  // const [carts, setcarts] = useState<CartType[]>([]);
+  const carts: ICartInContext[] = useCartState();
+  // useEffect(() => {
+  //   setcarts(defaultCart);
+  // }, []);
 
   const getTotalPrice = (): number => {
     return carts.reduce(
-      (acc: number, cart: CartType): number =>
+      (acc: number, cart: ICartInContext): number =>
         acc + cart.product.price * cart.count,
       0
     );
@@ -157,7 +132,7 @@ const Cart = () => {
           <h2>장바구니</h2>
         </div>
       </StyledCartHeader>
-      <CartProductList carts={carts} changeCount={changeCount} />
+      <CartProductList carts={carts} />
       <CartSummary totalPrice={getTotalPrice()} />
       <StyledCartButtonWrapper>
         <StyledCartButton>구매하기</StyledCartButton>
