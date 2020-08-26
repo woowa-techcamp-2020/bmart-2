@@ -1,7 +1,9 @@
 import express, { Request, Response, NextFunction } from 'express';
-import passport from 'passport';
+import DotEnv from 'dotenv';
 import jwt from 'jsonwebtoken';
 import { IUser } from '../../../types/modelTypes';
+
+DotEnv.config();
 
 const logout = async (
   req: Request,
@@ -30,7 +32,7 @@ const githubCallback = async (
       {
         data: newUser,
       },
-      'secret',
+      process.env.JWT_SECRET!,
       { expiresIn: 60 }
     );
     res.cookie('jwt', token);
