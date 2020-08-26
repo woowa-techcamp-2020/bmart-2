@@ -1,20 +1,17 @@
-import Dib from '../models/Dib';
-import Product from '../models/Product';
+import { QueryTypes } from 'sequelize';
+import { sequelize } from '../models';
+import { IProduct } from '../../../types/modelTypes';
 
 const findDibIncludeProductByUserId = async (
   userId: number
 ): Promise<any[]> => {
-  const result = await Product.findAll({
-    include: [
-      {
-        model: Dib,
-        where: {
-          userId,
-        },
-        required: true,
-      },
-    ],
-  });
+  const result = await sequelize.query(
+    'SELECT product.*, dib.userId from product, (SELECT productId, userId FROM dib WHERE userId = :userId) dib WHERE product.id = dib.productId;',
+    {
+      replacements: { userId },
+      type: QueryTypes.SELECT,
+    }
+  );
   return result;
 };
 
