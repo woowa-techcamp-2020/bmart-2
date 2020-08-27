@@ -9,7 +9,7 @@ import {
   StyledTitleWrap,
 } from './MainProductList.styles';
 
-import Product from './Product';
+import Product from '../Product';
 import { ICategory, IProduct } from '../../../../types/modelTypes';
 import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';

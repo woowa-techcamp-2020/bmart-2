@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
-import { StyledSlideList } from '../ProductSlideList/ProductSlideList.styles';
 
 export const StyledTitleWrap = styled.div`
   text-align: center;
