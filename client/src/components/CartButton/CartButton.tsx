@@ -13,7 +13,15 @@ export default function CartButton({ path, setPath }: IHeaderProps) {
   const carts: ICartInContext[] = useCartState();
 
   return ['/', '/category'].includes(path) ? (
-    <StyledFab color="secondary" aria-label="edit">
+    <StyledFab
+      color="secondary"
+      aria-label="edit"
+      onPointerUp={(e) => {
+        e.stopPropagation();
+        history.push('/cart');
+        setPath(history.location.pathname);
+      }}
+    >
       <ShoppingCartIcon color="inherit" />
       <StyledCount>{carts.length}</StyledCount>
     </StyledFab>

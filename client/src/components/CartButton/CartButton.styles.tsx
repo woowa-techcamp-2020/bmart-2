@@ -6,6 +6,7 @@ export const StyledFab = styled(Fab)`
   position: fixed !important;
   bottom: 1rem;
   right: 1rem;
+  z-index: 10;
 `;
 
 export const StyledCount = styled.span`
