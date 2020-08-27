@@ -1,4 +1,5 @@
 import React from 'react';
+import { IProduct } from '../../../../types/modelTypes';
 import {
   StyledProductCountWrapper,
   StyledCountUp,
@@ -14,34 +15,19 @@ import {
   StyledTotalPrice,
 } from './CartProduct.styles';
 import { numberToString } from '../../util/common';
-
-interface ProductType {
-  id: number;
-  subcategoryId: number;
-  thumbImgUrl: string;
-  mainImgUrl: string;
-  description: string;
-  price: number;
-  discount: number;
-  name: string;
-  maxQuantity: number;
-  stock: number;
-  removed: number;
-  createdAt: string | null;
-  updatedAt: string | null;
-}
+import {
+  useCartDispatch,
+  updateCart,
+  removeCart,
+} from '../../context/cartContext';
 
 interface CarProductProps {
-  product: ProductType;
+  product: IProduct;
   count: number;
-  changeCount: (productId: number, count: number) => void;
 }
 
-export default function CartProduct({
-  product,
-  count,
-  changeCount,
-}: CarProductProps) {
+export default function CartProduct({ product, count }: CarProductProps) {
+  const dispatch = useCartDispatch();
   return (
     <StyledProductWrapper>
       <StyledProductContent>
@@ -52,7 +38,13 @@ export default function CartProduct({
           <StyledProductInfoWrapper>
             <div>
               <h4>{product.name}</h4>
-              <button>삭제</button>
+              <button
+                onPointerUp={() => {
+                  removeCart(dispatch, product.id);
+                }}
+              >
+                삭제
+              </button>
             </div>
             <span>{numberToString(product.price)}원</span>
           </StyledProductInfoWrapper>
@@ -63,14 +55,14 @@ export default function CartProduct({
             <StyledProductCountWrapper>
               <StyledCountUp
                 onPointerUp={() => {
-                  changeCount(product.id, count + 1);
+                  updateCart(dispatch, 1, product.id, count + 1);
                 }}
                 count={count}
               />
               <StyledCountText>{count}</StyledCountText>
               <StyledCountDown
                 onPointerUp={() => {
-                  changeCount(product.id, count - 1);
+                  updateCart(dispatch, 1, product.id, count - 1);
                 }}
                 count={count}
               />

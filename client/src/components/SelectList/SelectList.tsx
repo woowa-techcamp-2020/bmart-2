@@ -19,7 +19,7 @@ import {
 
 import { numberToString } from '../../util/common';
 import { IProduct } from '../../../../types/modelTypes';
-
+import { useCartDispatch, createCart } from '../../context/cartContext';
 interface SelectListPropType {
   openList: boolean;
   setOpenList: Function;
@@ -33,9 +33,10 @@ const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
   const [clickbtn, setClicked] = React.useState(false);
   const [count, setCount] = React.useState(1);
   const detailContainer = React.useRef<HTMLDivElement>(null);
+  const dispatch = useCartDispatch();
 
   const clickedButton = useCallback(
-    (e) => {
+    (e, cnt) => {
       if (clickbtn) return;
       setClicked(true);
       setTimeout(() => {
@@ -43,6 +44,7 @@ const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
         setClicked(false);
         setCount(1);
       }, 1500);
+      createCart(dispatch, 1, product.id, cnt);
     },
     [clickbtn, setOpenList]
   );
@@ -96,7 +98,9 @@ const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
       <StyledSelectListButtonWrapper>
         <StyledSelectListButton
           open={openList}
-          onPointerUp={clickedButton}
+          onPointerUp={(e) => {
+            clickedButton(e, count);
+          }}
           clickbtn={clickbtn.toString()}
         ></StyledSelectListButton>
       </StyledSelectListButtonWrapper>
