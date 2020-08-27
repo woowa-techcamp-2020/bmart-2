@@ -1,5 +1,9 @@
 import React from 'react';
-import { OrderListWrapper, OrderProduct } from './OrderList.styles';
+import {
+  OrderListWrapper,
+  OrderProduct,
+  StyledSummaryInfo,
+} from './OrderList.styles';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
 import { IOrder } from '../../../../types/modelTypes';
 import { numberToString, dateToString } from '../../util/common';
@@ -25,6 +29,13 @@ const OrderList = ({ order }: { order: IOrder[] }) => {
     });
   };
 
+  const getTotalPrice = (): number => {
+    return order.reduce(
+      (acc: number, productInOrder: IOrder): number =>
+        acc + productInOrder.product.price * productInOrder.count,
+      0
+    );
+  };
   return (
     <OrderListWrapper>
       <p>
@@ -33,6 +44,10 @@ const OrderList = ({ order }: { order: IOrder[] }) => {
       </p>
       <span>{dateToString(order[0].lastUpdated)} 주문</span>
       {renderProducts()}
+      <StyledSummaryInfo>
+        <h4>총 주문 금액</h4>
+        <span>{numberToString(getTotalPrice())}원</span>
+      </StyledSummaryInfo>
     </OrderListWrapper>
   );
 };

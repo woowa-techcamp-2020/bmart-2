@@ -17,6 +17,18 @@ export const OrderListWrapper = styled.div`
   }
 `;
 
+export const StyledSummaryInfo = styled.div`
+  font-weight: bold;
+  margin-top: 1vh;
+  display: flex;
+  font-size: 1.1rem;
+  h4 {
+    display: inline-block;
+    flex: 1;
+    font-size: 1.1rem;
+  }
+`;
+
 export const OrderProduct = styled.div`
   display: flex;
   margin: 1rem 0 0;
