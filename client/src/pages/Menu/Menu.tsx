@@ -12,6 +12,7 @@ import { ICategory } from '../../../../types/modelTypes';
 
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 
 const Menu = () => {
   const categories = useCategoryState();
@@ -44,6 +45,10 @@ const Menu = () => {
         <MenuPageButton onClick={() => pushHistory('dib')}>
           <FavoriteBorderIcon />
           <span>찜하기</span>
+        </MenuPageButton>
+        <MenuPageButton onClick={() => pushHistory('dib')}>
+          <ExitToAppIcon />
+          <span>로그아웃</span>
         </MenuPageButton>
       </MenuPageButtonWrapper>
       <MenuCaegoryWrapper>{renderCategories()}</MenuCaegoryWrapper>
