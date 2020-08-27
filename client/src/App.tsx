@@ -12,23 +12,32 @@ import Category from './pages/Category';
 import Cart from './pages/Cart';
 import Detail from './pages/Detail';
 import Menu from './pages/Menu';
+import Order from './pages/Order';
 import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import Dib from './pages/Dib';
 import { useCategoryDispatch, TCategoryState } from './context/categoryContext';
-import category from './apis';
+import { useDibDispatch } from './context/dibContext';
+import api from './apis';
+import { getDibs } from './apis/dib';
 import SearchResult from './pages/SearchResult';
 
 function App() {
   const [path, setPath] = useState(history.location.pathname);
-  const dispatch = useCategoryDispatch();
+  const categoryDispath = useCategoryDispatch();
+  const dibDispatch = useDibDispatch();
   useEffect(() => {
-    const fetchCategory = async () => {
-      const res = await category.get('/category?sub=true');
-      dispatch!({ type: 'INIT', payload: res?.data as TCategoryState });
+    const fetchInitData = async () => {
+      const res = await api.get('/category?sub=true');
+      categoryDispath!({ type: 'INIT', payload: res?.data as TCategoryState });
+      // dib추가
+      const products = await getDibs();
+      dibDispatch!({ type: 'INIT', products });
     };
-    fetchCategory();
-  }, [dispatch]);
+
+    fetchInitData();
+  }, []);
   return (
     <>
       <ThemeProvider theme={theme}>
@@ -43,6 +52,8 @@ function App() {
               <Route path="/detail" exact component={Detail} />
               <Route path="/result" exact component={SearchResult} />
               <Route path="/menu" exact component={Menu} />
+              <Route path="/Order" exact component={Order} />
+              <Route path="/dib" exact component={Dib} />
               <Route
                 path="/search"
                 exact

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Divider, Checkbox } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 import FormatQuoteIcon from '@material-ui/icons/FormatQuote';
 
 interface DetailPageType {
@@ -117,16 +117,3 @@ export const Description = styled.div`
 export const StyledDivider = styled(Divider)`
   margin: 2rem 0 !important;
 `;
-
-export const StyledFavoriteCheck = styled(Checkbox)`
-  && {
-    position: absolute;
-    bottom: 0.3rem;
-    right: 0.3rem;
-    margin: 0;
-    svg {
-      width: 10vw !important;
-      height: 10vw !important;
-    }
-  }
-` as typeof Checkbox;

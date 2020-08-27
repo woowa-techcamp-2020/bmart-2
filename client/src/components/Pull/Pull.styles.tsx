@@ -4,14 +4,14 @@ export const StyledPullContainer = styled.div`
   position: absolute;
   text-align: center;
   //height: 100px;
-  width: 90%;
+  width: 100%;
   z-index: -1;
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 35px;
   font-weight: bolder;
-  top: 30px;
+  top: 15px;
 `;
 
 export const StyledSlotsWrap = styled.span`
@@ -19,6 +19,7 @@ export const StyledSlotsWrap = styled.span`
   padding-right: 10px;
 `;
 
-export const StyledPullContainer2 = styled.div`
-  background-color: greenyellow;
+export const StyledPullText = styled.div`
+  font-size: 35px;
+  color: gray;
 `;
