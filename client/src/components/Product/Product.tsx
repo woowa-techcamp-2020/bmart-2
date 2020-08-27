@@ -29,8 +29,14 @@ const Product = ({ product }: IProductProps) => {
       {product ? (
         <StyledProduct onClick={productClickHandler}>
           <ImageWrapper url={product.thumbImgUrl}>
-            {/* <img alt={product.name} src={product.thumbImgUrl} /> */}
-            {product.discount > 0 ? <div>{product.discount}%</div> : <></>}
+            {product.discount > 0 ? (
+              <div>
+                <p>{product.discount}%</p>
+                <p>Sale</p>
+              </div>
+            ) : (
+              <></>
+            )}
             <DibIcon product={product} />
           </ImageWrapper>
           <ProductTitle>{product.name} </ProductTitle>
