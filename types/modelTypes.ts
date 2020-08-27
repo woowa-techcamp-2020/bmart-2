@@ -26,8 +26,13 @@ export interface IProduct {
   stock: number;
 }
 
-
 export interface IDib {
   id: number;
   productId: number;
+}
+
+export interface IUser{
+  id: number,
+  name: string,
+  email?: string
 }

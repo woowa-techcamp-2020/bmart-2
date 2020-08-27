@@ -1,5 +1,4 @@
 import express, { Request, Response, NextFunction } from 'express';
-import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -16,7 +15,14 @@ interface Error {
 }
 startDB();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
+    allowedHeaders: ['Content-Type'],
+    credentials: true,
+  })
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -25,9 +31,9 @@ app.use(cookieParser());
 app.use(passport.initialize());
 passportConfig();
 
-app.use(express.static(path.join(__dirname, '../../client/build')));
-app.set('views', path.join(__dirname, '../../client/build'));
-app.engine('html', require('ejs').renderFile);
+// app.use(express.static(path.join(__dirname, '../../client/build')));
+// app.set('views', path.join(__dirname, '../../client/build'));
+// app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 
