@@ -17,3 +17,8 @@ export const removeHistory = async (id: number) => {
   const response = await api.delete(`history/${id}`);
   return response.data;
 };
+
+export const removeHistoryAll = async (id: number) => {
+  const response = await api.delete(`history/all/${id}`);
+  return response.data;
+};

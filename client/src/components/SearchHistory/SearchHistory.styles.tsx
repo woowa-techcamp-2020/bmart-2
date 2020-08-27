@@ -20,3 +20,7 @@ export const StyledListHeader = styled(ListSubheader)`
   color: black !important;
   padding: 0 !important;
 `;
+
+export const StyledRemoveAll = styled.div`
+  text-align: right;
+`;

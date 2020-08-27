@@ -26,7 +26,7 @@ const findAll = async (userId: string): Promise<ISearchHistory[]> => {
   return removedDuplicate.slice(0, limitByLength);
 };
 
-const deleteSearchHistory = async (id: string): Promise<number | null> => {
+const deleteSearchHistoryById = async (id: string): Promise<number | null> => {
   const removedHistory = await SearchHistory.destroy({
     where: {
       id,
@@ -35,4 +35,20 @@ const deleteSearchHistory = async (id: string): Promise<number | null> => {
   return removedHistory;
 };
 
-export default { create, findAll, deleteSearchHistory };
+const deleteSearchHistoryByUserID = async (
+  userId: string
+): Promise<number | null> => {
+  const removedHistory = await SearchHistory.destroy({
+    where: {
+      userId,
+    },
+  });
+  return removedHistory;
+};
+
+export default {
+  create,
+  findAll,
+  deleteSearchHistoryById,
+  deleteSearchHistoryByUserID,
+};

@@ -74,6 +74,7 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
           id="standard-adornment-amount"
           onChange={(e) => onChangeHandler(e)}
           onKeyDown={(e) => onKeyDownHandler(e)}
+          value={keyword}
           placeholder="검색어를 입력하세요"
         />
       </StyledLogoH>

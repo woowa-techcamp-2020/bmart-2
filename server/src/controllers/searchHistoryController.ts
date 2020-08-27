@@ -20,15 +20,35 @@ const create = async (
   res.status(200).send(history);
 };
 
-const deleteSearchHistory = async (
+const deleteSearchHistoryById = async (
   req: Request,
   res: Response,
   next: NextFunction
 ): Promise<void> => {
   const { params } = req;
-  const deletedId = await SearchHistoryService.deleteSearchHistory(params.id);
+  const deletedId = await SearchHistoryService.deleteSearchHistoryById(
+    params.id
+  );
   console.log(`deleteId: ${deletedId}`);
   res.status(200).send({ id: deletedId });
 };
 
-export default { findAll, create, deleteSearchHistory };
+const deleteSearchHistoryByUserId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { params } = req;
+  const deletedId = await SearchHistoryService.deleteSearchHistoryByUserID(
+    params.userId
+  );
+  console.log(`deleteId: ${deletedId}`);
+  res.status(200).send({ id: deletedId });
+};
+
+export default {
+  findAll,
+  create,
+  deleteSearchHistoryById,
+  deleteSearchHistoryByUserId,
+};
