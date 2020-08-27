@@ -56,6 +56,7 @@ export function usePageDispatch() {
 }
 
 export function openNotification(dispatch: any, message: string) {
+  dispatch({ type: 'NOTI_CLOSE' });
   dispatch({ type: 'NOTI_OPEN', message: message });
 }
 
