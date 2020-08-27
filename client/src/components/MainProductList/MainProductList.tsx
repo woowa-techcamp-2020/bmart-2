@@ -27,7 +27,7 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
 
   const observer = useMemo(() => {
     const options = {
-      threshold: 0.6,
+      threshold: 0.55,
     };
     const observerHandler = (entries: IntersectionObserverEntry[]) => {
       let curProductList = null;
@@ -78,7 +78,7 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
           data-order={i}
         >
           <CategoryTitle>
-            <img src={productsInCategory.imgUrl}></img>
+            <img src={productsInCategory.imgUrl} />
             {productsInCategory.name}
           </CategoryTitle>
           <StyledSortList container spacing={2}>

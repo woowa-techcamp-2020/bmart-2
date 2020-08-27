@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
+import { Container } from '@material-ui/core';
 import SaleNow from '../../components/SaleNow';
 import Pull from '../../components/Pull';
 import Carousel from '../../components/Carousel';
@@ -9,8 +10,6 @@ import { ICategory } from '../../../../types/modelTypes';
 import apis from '../../apis';
 import ProductRecommendList from '../../components/ProductRecommendList';
 import ProductSlideList from '../../components/ProductSlideList';
-
-import { Container } from '@material-ui/core';
 
 interface IPos {
   x: number;
@@ -121,8 +120,17 @@ const Main = () => {
       }, intervalDelay);
     }, second * 1000);
   };
-
+  const scrollToCenter = () => {
+    const scrollDelay = 300;
+    setTimeout(() => {
+      window.scrollTo({
+        left: 0,
+        behavior: 'smooth',
+      });
+    }, scrollDelay);
+  };
   const onTouchEnd = () => {
+    scrollToCenter();
     if (boxHeight > minBoxSize) {
       setBoxHeightToZero();
     } else {
@@ -151,6 +159,7 @@ const Main = () => {
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
+      onTouchCancel={scrollToCenter}
     >
       {getPull}
       <div
@@ -161,8 +170,8 @@ const Main = () => {
         <Container maxWidth="md">
           <CategoryIcons />
           <SaleNow />
-          <ProductSlideList></ProductSlideList>
-          <ProductRecommendList></ProductRecommendList>
+          <ProductSlideList />
+          <ProductRecommendList />
         </Container>
         {getMainProductList}
       </div>
