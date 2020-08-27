@@ -1,16 +1,16 @@
 import styled from 'styled-components';
-import FormControl from '@material-ui/core/FormControl';
-import { Input } from '@material-ui/core';
+import { InputBase } from '@material-ui/core';
 
-export const StyledFormControl = styled(FormControl)``;
+export const StyledFormControl = styled.div`
+  display: flex;
+`;
 
-export const StyledInput = styled(Input)`
-  line-height: 30px;
-  root {
-    color: #fff;
-  }
+export const StyledInput = styled(InputBase)`
+  width: 100%;
+  padding-top: 0.1rem;
   input {
-    padding: 10px;
-    font-size: 20px;
+    width: 100%;
+    padding: 0.43rem;
+    font-size: 1rem;
   }
 `;
