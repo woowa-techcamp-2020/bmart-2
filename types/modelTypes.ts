@@ -26,6 +26,7 @@ export interface IProduct {
   stock: number;
 }
 
+
 export interface IDib {
   id: number;
   productId: number;
