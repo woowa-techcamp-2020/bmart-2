@@ -10,8 +10,8 @@ export const StyledFab = styled(Fab)`
 
 export const StyledCount = styled.span`
   position: absolute;
-  right: 20%;
-  top: 20%;
+  right: 18%;
+  top: 18%;
   background-color: #fff;
   width: 0.8rem;
   height: 0.8rem;
