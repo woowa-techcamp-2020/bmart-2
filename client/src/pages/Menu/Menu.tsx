@@ -15,7 +15,7 @@ import {
 import { useCategoryState } from '../../context/categoryContext';
 import history from '../../history';
 import { ICategory } from '../../../../types/modelTypes';
-
+import { usePageDispatch, openNotification } from '../../context/pageContext';
 import { login, logout } from '../../apis/auth';
 import { getCookie } from '../../util/common';
 
@@ -26,6 +26,7 @@ const selectedAll = {
 const Menu = () => {
   const categories = useCategoryState();
   const [selected, setSelected] = useState(0);
+  const pageDispatch = usePageDispatch();
 
   const pushHistory = (
     pathname: string,
@@ -81,7 +82,16 @@ const Menu = () => {
           <FavoriteBorderIcon />
           <span>찜하기</span>
         </MenuPageButton>
-        <MenuPageButton onClick={() => (name ? logout() : login())}>
+        <MenuPageButton
+          onClick={async () => {
+            if (name) {
+              await logout();
+              openNotification(pageDispatch, '로그아웃 완료!');
+            } else {
+              await login();
+            }
+          }}
+        >
           <ExitToAppIcon />
           {name ? <span>로그아웃</span> : <span>로그인</span>}
         </MenuPageButton>
