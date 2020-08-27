@@ -6,6 +6,7 @@ import UserController from './userController';
 import DibController from './dibController';
 import OrderController from './orderController';
 import CartController from './cartController';
+import SearchHistoryController from './searchHistoryController';
 import LoginController from './loginController';
 
 export {
@@ -18,4 +19,5 @@ export {
   OrderController,
   CartController,
   LoginController,
+  SearchHistoryController,
 };
