@@ -18,9 +18,21 @@ const OrderList = ({ order }: { order: IOrder[] }) => {
           <div>
             <span>{product.name}</span>
             <div>
-              {numberToString(product.price)}원 x {productInOrder.count}개{' '}
+              {product.discount > 0
+                ? numberToString(
+                    Math.floor((product.price * (100 - product.discount)) / 100)
+                  )
+                : numberToString(product.price)}
+              원 x {productInOrder.count}개{' '}
               <span>
-                {numberToString(product.price * productInOrder.count)}
+                {product.discount > 0
+                  ? numberToString(
+                      Math.floor(
+                        (product.price * (100 - product.discount)) / 100
+                      ) * productInOrder.count
+                    )
+                  : numberToString(product.price * productInOrder.count)}
+                원
               </span>
             </div>
           </div>
