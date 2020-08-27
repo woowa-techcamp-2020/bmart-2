@@ -14,7 +14,7 @@ const CategoryIcons = () => {
   const categoryClickHandler = (category: ICategory) => {
     history.push({
       pathname: '/category',
-      state: { category },
+      state: { category, subCategoryId: 0 },
     });
   };
   const categoryGrid = () =>
