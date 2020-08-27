@@ -11,8 +11,19 @@ const findAll = async (userId: string): Promise<ISearchHistory[]> => {
     where: {
       userId,
     },
+    order: [['updatedAt', 'DESC']],
   })) as ISearchHistory[];
-  return histories;
+  const idSet = new Set();
+  const removedDuplicate = histories.filter((history) => {
+    if (idSet.has(history.keyword)) return false;
+    idSet.add(history.keyword);
+    return true;
+  });
+  const limit = 5;
+  const limitByLength =
+    removedDuplicate.length >= limit ? limit : removedDuplicate.length;
+
+  return removedDuplicate.slice(0, limitByLength);
 };
 
 const deleteSearchHistory = async (id: string): Promise<number | null> => {

@@ -34,10 +34,18 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
     }
   };
 
+  const validateKeyword = () => {
+    if (keyword.trim() === '') {
+      alert('빈 검색어입니다.');
+      return false;
+    }
+    return true;
+  };
+
   const onKeyDownHandler = (
     event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && validateKeyword()) {
       createSearchHistoryUsingKeyword();
       history.push(`/result?keyword=${keyword}`);
       setPath(history.location.pathname);
@@ -45,6 +53,7 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
   };
 
   const searchClickHandler = () => {
+    if (!validateKeyword()) return;
     history.push(`/result?keyword=${keyword}`);
     createSearchHistoryUsingKeyword();
     setPath(history.location.pathname);
