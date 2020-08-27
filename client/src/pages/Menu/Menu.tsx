@@ -1,4 +1,7 @@
 import React from 'react';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import {
   MenuPageButtonWrapper,
   MenuCaegoryWrapper,
@@ -10,9 +13,8 @@ import { useCategoryState } from '../../context/categoryContext';
 import history from '../../history';
 import { ICategory } from '../../../../types/modelTypes';
 
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { login, logout } from '../../apis/auth';
+import { getCookie } from '../../util/common';
 
 const Menu = () => {
   const categories = useCategoryState();
@@ -30,11 +32,14 @@ const Menu = () => {
         key={`menu-category-${category.id}`}
         onClick={() => pushHistory('category', category)}
       >
-        <img src={category.imgUrl} alt={category.name}></img>
+        <img src={category.imgUrl} alt={category.name} />
         <div>{category.name}</div>
       </MenuCategory>
     ));
   };
+
+  const name = getCookie('name');
+
   return (
     <>
       <MenuPageButtonWrapper>
@@ -46,9 +51,9 @@ const Menu = () => {
           <FavoriteBorderIcon />
           <span>찜하기</span>
         </MenuPageButton>
-        <MenuPageButton onClick={() => pushHistory('dib')}>
+        <MenuPageButton onClick={() => (name ? logout() : login())}>
           <ExitToAppIcon />
-          <span>로그아웃</span>
+          {name ? <span>로그아웃</span> : <span>로그인</span>}
         </MenuPageButton>
       </MenuPageButtonWrapper>
       <MenuCaegoryWrapper>{renderCategories()}</MenuCaegoryWrapper>

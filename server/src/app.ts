@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
+import path from 'path';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import logger from 'morgan';
@@ -14,15 +15,14 @@ interface Error {
   message?: string;
 }
 startDB();
+const whitelist = [
+  'https://github.com',
+  'http://localhost:3000',
+  'http://localhost:4000',
+];
 
-app.use(
-  cors({
-    origin: 'http://localhost:3000',
-    methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
-    allowedHeaders: ['Content-Type'],
-    credentials: true,
-  })
-);
+app.use(cors({ origin: true, credentials: true }));
+
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,16 +31,14 @@ app.use(cookieParser());
 app.use(passport.initialize());
 passportConfig();
 
-// app.use(express.static(path.join(__dirname, '../../client/build')));
-// app.set('views', path.join(__dirname, '../../client/build'));
-// app.engine('html', require('ejs').renderFile);
+app.use(express.static(path.join(__dirname, '../../client/build')));
+app.set('views', path.join(__dirname, '../../client/build'));
+app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 
-app.get('/', (req: Request, res: Response) => res.render('index'));
-
-app.use('/api', router);
-app.use('/auth', loginRouter);
+app.use('/api', cors(), router);
+app.use('/auth', cors(), loginRouter);
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.locals.message = err.message;
@@ -49,5 +47,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(err.status || 500);
   res.send(err.message);
 });
+app.get('*', cors(), (req: Request, res: Response) => res.render('index'));
 
 export default app;
