@@ -16,16 +16,16 @@ import {
   StyledCountUp,
   StyledCountText,
 } from './SelectList.styles';
-
+import { usePageDispatch, openNotification } from '../../context/pageContext';
 import { numberToString } from '../../util/common';
 import { IProduct } from '../../../../types/modelTypes';
 import { useCartDispatch, createCart } from '../../context/cartContext';
+
 interface SelectListPropType {
   openList: boolean;
   setOpenList: Function;
   product: IProduct;
 }
-
 // TODO
 // 장바구니에 있는 것까지 카운트하기
 
@@ -33,7 +33,8 @@ const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
   const [clickbtn, setClicked] = React.useState(false);
   const [count, setCount] = React.useState(1);
   const detailContainer = React.useRef<HTMLDivElement>(null);
-  const dispatch = useCartDispatch();
+  const cartDispatch = useCartDispatch();
+  const pageDispatch = usePageDispatch();
 
   const clickedButton = useCallback(
     (e, cnt) => {
@@ -44,7 +45,9 @@ const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
         setClicked(false);
         setCount(1);
       }, 1500);
-      createCart(dispatch, 1, product.id, cnt);
+
+      createCart(cartDispatch, 1, product.id, cnt);
+      openNotification(pageDispatch, '장바구니 추가 완료!');
     },
     [clickbtn, setOpenList]
   );

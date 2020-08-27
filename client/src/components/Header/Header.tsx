@@ -8,6 +8,7 @@ import {
   StyledToolbar,
   StyledButton,
   StyledAppBar,
+  ButtonZone,
 } from './Header.styles';
 import history from '../../history';
 
@@ -33,6 +34,12 @@ export default function Header({ path, setPath }: IHeaderProps) {
 
   const menuHandler = () => {
     history.push('/menu');
+    setPath(history.location.pathname);
+  };
+
+  const mainHandler = () => {
+    history.push('/');
+    setPath(history.location.pathname);
   };
 
   const menuPageButton = () => {
@@ -46,7 +53,9 @@ export default function Header({ path, setPath }: IHeaderProps) {
   const renderInMainPage = () => {
     return (
       <>
-        <StyledLogoH variant="h6">{title}</StyledLogoH>
+        <StyledLogoH variant="h6" onClick={mainHandler}>
+          {title}
+        </StyledLogoH>
         <StyledButton aria-label="search" onClick={searchHandler}>
           <SearchIcon />
         </StyledButton>
@@ -58,7 +67,9 @@ export default function Header({ path, setPath }: IHeaderProps) {
   const renderInCategoryPage = () => {
     return (
       <>
-        <StyledLogoH variant="h6">{title}</StyledLogoH>
+        <StyledLogoH variant="h6" onClick={mainHandler}>
+          {title}
+        </StyledLogoH>
         <StyledButton aria-label="search" onClick={searchHandler}>
           <SearchIcon />
         </StyledButton>
@@ -70,7 +81,9 @@ export default function Header({ path, setPath }: IHeaderProps) {
   const renderInCartPage = () => {
     return (
       <>
-        <StyledLogoH variant="h6">{title}</StyledLogoH>
+        <StyledLogoH variant="h6" onClick={mainHandler}>
+          {title}
+        </StyledLogoH>
       </>
     );
   };
@@ -95,13 +108,22 @@ export default function Header({ path, setPath }: IHeaderProps) {
     setPath(history.location.pathname);
   };
 
+  const renderBackSpace = () => {
+    return (
+      path !== '/' && (
+        <StyledButton color="inherit" onClick={backSpaceHandler}>
+          <ArrowBackIcon />
+        </StyledButton>
+      )
+    );
+  };
+
   return history.location.pathname !== '/search' ? (
     <div>
       <StyledAppBar>
         <StyledToolbar>
-          <StyledButton color="inherit" onClick={backSpaceHandler}>
-            <ArrowBackIcon />
-          </StyledButton>
+          <ButtonZone>{renderBackSpace()}</ButtonZone>
+
           {renderByPage()}
         </StyledToolbar>
       </StyledAppBar>

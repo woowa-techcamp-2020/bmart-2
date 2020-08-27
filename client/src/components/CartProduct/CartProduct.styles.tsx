@@ -47,6 +47,7 @@ export const StyledProductInfoWrapper = styled.div`
     }
     button {
       color: #777777;
+      outline: none;
     }
   }
 `;

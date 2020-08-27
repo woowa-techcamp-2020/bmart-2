@@ -31,7 +31,7 @@ export const StyledCategoryIconsCol = styled.div`
     width: 100%;
   }
   p {
-    font-size: 0.7rem;
+    font-size: 0.9rem;
     margin: 8px 0;
   }
 `;

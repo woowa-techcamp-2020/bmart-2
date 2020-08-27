@@ -5,16 +5,17 @@ interface SubCategoryType {
 }
 
 export const CategoryTitle = styled.div`
-  font-size: 17px;
+  font-size: ${(props) => props.theme.font.subTitle};
   font-weight: 600;
-  margin: 12px 0;
+  margin: 1.3rem 0 1rem;
   display: flex;
   img {
-    width: 22px;
-    height: 22px;
+    width: ${(props) => props.theme.font.subTitle};
+    height: ${(props) => props.theme.font.subTitle};
     margin-right: 10px;
   }
 `;
+
 export const SubCategory = styled.div`
   border-radius: 12px;
   padding: 8px;
@@ -25,12 +26,12 @@ export const SubCategory = styled.div`
   user-select: none;
   color: #555;
   filter: drop-shadow(${(props) => props.theme.dropShadow});
+
   ${(props: SubCategoryType) =>
     props.selected &&
     css`
       color: white;
       font-weight: 500;
       background: ${(props) => props.theme.colors.main};
-      filter: drop-shadow(${(props) => props.theme.dropShadow});
     `}
 `;

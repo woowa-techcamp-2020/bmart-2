@@ -25,14 +25,13 @@ export const MenuCategory = styled.div`
   }
   div {
     margin-left: 1rem;
-    font-size: 0.9rem;
+    font-size: 1rem;
     line-height: 7vw;
   }
 `;
 
 export const MenuPageButton = styled.div`
-  width: 20vw;
-  height: 20vw;
+  padding: 1vw;
   margin: 0 1rem;
   display: flex;
   flex-direction: column;
@@ -43,8 +42,8 @@ export const MenuPageButton = styled.div`
     font-size: 1rem;
   }
   svg {
-    width: 7vw;
-    height: 7vw;
+    width: 6vw;
+    height: 6vw;
   }
 `;
 
