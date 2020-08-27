@@ -1,9 +1,29 @@
 import { ISearchHistory } from '../../../types/modelTypes';
 import SearchHistory from '../models/SearchHistory';
 
-const create = async (history: ISearchHistory): Promise<SearchHistory> => {
-  const newUser = await SearchHistory.create(history);
-  return newUser;
+const create = async (
+  newHistory: ISearchHistory
+): Promise<ISearchHistory | null> => {
+  const lastHistories = (await SearchHistory.findAll({
+    where: {
+      userId: newHistory.userId,
+    },
+  })) as ISearchHistory[];
+  if (
+    lastHistories.filter((history) => history.keyword === newHistory.keyword)
+      .length > 0
+  ) {
+    const resHistory = await SearchHistory.update(newHistory, {
+      where: {
+        keyword: newHistory.keyword,
+      },
+    });
+    return newHistory;
+  }
+
+  const resHistory = await SearchHistory.create(newHistory);
+
+  return resHistory;
 };
 
 const findAll = async (userId: string): Promise<ISearchHistory[]> => {

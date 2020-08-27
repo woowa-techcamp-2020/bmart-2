@@ -17,7 +17,8 @@ const create = async (
   next: NextFunction
 ): Promise<void> => {
   const history = await SearchHistoryService.create(req.body);
-  res.status(200).send(history);
+  if (history) res.status(200).send(history);
+  else next();
 };
 
 const deleteSearchHistoryById = async (
