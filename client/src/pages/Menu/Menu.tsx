@@ -2,6 +2,7 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState } from 'react';
+import { Container } from '@material-ui/core';
 import {
   MenuPageButtonWrapper,
   MenuCaegoryWrapper,
@@ -15,10 +16,6 @@ import { useCategoryState } from '../../context/categoryContext';
 import history from '../../history';
 import { ICategory } from '../../../../types/modelTypes';
 
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
-import { Container } from '@material-ui/core';
 import { login, logout } from '../../apis/auth';
 import { getCookie } from '../../util/common';
 
@@ -61,7 +58,7 @@ const Menu = () => {
     return categories.map((category) => (
       <MenuCaegoryWrapper key={`menu-category-${category.id}`}>
         <MenuCategory onClick={() => setSelected(category.id)}>
-          <img src={category.imgUrl} alt={category.name}></img>
+          <img src={category.imgUrl} alt={category.name} />
           <div>{category.name}</div>
         </MenuCategory>
         <SubcategoryWrapper container hidden={selected !== category.id}>
