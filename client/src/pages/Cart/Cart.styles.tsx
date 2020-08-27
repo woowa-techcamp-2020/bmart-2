@@ -1,10 +1,11 @@
 import styled from 'styled-components';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { Container } from '@material-ui/core';
 
 export const StyledCartButton = styled.button`
   width: 100%;
   border-radius: 3vh;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   bottom: 1vh;
   height: 8vh;
   color: white;
@@ -13,7 +14,7 @@ export const StyledCartButton = styled.button`
   text-align: center;
 `;
 
-export const StyledCartWrapper = styled.div`
+export const StyledCartWrapper = styled(Container)`
   width: 100%;
   padding-bottom: 9vh;
 `;
@@ -47,7 +48,7 @@ export const StyledCartHeader = styled.div`
 export const StyledCartIconWrapper = styled.div`
   height: 5vh !important;
   width: 5vh !important;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   border-radius: 50%;
   display: flex;
   align-items: center;

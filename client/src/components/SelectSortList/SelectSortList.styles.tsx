@@ -56,7 +56,7 @@ export const StyledItem = styled.div`
   ${(props: SelectListType) =>
     props.selected &&
     css`
-      color: #dd4470;
+      color: ${(props) => props.theme.colors.main};
       font-weight: 700;
     `}
 `;

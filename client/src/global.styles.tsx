@@ -19,11 +19,11 @@ declare module 'styled-components' {
 
 const theme: BMartTheme = {
   colors: {
-    main: '#ef5350',
+    main: '#e95157',
     background: '#ffebee',
   },
   border: {
-    radius: '10px',
+    radius: '16px',
   },
   shadow: '0px 4px 4px 1px rgba(0, 0, 0, 0.1)',
   dropShadow: '0px 3px 3px rgba(100, 100, 100, 0.25)',

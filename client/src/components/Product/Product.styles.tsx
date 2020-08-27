@@ -19,7 +19,7 @@ const ImageWrapper = styled.div`
     padding: 0.6em 0.8em;
     top: 0.6rem;
     left: 0.6rem;
-    background: #dd4470;
+    background: ${(props) => props.theme.colors.main};
     font-weight: bold;
     color: white;
     border-radius: 12px;

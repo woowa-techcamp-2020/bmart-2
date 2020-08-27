@@ -13,6 +13,7 @@ import { ICategory } from '../../../../types/modelTypes';
 import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Container } from '@material-ui/core';
 
 const Menu = () => {
   const categories = useCategoryState();
@@ -36,7 +37,7 @@ const Menu = () => {
     ));
   };
   return (
-    <>
+    <Container maxWidth="md">
       <MenuPageButtonWrapper>
         <MenuPageButton onClick={() => pushHistory('order')}>
           <ListAltIcon />
@@ -52,7 +53,7 @@ const Menu = () => {
         </MenuPageButton>
       </MenuPageButtonWrapper>
       <MenuCaegoryWrapper>{renderCategories()}</MenuCaegoryWrapper>
-    </>
+    </Container>
   );
 };
 

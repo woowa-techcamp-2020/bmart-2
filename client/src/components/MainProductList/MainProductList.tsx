@@ -14,6 +14,7 @@ import { ICategory, IProduct } from '../../../../types/modelTypes';
 import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
 import history from '../../history';
+import { Container } from '@material-ui/core';
 
 interface IMainProductList {
   productsInCategories: ICategory[];
@@ -94,7 +95,7 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
         curCategory={curCategory}
         productListRefs={productListRefs}
       />
-      <StyledGridContainer>{productList()}</StyledGridContainer>
+      <StyledGridContainer maxWidth="md">{productList()}</StyledGridContainer>
     </div>
   );
 };

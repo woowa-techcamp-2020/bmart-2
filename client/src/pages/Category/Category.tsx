@@ -1,14 +1,11 @@
 import * as React from 'react';
-import {
-  CategoryPageWrapper,
-  CategoryTitle,
-  SubCategory,
-} from './Category.styles';
+import { CategoryTitle, SubCategory } from './Category.styles';
 import { useLocation } from 'react-router-dom';
 import ProductSortList from '../../components/ProductSortList';
 import { ICategory, IProduct } from '../../../../types/modelTypes';
 
 import categoryApi from '../../apis';
+import { Container } from '@material-ui/core';
 
 interface ICategoryLocationState {
   category: ICategory;
@@ -55,7 +52,7 @@ const Category = () => {
   );
 
   return (
-    <CategoryPageWrapper>
+    <Container maxWidth="md">
       <CategoryTitle>
         <img src={category.imgUrl}></img>
         {category.name}
@@ -64,7 +61,7 @@ const Category = () => {
       <ProductSortList
         products={selected ? filteredProduct : products}
       ></ProductSortList>
-    </CategoryPageWrapper>
+    </Container>
   );
 };
 

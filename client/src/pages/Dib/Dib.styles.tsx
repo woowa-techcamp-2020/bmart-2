@@ -14,7 +14,7 @@ export const DibTitle = styled.div`
 export const IconWrapper = styled.div`
   width: 8vw;
   height: 100%;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   border-radius: 20px;
   svg {
     margin: 15%;

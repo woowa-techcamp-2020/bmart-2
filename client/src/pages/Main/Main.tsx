@@ -8,6 +8,8 @@ import MainProductList from '../../components/MainProductList';
 import { ICategory } from '../../../../types/modelTypes';
 import apis from '../../apis';
 
+import { Container } from '@material-ui/core';
+
 interface IPos {
   x: number;
   y: number;
@@ -153,9 +155,11 @@ const Main = () => {
         style={{ transform: transformOption() }}
         ref={transitionContainerRef}
       >
-        <CategoryIcons />
         <Carousel />
-        <SaleNow />
+        <Container maxWidth="md">
+          <CategoryIcons />
+          <SaleNow />
+        </Container>
         {getMainProductList}
       </div>
     </StyledMainWrap>

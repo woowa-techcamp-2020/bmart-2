@@ -21,6 +21,7 @@ import SelectList from '../../components/SelectList';
 import DibIcon from '../../components/DibIcon';
 import { numberToString } from '../../util/common';
 import { IProduct } from '../../../../types/modelTypes';
+import { Container } from '@material-ui/core';
 
 interface ILocationState {
   product: IProduct;
@@ -35,7 +36,7 @@ const Detail = () => {
   };
 
   return (
-    <>
+    <Container maxWidth="md">
       <StyledDetialWrapper>
         <StyledImage className="image" src={product.mainImgUrl}>
           <DibIcon product={product} />
@@ -84,7 +85,7 @@ const Detail = () => {
         setOpenList={setOpenList}
         product={product}
       />
-    </>
+    </Container>
   );
 };
 

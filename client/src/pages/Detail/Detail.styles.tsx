@@ -44,7 +44,7 @@ export const StyledCardButtonWrapper = styled.div`
 export const StyledCartButton = styled.div`
   width: 100%;
   border-radius: 16px;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   height: 6vh;
   color: white;
   font-size: 1.1rem;
@@ -66,7 +66,7 @@ export const StyledPriceText = styled.div`
   margin-bottom: 0.4rem;
   span {
     margin-right: 8px;
-    color: #dd4470;
+    color: ${(props) => props.theme.colors.main};
   }
 `;
 
@@ -95,7 +95,7 @@ export const InfoTitle = styled.div`
   margin-top: 0 !important;
   font-size: 1.1rem;
   margin-right: 0.8rem;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   padding: 8px !important;
   text-align: center;
   color: white;

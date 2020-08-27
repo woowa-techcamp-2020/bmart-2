@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 
 export const StyledTitleWrap = styled.div`
   text-align: center;
@@ -25,7 +25,7 @@ export const StyledCategoryListWrap = styled(Grid)`
   }
 `;
 
-export const StyledGridContainer = styled(Grid)`
+export const StyledGridContainer = styled(Container)`
   top: 0;
   > div {
     text-align: center;
@@ -42,7 +42,7 @@ export const StyledCategoryWrap = styled(Grid)<IStyledCategoryWrap>`
     box-shadow: ${(props) => props.theme.shadow};
     line-height: 30px;
     background-color: ${(props: IStyledCategoryWrap) =>
-      props.selected ? '#FE72A9' : 'white'};
+      props.selected ? '#e95157' : 'white'};
     color: ${(props: IStyledCategoryWrap) =>
       props.selected ? 'white' : 'black'};
     -webkit-tap-highlight-color: transparent;

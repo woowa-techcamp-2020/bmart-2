@@ -5,6 +5,8 @@ import Product from '../../components/Product';
 
 import { Grid } from '@material-ui/core';
 import { useDibState } from '../../context/dibContext';
+import { Container } from '@material-ui/core';
+
 // TODO
 // 최근 순으로 보여줘야함
 const Dib = () => {
@@ -17,7 +19,7 @@ const Dib = () => {
     ));
   };
   return (
-    <>
+    <Container maxWidth="md">
       <DibTitle>
         <IconWrapper>
           <FavoriteBorderIcon />
@@ -28,7 +30,7 @@ const Dib = () => {
       <Grid container spacing={3}>
         {renderDibs()}
       </Grid>
-    </>
+    </Container>
   );
 };
 

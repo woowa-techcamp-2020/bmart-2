@@ -47,28 +47,28 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Container maxWidth="md">
-          <Router history={history}>
-            <Header path={path} setPath={setPath} />
-            <Switch>
-              <Route path="/" exact component={Main} />
-              <Route path="/cart" exact component={Cart} />
-              <Route path="/category" exact component={Category} />
-              <Route path="/detail" exact component={Detail} />
-              <Route path="/result" exact component={SearchResult} />
-              <Route path="/menu" exact component={Menu} />
-              <Route path="/Order" exact component={Order} />
-              <Route path="/dib" exact component={Dib} />
-              <Route
-                path="/search"
-                exact
-                component={() => <Search setPath={setPath} />}
-              />
-              <Route path="/signin" exact component={Signin} />
-              <Route path="/signup" exact component={Signup} />
-            </Switch>
-          </Router>
-        </Container>
+        {/* <Container maxWidth="md"> */}
+        <Router history={history}>
+          <Header path={path} setPath={setPath} />
+          <Switch>
+            <Route path="/" exact component={Main} />
+            <Route path="/cart" exact component={Cart} />
+            <Route path="/category" exact component={Category} />
+            <Route path="/detail" exact component={Detail} />
+            <Route path="/result" exact component={SearchResult} />
+            <Route path="/menu" exact component={Menu} />
+            <Route path="/Order" exact component={Order} />
+            <Route path="/dib" exact component={Dib} />
+            <Route
+              path="/search"
+              exact
+              component={() => <Search setPath={setPath} />}
+            />
+            <Route path="/signin" exact component={Signin} />
+            <Route path="/signup" exact component={Signup} />
+          </Switch>
+        </Router>
+        {/* </Container> */}
       </ThemeProvider>
     </>
   );
