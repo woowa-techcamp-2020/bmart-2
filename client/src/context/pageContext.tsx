@@ -9,7 +9,7 @@ export type TPageState = IPageInContext;
 
 const PageStateContext = createContext<TPageState | undefined>(undefined);
 
-type TAction = { type: 'NOTI_OPEN'; message: string };
+type TAction = { type: 'NOTI_OPEN'; message: string } | { type: 'NOTI_CLOSE' };
 
 type TPageDispatch = Dispatch<TAction>;
 const PageDispatchContext = createContext<TPageDispatch | undefined>(undefined);
@@ -17,7 +17,9 @@ const PageDispatchContext = createContext<TPageDispatch | undefined>(undefined);
 function pageReducer(state: TPageState, action: TAction): TPageState {
   switch (action.type) {
     case 'NOTI_OPEN':
-      return { ...state, message: action.message };
+      return { onNotification: true, message: action.message };
+    case 'NOTI_CLOSE':
+      return { onNotification: false, message: '' };
     default:
       throw new Error('Unhandled action');
   }
@@ -51,4 +53,12 @@ export function usePageState() {
 export function usePageDispatch() {
   const dispatch = useContext(PageDispatchContext);
   return dispatch;
+}
+
+export function openNotification(dispatch: any, message: string) {
+  dispatch({ type: 'NOTI_OPEN', message: message });
+}
+
+export function closeNotification(dispatch: any) {
+  dispatch({ type: 'NOTI_CLOSE' });
 }
