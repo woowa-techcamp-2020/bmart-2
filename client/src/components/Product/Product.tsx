@@ -12,14 +12,38 @@ import {
 import { IProduct } from '../../../../types/modelTypes';
 import { numberToString } from '../../util/common';
 import history from '../../history';
+import { createDib, removeDib } from '../../apis/dib';
+import { useDibState, useDibDispatch } from '../../context/dibContext';
 
 interface IProductProps {
   product: IProduct;
 }
 
 const Product = ({ product }: IProductProps) => {
-  const clickDibIcon = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+  const dibState = useDibState();
+  const dibDispatch = useDibDispatch();
+  const [status, setStatus] = React.useState(false);
+
+  React.useEffect(() => {
+    console.log(dibState);
+    setStatus(dibState.find((data) => data.id === product.id) !== undefined);
+  }, [dibState]);
+  const clickDibIcon = async (
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
     e.stopPropagation();
+    if (status) {
+      await removeDib(product.id);
+      setStatus(false);
+      dibDispatch({ type: 'REMOVE', productId: product.id });
+    } else {
+      await createDib({
+        userId: 1,
+        productId: product.id,
+      });
+      setStatus(true);
+      dibDispatch({ type: 'ADD', product });
+    }
   };
 
   const productClickHandler = () => {
@@ -41,6 +65,7 @@ const Product = ({ product }: IProductProps) => {
             />
             {product.discount > 0 ? <div>{product.discount}%</div> : <></>}
             <StyledFavoriteCheck
+              checked={status}
               icon={<FavoriteBorder />}
               checkedIcon={<Favorite />}
               name="checked"
@@ -57,7 +82,7 @@ const Product = ({ product }: IProductProps) => {
             {numberToString(
               Math.floor((product.price * (100 - product.discount)) / 100)
             )}
-            원
+            원 {status ? 'asdf' : 'qwer'}
           </ProductPrice>
         </StyledProduct>
       ) : (
