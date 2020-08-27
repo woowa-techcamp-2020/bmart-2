@@ -26,6 +26,16 @@ const remove = async (
   res.status(200).send({ success: true });
 };
 
+const removeByUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const userId = req.user as number;
+  await Cart.destroy({ where: { userId } });
+  res.status(200).send({ success: true });
+};
+
 const find = async (
   req: Request,
   res: Response,
@@ -39,7 +49,22 @@ const find = async (
     const { userId, count, ...product } = row;
     return { userId, count, product };
   });
-  res.status(200).send(carts);
+  res.status(200).send({ success: true, carts });
+};
+
+const isExist = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { productId } = req.params;
+  console.log(productId);
+  console.log(req.user);
+  const cart = await CartService.isExist(
+    req.user as number,
+    parseInt(productId, 10)
+  );
+  res.status(200).send({ success: true, cart });
 };
 
 const update = async (
@@ -53,4 +78,4 @@ const update = async (
   res.status(200).send({ success: true });
 };
 
-export default { create, remove, find, update };
+export default { create, remove, find, update, removeByUser, isExist };

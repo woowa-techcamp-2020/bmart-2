@@ -19,3 +19,13 @@ export const removeCart = async (productId: number) => {
   const response = await api.delete(`/cart/${productId}`);
   return response.data;
 };
+
+export const isExist = async (productId: number) => {
+  const response = await api.get(`/cart/exist/${productId}`);
+  return response.data;
+};
+
+export const removeCartByUser = async () => {
+  const response = await api.delete(`/cart/user`);
+  return response.data;
+};

@@ -55,8 +55,8 @@ export function useCartDispatch() {
 }
 
 export async function getCarts(dispatch: any) {
-  const carts = await api.getCarts();
-  dispatch({ type: 'GET_CART', payload: carts });
+  const result = await api.getCarts();
+  dispatch({ type: 'GET_CART', payload: result.carts });
 }
 
 export async function updateCart(
@@ -73,6 +73,11 @@ export async function createCart(
   productId: number,
   count: number
 ) {
+  const result = await api.isExist(productId);
+  if (result.cart.length > 0) {
+    await updateCart(dispatch, productId, count);
+    return;
+  }
   await api.createCart(productId, count);
   await getCarts(dispatch);
 }
@@ -82,9 +87,13 @@ export async function removeCart(dispatch: any, productId: number) {
   await getCarts(dispatch);
 }
 
-export async function order(carts: TCartState) {
+export async function order(dispatch: any, carts: TCartState) {
   const products = carts.map((cart) => {
     return { count: cart.count, id: cart.product.id };
   });
   const response = await createOrder({ products });
+  if (response.success) {
+    await api.removeCartByUser();
+    await getCarts(dispatch);
+  }
 }

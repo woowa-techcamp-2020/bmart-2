@@ -1,5 +1,10 @@
 import React from 'react';
-import { useCartState, ICartInContext, order } from '../../context/cartContext';
+import {
+  useCartState,
+  ICartInContext,
+  order,
+  useCartDispatch,
+} from '../../context/cartContext';
 import CartProductList from '../../components/CartProductList';
 import CartSummary from '../../components/CartSummary';
 import { usePageDispatch, openNotification } from '../../context/pageContext';
@@ -16,6 +21,7 @@ import {
 const Cart = () => {
   const carts: ICartInContext[] = useCartState();
   const pageDispatch = usePageDispatch();
+  const cartDispatch = useCartDispatch();
 
   const getTotalPrice = (): number => {
     return carts.reduce(
@@ -40,7 +46,7 @@ const Cart = () => {
       <StyledCartButtonWrapper>
         <StyledCartButton
           onPointerUp={() => {
-            order(carts);
+            order(cartDispatch, carts);
             openNotification(pageDispatch, '주문 완료!');
           }}
         >
