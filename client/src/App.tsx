@@ -18,15 +18,18 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Dib from './pages/Dib';
 import { useCategoryDispatch, TCategoryState } from './context/categoryContext';
-import { useDibDispatch } from './context/dibContext';
+import { useCartDispatch, TCartState, getCarts } from './context/cartContext';
 import api from './apis';
 import { getDibs } from './apis/dib';
 import SearchResult from './pages/SearchResult';
+import { useDibDispatch } from './context/dibContext';
 
 function App() {
   const [path, setPath] = useState(history.location.pathname);
   const categoryDispath = useCategoryDispatch();
   const dibDispatch = useDibDispatch();
+  const cartDispatch = useCartDispatch();
+
   useEffect(() => {
     const fetchInitData = async () => {
       const res = await api.get('/category?sub=true');
@@ -34,10 +37,12 @@ function App() {
       // dib추가
       const products = await getDibs();
       dibDispatch!({ type: 'INIT', products });
+      await getCarts(cartDispatch);
     };
 
     fetchInitData();
   }, []);
+
   return (
     <>
       <ThemeProvider theme={theme}>

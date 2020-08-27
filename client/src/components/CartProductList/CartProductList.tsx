@@ -1,7 +1,7 @@
 import React from 'react';
 import CartProduct from '../CartProduct';
 import { StyledProductListWrapper } from './CartProductList.styles';
-
+import { ICartInContext } from '../../context/cartContext';
 interface ProductType {
   id: number;
   subcategoryId: number;
@@ -18,27 +18,17 @@ interface ProductType {
   updatedAt: string | null;
 }
 
-interface CartType {
-  userId: number;
-  count: number;
-  product: ProductType;
-}
-
-interface CartProductListProp {
-  carts: CartType[];
-  changeCount: (productId: number, count: number) => void;
-}
-
 export default function CartProductList({
   carts,
-  changeCount,
-}: CartProductListProp) {
+}: {
+  carts: ICartInContext[];
+}) {
   const renderCartProduct = () => {
-    return carts.map((cart) => (
+    return carts.map((cart, i) => (
       <CartProduct
         product={cart.product}
         count={cart.count}
-        changeCount={changeCount}
+        key={`cartProduct_${i}`}
       />
     ));
   };
