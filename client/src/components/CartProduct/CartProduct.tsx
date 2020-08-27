@@ -20,6 +20,7 @@ import {
   updateCart,
   removeCart,
 } from '../../context/cartContext';
+import { usePageDispatch, openNotification } from '../../context/pageContext';
 
 interface CarProductProps {
   product: IProduct;
@@ -27,7 +28,8 @@ interface CarProductProps {
 }
 
 export default function CartProduct({ product, count }: CarProductProps) {
-  const dispatch = useCartDispatch();
+  const cartDispatch = useCartDispatch();
+  const pageDispatch = usePageDispatch();
   return (
     <StyledProductWrapper>
       <StyledProductContent>
@@ -40,7 +42,8 @@ export default function CartProduct({ product, count }: CarProductProps) {
               <h4>{product.name}</h4>
               <button
                 onPointerUp={() => {
-                  removeCart(dispatch, product.id);
+                  removeCart(cartDispatch, product.id);
+                  openNotification(pageDispatch, '장바구니 삭제 완료!');
                 }}
               >
                 삭제
@@ -55,14 +58,14 @@ export default function CartProduct({ product, count }: CarProductProps) {
             <StyledProductCountWrapper>
               <StyledCountUp
                 onPointerUp={() => {
-                  updateCart(dispatch, 1, product.id, count + 1);
+                  updateCart(cartDispatch, 1, product.id, count + 1);
                 }}
                 count={count}
               />
               <StyledCountText>{count}</StyledCountText>
               <StyledCountDown
                 onPointerUp={() => {
-                  updateCart(dispatch, 1, product.id, count - 1);
+                  updateCart(cartDispatch, 1, product.id, count - 1);
                 }}
                 count={count}
               />
