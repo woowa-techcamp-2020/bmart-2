@@ -26,7 +26,7 @@ export default function Notification() {
   return (
     <Snackbar
       open={page.onNotification}
-      autoHideDuration={10000}
+      autoHideDuration={1000}
       onClose={handleClose}
     >
       <Alert onClose={handleClose} severity="info">
