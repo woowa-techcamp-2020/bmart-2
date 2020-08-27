@@ -3,6 +3,8 @@ import ProcutService from './productService';
 import OrderService from './orderService';
 import CartService from './cartService';
 import DibService from './dibService';
+import UserService from './userService';
+
 
 export {
   CategoryService,
@@ -10,4 +12,5 @@ export {
   CartService,
   DibService,
   OrderService,
+  UserService
 };
