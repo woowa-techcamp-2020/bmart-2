@@ -17,7 +17,11 @@ const Search = ({ setPath }: ISearchProps) => {
         keyword={keyword}
         setPath={setPath}
       />
-      <SearchHistory />
+      <SearchHistory
+        setKeyword={setKeyword}
+        keyword={keyword}
+        setPath={setPath}
+      />
     </StyledSearchWrap>
   );
 };

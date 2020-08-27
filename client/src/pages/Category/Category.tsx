@@ -9,6 +9,7 @@ import { Container } from '@material-ui/core';
 
 interface ICategoryLocationState {
   category: ICategory;
+  subCategoryId: number;
 }
 const selectedAll = {
   id: 0,
@@ -17,11 +18,12 @@ const selectedAll = {
 
 const Category = () => {
   const location = useLocation<ICategoryLocationState>();
-  const { category } = location.state;
+  const { category, subCategoryId } = location.state;
   const [selected, setSelected] = React.useState(0);
   const [products, setProducts] = React.useState<IProduct[] | null>(null);
 
   React.useEffect(() => {
+    subCategoryId && setSelected(subCategoryId);
     const fetchCategoryProducts = async () => {
       const res = await categoryApi.get(`/product?categoryId=${category.id}`);
       setProducts(res.data.products);
@@ -43,13 +45,11 @@ const Category = () => {
     ));
   };
 
-  const filteredProduct: IProduct[] | null = React.useMemo(
-    () =>
-      products
-        ? products.filter((product) => product.subcategoryId === selected)
-        : null,
-    [selected]
-  );
+  const filteredProduct: IProduct[] | null = React.useMemo(() => {
+    return selected !== 0 && products
+      ? products.filter((product) => product.subcategoryId === selected)
+      : products;
+  }, [selected, products]);
 
   return (
     <Container maxWidth="md">
@@ -58,9 +58,7 @@ const Category = () => {
         {category.name}
       </CategoryTitle>
       {addSubCategory()}
-      <ProductSortList
-        products={selected ? filteredProduct : products}
-      ></ProductSortList>
+      <ProductSortList products={filteredProduct}></ProductSortList>
     </Container>
   );
 };

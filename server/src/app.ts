@@ -15,8 +15,20 @@ interface Error {
   message?: string;
 }
 startDB();
+const whitelist = [
+  'https://github.com',
+  'http://localhost:3000',
+  'http://localhost:4000',
+];
 
-app.use(cors());
+app.use(cors({ origin: true, credentials: true }));
+
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,10 +43,9 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 
-app.get('/', (req: Request, res: Response) => res.render('index'));
-
 app.use('/api', router);
 app.use('/auth', loginRouter);
+app.get('*', (req: Request, res: Response) => res.render('index'));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.locals.message = err.message;
@@ -43,5 +54,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(err.status || 500);
   res.send(err.message);
 });
+app.get('*', cors(), (req: Request, res: Response) => res.render('index'));
 
 export default app;

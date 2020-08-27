@@ -1,5 +1,5 @@
 import React from 'react';
-import { useCartState, ICartInContext } from '../../context/cartContext';
+import { useCartState, ICartInContext, order } from '../../context/cartContext';
 import CartProductList from '../../components/CartProductList';
 import CartSummary from '../../components/CartSummary';
 
@@ -36,7 +36,13 @@ const Cart = () => {
       <CartProductList carts={carts} />
       <CartSummary totalPrice={getTotalPrice()} />
       <StyledCartButtonWrapper>
-        <StyledCartButton>구매하기</StyledCartButton>
+        <StyledCartButton
+          onPointerUp={() => {
+            order(carts);
+          }}
+        >
+          구매하기
+        </StyledCartButton>
       </StyledCartButtonWrapper>
     </StyledCartWrapper>
   );

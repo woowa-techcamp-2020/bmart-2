@@ -35,6 +35,10 @@ const githubCallback = async (
       process.env.JWT_SECRET!,
       { expiresIn: 60 }
     );
+    console.log(token);
+    res.cookie('name', newUser.name);
+    res.cookie('userId', newUser.id);
+
     res.cookie('jwt', token);
   }
   res.redirect('/');
