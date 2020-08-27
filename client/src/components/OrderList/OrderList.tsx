@@ -1,22 +1,28 @@
 import React from 'react';
 import { OrderListWrapper, OrderProduct } from './OrderList.styles';
 import DoneOutlineIcon from '@material-ui/icons/DoneOutline';
+import { IOrder } from '../../../../types/modelTypes';
+import { numberToString, dateToString } from '../../util/common';
 
-const url = 'https://img-cf.kurly.com/shop/data/goods/1463997072538l0.jpg';
-
-const OrderList = () => {
+const OrderList = ({ order }: { order: IOrder[] }) => {
   const renderProducts = () => {
-    return (
-      <OrderProduct>
-        <img src={url}></img>
-        <div>
-          <span>당근당근당근!</span>
+    return order.map((productInOrder: IOrder, i: number) => {
+      const { product } = productInOrder;
+      return (
+        <OrderProduct key={'orderProduct' + i}>
+          <img src={product.thumbImgUrl}></img>
           <div>
-            1,000원 x 27개 <span>27,000원</span>
+            <span>{product.name}</span>
+            <div>
+              {numberToString(product.price)}원 x {productInOrder.count}개{' '}
+              <span>
+                {numberToString(product.price * productInOrder.count)}
+              </span>
+            </div>
           </div>
-        </div>
-      </OrderProduct>
-    );
+        </OrderProduct>
+      );
+    });
   };
 
   return (
@@ -25,8 +31,7 @@ const OrderList = () => {
         <DoneOutlineIcon />
         배송 완료
       </p>
-      <span> 8월 20일 6시 10분 주문</span>
-      {renderProducts()}
+      <span>{dateToString(order[0].lastUpdated)} 주문</span>
       {renderProducts()}
     </OrderListWrapper>
   );
