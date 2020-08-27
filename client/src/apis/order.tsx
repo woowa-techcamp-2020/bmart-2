@@ -2,7 +2,7 @@ import api from './util';
 
 export const getOrders = async () => {
   const response = await api.get(`/order`);
-  return response;
+  return response.data;
 };
 
 export const createOrder = async (body: {
