@@ -23,6 +23,7 @@ import api from './apis';
 import { getDibs } from './apis/dib';
 import SearchResult from './pages/SearchResult';
 import { useDibDispatch } from './context/dibContext';
+import CartButton from './components/CartButton';
 
 function App() {
   const [path, setPath] = useState(history.location.pathname);
@@ -47,27 +48,27 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Router history={history}>
-          <Header path={path} setPath={setPath} />
-          <Switch>
-            <Route path="/" exact component={Main} />
-            <Route path="/cart" exact component={Cart} />
-            <Route path="/category" exact component={Category} />
-            <Route path="/detail" exact component={Detail} />
-            <Route path="/result" exact component={SearchResult} />
-            <Route path="/menu" exact component={Menu} />
-            <Route path="/Order" exact component={Order} />
-            <Route path="/dib" exact component={Dib} />
-            <Route
-              path="/search"
-              exact
-              component={() => <Search setPath={setPath} />}
-            />
-            <Route path="/signin" exact component={Signin} />
-            <Route path="/signup" exact component={Signup} />
-          </Switch>
-        </Router>
-        {/* </Container> */}
+          <Router history={history}>
+            <Header path={path} setPath={setPath} />
+            <Switch>
+              <Route path="/" exact component={Main} />
+              <Route path="/cart" exact component={Cart} />
+              <Route path="/category" exact component={Category} />
+              <Route path="/detail" exact component={Detail} />
+              <Route path="/result" exact component={SearchResult} />
+              <Route path="/menu" exact component={Menu} />
+              <Route path="/Order" exact component={Order} />
+              <Route path="/dib" exact component={Dib} />
+              <Route
+                path="/search"
+                exact
+                component={() => <Search setPath={setPath} />}
+              />
+              <Route path="/signin" exact component={Signin} />
+              <Route path="/signup" exact component={Signup} />
+            </Switch>
+          </Router>
+          <CartButton path={path} setPath={setPath} />
       </ThemeProvider>
     </>
   );

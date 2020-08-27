@@ -26,13 +26,29 @@ export interface IProduct {
   stock: number;
 }
 
+export interface IOrder {
+  userId: number;
+  orderId: number;
+  lastUpdated: string;
+  count: number;
+  product: IProduct;
+}
+
 export interface IDib {
   id: number;
   productId: number;
 }
+
 
 export interface IUser {
   id: number;
   name: string;
   email?: string;
 }
+
+export interface ISearchHistory {
+  id?: number;
+  userId?: number;
+  keyword?: string
+}
+

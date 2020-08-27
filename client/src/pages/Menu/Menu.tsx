@@ -1,9 +1,14 @@
-import React from 'react';
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import React, { useState } from 'react';
 import {
   MenuPageButtonWrapper,
   MenuCaegoryWrapper,
   MenuCategory,
   MenuPageButton,
+  StyledSubCategory,
+  SubcategoryWrapper,
 } from './Menu.styles';
 
 import { useCategoryState } from '../../context/categoryContext';
@@ -14,28 +19,60 @@ import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
 import ListAltIcon from '@material-ui/icons/ListAlt';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import { Container } from '@material-ui/core';
+import { login, logout } from '../../apis/auth';
+import { getCookie } from '../../util/common';
 
+const selectedAll = {
+  id: 0,
+  name: '전체보기',
+};
 const Menu = () => {
   const categories = useCategoryState();
+  const [selected, setSelected] = useState(0);
 
-  const pushHistory = (pathname: string, category?: ICategory) => {
+  const pushHistory = (
+    pathname: string,
+    category?: ICategory,
+    subCategoryId?: number
+  ) => {
     history.push({
       pathname: `/${pathname}`,
-      state: { category },
+      state: { category, subCategoryId },
     });
+  };
+
+  const renderSubCategories = (category: ICategory) => {
+    if (!category.SubCategories) return;
+    const subCategory = [selectedAll, ...category.SubCategories];
+    return subCategory.map((subCategory) => (
+      <StyledSubCategory
+        item
+        xs={6}
+        sm={3}
+        key={`sub-category-${subCategory.id}-by-${category.id}`}
+        onClick={() => pushHistory('category', category, subCategory.id)}
+      >
+        {subCategory.name}
+      </StyledSubCategory>
+    ));
   };
 
   const renderCategories = () => {
     return categories.map((category) => (
-      <MenuCategory
-        key={`menu-category-${category.id}`}
-        onClick={() => pushHistory('category', category)}
-      >
-        <img src={category.imgUrl} alt={category.name}></img>
-        <div>{category.name}</div>
-      </MenuCategory>
+      <MenuCaegoryWrapper key={`menu-category-${category.id}`}>
+        <MenuCategory onClick={() => setSelected(category.id)}>
+          <img src={category.imgUrl} alt={category.name}></img>
+          <div>{category.name}</div>
+        </MenuCategory>
+        <SubcategoryWrapper container hidden={selected !== category.id}>
+          {renderSubCategories(category)}
+        </SubcategoryWrapper>
+      </MenuCaegoryWrapper>
     ));
   };
+
+  const name = getCookie('name');
+
   return (
     <Container maxWidth="md">
       <MenuPageButtonWrapper>
@@ -47,9 +84,9 @@ const Menu = () => {
           <FavoriteBorderIcon />
           <span>찜하기</span>
         </MenuPageButton>
-        <MenuPageButton onClick={() => pushHistory('dib')}>
+        <MenuPageButton onClick={() => (name ? logout() : login())}>
           <ExitToAppIcon />
-          <span>로그아웃</span>
+          {name ? <span>로그아웃</span> : <span>로그인</span>}
         </MenuPageButton>
       </MenuPageButtonWrapper>
       <MenuCaegoryWrapper>{renderCategories()}</MenuCaegoryWrapper>
