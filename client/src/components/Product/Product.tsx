@@ -14,9 +14,10 @@ import DibIcon from '../DibIcon';
 
 interface IProductProps {
   product: IProduct;
+  size?: string;
 }
 
-const Product = ({ product }: IProductProps) => {
+const Product = ({ product, size }: IProductProps) => {
   const productClickHandler = () => {
     history.push({
       pathname: '/detail',
@@ -28,7 +29,7 @@ const Product = ({ product }: IProductProps) => {
     <>
       {product ? (
         <StyledProduct onClick={productClickHandler}>
-          <ImageWrapper url={product.thumbImgUrl}>
+          <ImageWrapper url={product.thumbImgUrl} size={size}>
             {product.discount > 0 ? (
               <div>
                 <p>{product.discount}%</p>
@@ -54,10 +55,13 @@ const Product = ({ product }: IProductProps) => {
         </StyledProduct>
       ) : (
         <StyledProduct>
-          <ImageWrapper url="">
+          <ImageWrapper url="" size={size}>
             <Skeleton
               variant="rect"
-              style={{ width: '100%', height: '100%' }}
+              style={{
+                width: size === 'medium' ? '20vh' : '100%',
+                height: '100%',
+              }}
             />
           </ImageWrapper>
           <ProductTitle>

@@ -2,6 +2,32 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 import { backgroundUrlImage, TImageUrl } from '../../shared/style.styles';
 
+interface IImageSize extends TImageUrl {
+  size?: string;
+}
+
+const imageSize = (size: string) => {
+  switch (size) {
+    case 'small':
+      return '16vh';
+    case 'medium':
+      return '20vh';
+    default:
+      return '26vh';
+  }
+};
+
+const iconScaleSize = (size: string) => {
+  switch (size) {
+    case 'small':
+      return '0.85';
+    case 'medium':
+      return '0.92';
+    default:
+      return '1';
+  }
+};
+
 const StyledProduct = styled(Grid)`
   width: 100%;
   background: white;
@@ -11,12 +37,13 @@ const StyledProduct = styled(Grid)`
 
 const ImageWrapper = styled.div`
   width: 100%;
-  height: 28vh;
+  height: ${(props: IImageSize) =>
+    props.size ? imageSize(props.size) : '26vh'};
   border-radius: 12px;
   margin-bottom: 12px;
   overflow: hidden;
   position: relative;
-  ${(props: TImageUrl) => backgroundUrlImage(props.url)};
+  ${(props: IImageSize) => backgroundUrlImage(props.url)};
   div {
     position: absolute;
     padding: 0.4rem 0.8rem;
@@ -27,6 +54,14 @@ const ImageWrapper = styled.div`
     background: white;
     font-size: 1rem;
     border-radius: 12px;
+    transform: scale(
+      ${(props: IImageSize) => (props.size ? iconScaleSize(props.size) : '1')}
+    );
+  }
+  svg {
+    transform: scale(
+      ${(props: IImageSize) => (props.size ? iconScaleSize(props.size) : '1')}
+    );
   }
 `;
 

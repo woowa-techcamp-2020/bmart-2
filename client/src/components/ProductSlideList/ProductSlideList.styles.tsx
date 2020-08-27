@@ -2,9 +2,11 @@ import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
 
 export const StyledListTitle = styled.div`
-  padding: 6px 0;
-  font-size: 15px;
-  font-weight: 500;
+  padding: 2vw 0;
+  font-size: ${(props) => props.theme.font.subTitle};
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
 `;
 
 export const StyledSlideList = styled(Grid)`
