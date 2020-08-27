@@ -24,6 +24,10 @@ const ImageWrapper = styled.div`
     color: white;
     border-radius: 12px;
   }
+  img {
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 const ProductTitle = styled.div`
@@ -43,23 +47,4 @@ const ProductPrice = styled.div`
   }
 `;
 
-const StyledFavoriteCheck = styled(Checkbox)`
-  && {
-    position: absolute;
-    bottom: 0.3rem;
-    right: 0.3rem;
-    margin: 0;
-    svg {
-      width: 8vw !important;
-      height: 8vw !important;
-    }
-  }
-` as typeof Checkbox;
-
-export {
-  StyledProduct,
-  ImageWrapper,
-  ProductTitle,
-  ProductPrice,
-  StyledFavoriteCheck,
-};
+export { StyledProduct, ImageWrapper, ProductTitle, ProductPrice };

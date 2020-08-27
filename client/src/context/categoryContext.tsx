@@ -54,8 +54,6 @@ export function useCategoryState() {
 
 export function useCategoryDispatch() {
   const dispatch = useContext(CategoryDispatchContext);
-  console.log('dispatch: ', dispatch);
-  console.log('CategoryDispatchContext: ', CategoryDispatchContext);
 
   return dispatch;
 }

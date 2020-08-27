@@ -12,6 +12,7 @@ import Category from './pages/Category';
 import Cart from './pages/Cart';
 import Detail from './pages/Detail';
 import Menu from './pages/Menu';
+import Order from './pages/Order';
 import Search from './pages/Search';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
@@ -26,13 +27,14 @@ function App() {
   const [path, setPath] = useState(history.location.pathname);
   const dispatch = useCategoryDispatch();
   const cartDispatch = useCartDispatch();
+
   useEffect(() => {
     const fetchInitData = async () => {
       const res = await api.get('/category?sub=true');
-      dispatch!({ type: 'INIT', payload: res?.data as TCategoryState });
+      categoryDispath!({ type: 'INIT', payload: res?.data as TCategoryState });
       // dib추가
-      // const dibs = await getDibs();
-      // dispatch!({ type: 'INIT', payload: dibs });
+      const products = await getDibs();
+      dibDispatch!({ type: 'INIT', products });
     };
 
     fetchInitData();
@@ -45,6 +47,7 @@ function App() {
 
     fetchInitData();
   }, [dispatch]);
+
 
   return (
     <>
@@ -60,6 +63,7 @@ function App() {
               <Route path="/detail" exact component={Detail} />
               <Route path="/result" exact component={SearchResult} />
               <Route path="/menu" exact component={Menu} />
+              <Route path="/Order" exact component={Order} />
               <Route path="/dib" exact component={Dib} />
               <Route
                 path="/search"
