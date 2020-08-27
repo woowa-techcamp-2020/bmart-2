@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 // eslint-disable-next-line import/prefer-default-export
 export const StyledCategoryIconsWrap = styled.div`
-  margin-top: 10px;
+  margin: 1vw 0 3vw;
 `;
 
 export const StyledCategoryIconsRow = styled.div`

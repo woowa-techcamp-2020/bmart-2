@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   StyledListTitle,
   StyledRecommendList,
@@ -7,21 +7,41 @@ import {
   StyledRefreshIcon,
 } from './ProductRecommendList.styles';
 
+import { getRecommendProducts } from '../../apis/product';
+import { IProduct } from '../../../../types/modelTypes';
 import Product from '../Product';
 import { Grid } from '@material-ui/core';
 
 interface ProductRecommendListType {}
 
-// test
-const items = [1, 2, 3, 4, 5, 6];
-
 const ProductRecommendList = ({}: ProductRecommendListType) => {
+  const [products, setProducts] = useState<IProduct[]>([]);
+  useEffect(() => {
+    fetchLatestData();
+  }, []);
+
+  const fetchLatestData = async () => {
+    const res = await getRecommendProducts();
+    setProducts(res.result);
+  };
+
   const renderProduct = () => {
-    return items.map((item, index) => (
-      <Grid item xs={4} sm={3} key={'recommand-list' + index}>
-        {/* <Product /> */}
-      </Grid>
-    ));
+    if (products.length === 0) {
+      const skeletonProducts = new Array(12).fill(0);
+      return skeletonProducts.map((product, index) => (
+        <Grid item xs={4} sm={3} key={'recommand-list' + index}>
+          <Product product={product} size={'small'} />
+        </Grid>
+      ));
+    }
+    return (
+      products &&
+      products.map((product, index) => (
+        <Grid item xs={4} sm={3} key={'recommand-list' + index}>
+          <Product product={product} size={'small'} />
+        </Grid>
+      ))
+    );
   };
   return (
     <StyledListWrapper>
@@ -29,7 +49,7 @@ const ProductRecommendList = ({}: ProductRecommendListType) => {
       <StyledRecommendList container spacing={2}>
         {renderProduct()}
       </StyledRecommendList>
-      <StyledRefreshButton>
+      <StyledRefreshButton onClick={() => fetchLatestData()}>
         <StyledRefreshIcon />
         지금 뭐 먹지? 다른 상품 보기
       </StyledRefreshButton>
