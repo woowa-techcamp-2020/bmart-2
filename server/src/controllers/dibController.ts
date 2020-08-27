@@ -11,7 +11,7 @@ const create = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const dib = await Dib.create(req.body);
+  const dib = await Dib.create({ ...req.body, userId: req.user as number });
   res.status(200).send(dib);
 };
 
@@ -22,7 +22,7 @@ const remove = async (
 ): Promise<void> => {
   const { params } = req;
   const productId = parseInt(params.productId, 10);
-  await Dib.destroy({ where: { productId } });
+  await Dib.destroy({ where: { productId, userId: req.user as number } });
   res.status(200).send({ success: true });
 };
 
@@ -31,8 +31,7 @@ const find = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const { params } = req;
-  const userId = parseInt(params.userId, 10);
+  const userId = req.user as number;
   const result = await DibService.findDibIncludeProductByUserId(userId);
   const dibs = result.map((row) => {
     // eslint-disable-next-line no-shadow
