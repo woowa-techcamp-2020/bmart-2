@@ -4,8 +4,6 @@ interface SubCategoryType {
   selected: boolean;
 }
 
-export const CategoryPageWrapper = styled.div``;
-
 export const CategoryTitle = styled.div`
   font-size: 17px;
   font-weight: 600;
@@ -32,7 +30,7 @@ export const SubCategory = styled.div`
     css`
       color: white;
       font-weight: 500;
-      background: #fe72a9;
+      background: ${(props) => props.theme.colors.main};
       filter: drop-shadow(${(props) => props.theme.dropShadow});
     `}
 `;
