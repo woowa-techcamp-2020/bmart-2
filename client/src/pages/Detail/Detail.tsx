@@ -15,13 +15,12 @@ import {
   StyledFormatQuoteIcon,
   StyledLeftformatQueteIcon,
   StyledPriceDiscount,
-  StyledFavoriteCheck,
 } from './Detail.styles';
 
 import SelectList from '../../components/SelectList';
+import DibIcon from '../../components/DibIcon';
 import { numberToString } from '../../util/common';
 import { IProduct } from '../../../../types/modelTypes';
-import { Favorite, FavoriteBorder } from '@material-ui/icons';
 
 interface ILocationState {
   product: IProduct;
@@ -39,11 +38,7 @@ const Detail = () => {
     <>
       <StyledDetialWrapper>
         <StyledImage className="image" src={product.mainImgUrl}>
-          <StyledFavoriteCheck
-            icon={<FavoriteBorder />}
-            checkedIcon={<Favorite />}
-            name="checked"
-          />
+          <DibIcon product={product} />
         </StyledImage>
         <StyledNameText>{product.name}</StyledNameText>
         <StyledPriceText>
