@@ -8,6 +8,7 @@ import dibRouter from './dibRouter';
 import orderRouter from './orderRouter';
 import cartRouter from './cartRouter';
 import searchRouter from './searchRouter';
+import searchHistoryRouter from './searchHistoryRouter';
 
 const router = express.Router();
 
@@ -20,5 +21,6 @@ router.use('/order', orderRouter);
 router.use('/dib', dibRouter);
 router.use('/cart', cartRouter);
 router.use('/search', searchRouter);
+router.use('/history', searchHistoryRouter);
 
 export default router;

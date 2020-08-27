@@ -45,3 +45,10 @@ export interface IUser {
   name: string;
   email?: string;
 }
+
+export interface ISearchHistory {
+  id?: number;
+  userId?: number;
+  keyword?: string
+}
+

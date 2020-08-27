@@ -1,7 +1,6 @@
 function numberToString(x: number) {
   return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
 }
-
 function dateToString(dateStr: string) {
   const date = new Date(dateStr);
   return `${date.getMonth() + 1}월 ${date.getDate()}일 ${
@@ -18,6 +17,8 @@ const deleteCookie = function (name: string) {
   const date = new Date();
   document.cookie = `${name}= ` + `; expires=${date.toUTCString()}; path=/`;
 };
+const isLogin = () => {
+  return getCookie('name') !== null;
+};
 
-
-export { numberToString, getCookie, deleteCookie, dateToString };
+export { numberToString, getCookie, deleteCookie, dateToString, isLogin };

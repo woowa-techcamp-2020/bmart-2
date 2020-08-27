@@ -4,7 +4,7 @@ import OrderService from './orderService';
 import CartService from './cartService';
 import DibService from './dibService';
 import UserService from './userService';
-
+import SearchHistoryService from './searchHistory';
 
 export {
   CategoryService,
@@ -12,5 +12,6 @@ export {
   CartService,
   DibService,
   OrderService,
-  UserService
+  UserService,
+  SearchHistoryService,
 };

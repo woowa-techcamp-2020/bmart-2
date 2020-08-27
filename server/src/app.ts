@@ -23,6 +23,12 @@ const whitelist = [
 
 app.use(cors({ origin: true, credentials: true }));
 
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -37,8 +43,9 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 
-app.use('/api', cors(), router);
-app.use('/auth', cors(), loginRouter);
+app.use('/api', router);
+app.use('/auth', loginRouter);
+app.get('*', (req: Request, res: Response) => res.render('index'));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.locals.message = err.message;
