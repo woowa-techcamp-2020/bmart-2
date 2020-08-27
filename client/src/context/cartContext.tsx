@@ -61,21 +61,19 @@ export async function getCarts(dispatch: any) {
 
 export async function updateCart(
   dispatch: any,
-  userId: number,
   productId: number,
   count: number
 ) {
-  await api.updateCart(productId, userId, count);
+  await api.updateCart(productId, count);
   await getCarts(dispatch);
 }
 
 export async function createCart(
   dispatch: any,
-  userId: number,
   productId: number,
   count: number
 ) {
-  await api.createCart(productId, userId, count);
+  await api.createCart(productId, count);
   await getCarts(dispatch);
 }
 

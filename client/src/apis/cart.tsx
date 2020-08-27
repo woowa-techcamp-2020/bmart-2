@@ -1,26 +1,17 @@
 import api from './util';
 
 export const getCarts = async () => {
-  const userId = 1;
-  const response = await api.get(`/cart/${userId}`);
+  const response = await api.get(`/cart`);
   return response.data;
 };
 
-export const createCart = async (
-  productId: number,
-  userId: number,
-  count: number
-) => {
-  const response = await api.post('cart', { productId, userId, count });
+export const createCart = async (productId: number, count: number) => {
+  const response = await api.post('cart', { productId, count });
   return response.data;
 };
 
-export const updateCart = async (
-  productId: number,
-  userId: number,
-  count: number
-) => {
-  const response = await api.put('cart', { productId, userId, count });
+export const updateCart = async (productId: number, count: number) => {
+  const response = await api.put('cart', { productId, count });
   return response.data;
 };
 

@@ -65,14 +65,14 @@ export default function CartProduct({ product, count }: CarProductProps) {
             <StyledProductCountWrapper>
               <StyledCountUp
                 onPointerUp={() => {
-                  updateCart(cartDispatch, 1, product.id, count + 1);
+                  updateCart(cartDispatch, product.id, count + 1);
                 }}
                 count={count}
               />
               <StyledCountText>{count}</StyledCountText>
               <StyledCountDown
                 onPointerUp={() => {
-                  updateCart(cartDispatch, 1, product.id, count - 1);
+                  updateCart(cartDispatch, product.id, count - 1);
                 }}
                 count={count}
               />
