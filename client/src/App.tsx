@@ -69,7 +69,7 @@ function App() {
               <Route path="/signup" exact component={Signup} />
             </Switch>
           </Router>
-          <CartButton />
+          <CartButton path={path} setPath={setPath} />
         </Container>
       </ThemeProvider>
     </>
