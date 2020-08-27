@@ -1,27 +1,22 @@
 import * as React from 'react';
 import Skeleton from '@material-ui/lab/Skeleton';
-import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import {
   StyledProduct,
   ImageWrapper,
   ProductTitle,
   ProductPrice,
-  StyledFavoriteCheck,
 } from './Product.styles';
 
 import { IProduct } from '../../../../types/modelTypes';
 import { numberToString } from '../../util/common';
 import history from '../../history';
+import DibIcon from '../DibIcon';
 
 interface IProductProps {
   product: IProduct;
 }
 
 const Product = ({ product }: IProductProps) => {
-  const clickDibIcon = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    e.stopPropagation();
-  };
-
   const productClickHandler = () => {
     history.push({
       pathname: '/detail',
@@ -34,18 +29,9 @@ const Product = ({ product }: IProductProps) => {
       {product ? (
         <StyledProduct onClick={productClickHandler}>
           <ImageWrapper>
-            <img
-              style={{ width: '100%', height: '100%' }}
-              alt={product.name}
-              src={product.thumbImgUrl}
-            />
+            <img alt={product.name} src={product.thumbImgUrl} />
             {product.discount > 0 ? <div>{product.discount}%</div> : <></>}
-            <StyledFavoriteCheck
-              icon={<FavoriteBorder />}
-              checkedIcon={<Favorite />}
-              name="checked"
-              onClick={clickDibIcon}
-            />
+            <DibIcon product={product} />
           </ImageWrapper>
           <ProductTitle>{product.name} </ProductTitle>
           <ProductPrice>

@@ -58,7 +58,7 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
         // 할인율
         return products.sort((a, b) => b.discount - a.discount);
       default:
-        return products;
+        return products.sort((a, b) => a.id - b.id);
     }
   };
 
