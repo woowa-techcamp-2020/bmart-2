@@ -82,7 +82,7 @@ const CategoryList = ({ curCategory, productListRefs }: ICategoryListProps) => {
     >
       <StyledSlideList
         container
-        spacing={2}
+        spacing={1}
         wrap="nowrap"
         ref={categorySlideListRef}
       >

@@ -8,8 +8,8 @@ export const StyledFavoriteCheck = styled(Checkbox)`
     right: 0.3rem;
     margin: 0;
     svg {
-      width: 8vw !important;
-      height: 8vw !important;
+      width: 2.5rem !important;
+      height: 2.5rem !important;
     }
   }
 ` as typeof Checkbox;

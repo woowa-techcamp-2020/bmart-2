@@ -7,6 +7,7 @@ import {
   StyledProductListWrap,
   StyledProductTitle,
   StyledTitleWrap,
+  CategoryTitle,
 } from './MainProductList.styles';
 
 import Product from '../Product';
@@ -14,7 +15,6 @@ import { ICategory, IProduct } from '../../../../types/modelTypes';
 import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
 import history from '../../history';
-import { Container } from '@material-ui/core';
 
 interface IMainProductList {
   productsInCategories: ICategory[];
@@ -77,7 +77,10 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
           }}
           data-order={i}
         >
-          <StyledProductTitle>{productsInCategory.name}</StyledProductTitle>
+          <CategoryTitle>
+            <img src={productsInCategory.imgUrl}></img>
+            {productsInCategory.name}
+          </CategoryTitle>
           <StyledSortList container spacing={2}>
             {renderProduct(productsInCategory.Products as IProduct[])}
           </StyledSortList>

@@ -47,7 +47,6 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        {/* <Container maxWidth="md"> */}
         <Router history={history}>
           <Header path={path} setPath={setPath} />
           <Switch>

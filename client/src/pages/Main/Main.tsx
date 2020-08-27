@@ -7,6 +7,8 @@ import CategoryIcons from '../../components/CategoryIcons';
 import MainProductList from '../../components/MainProductList';
 import { ICategory } from '../../../../types/modelTypes';
 import apis from '../../apis';
+import ProductRecommendList from '../../components/ProductRecommendList';
+import ProductSlideList from '../../components/ProductSlideList';
 
 import { Container } from '@material-ui/core';
 
@@ -159,6 +161,8 @@ const Main = () => {
         <Container maxWidth="md">
           <CategoryIcons />
           <SaleNow />
+          <ProductSlideList></ProductSlideList>
+          <ProductRecommendList></ProductRecommendList>
         </Container>
         {getMainProductList}
       </div>
