@@ -46,7 +46,7 @@ const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
         setCount(1);
       }, 1500);
 
-      createCart(cartDispatch, 1, product.id, cnt);
+      createCart(cartDispatch, product.id, cnt);
       openNotification(pageDispatch, '장바구니 추가 완료!');
     },
     [clickbtn, setOpenList]

@@ -32,7 +32,6 @@ const DibIcon = ({ product }: IDibIconProps) => {
       openNotification(pageDispatch, '찜 삭제 완료!');
     } else {
       await createDib({
-        userId: 1,
         productId: product.id,
       });
       setStatus(true);
