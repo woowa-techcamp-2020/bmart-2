@@ -22,10 +22,12 @@ import { useCartDispatch, TCartState, getCarts } from './context/cartContext';
 import api from './apis';
 import { getDibs } from './apis/dib';
 import SearchResult from './pages/SearchResult';
+import { useDibDispatch } from './context/dibContext';
 
 function App() {
   const [path, setPath] = useState(history.location.pathname);
-  const dispatch = useCategoryDispatch();
+  const categoryDispath = useCategoryDispatch();
+  const dibDispatch = useDibDispatch();
   const cartDispatch = useCartDispatch();
 
   useEffect(() => {
@@ -35,19 +37,11 @@ function App() {
       // dib추가
       const products = await getDibs();
       dibDispatch!({ type: 'INIT', products });
+      await getCarts(cartDispatch);
     };
 
     fetchInitData();
-  }, [dispatch]);
-
-  useEffect(() => {
-    const fetchInitData = async () => {
-      const carts = await getCarts(cartDispatch);
-    };
-
-    fetchInitData();
-  }, [dispatch]);
-
+  }, []);
 
   return (
     <>
