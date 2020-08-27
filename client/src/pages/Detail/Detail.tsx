@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useLocation } from 'react-router-dom';
+import { Container } from '@material-ui/core';
+import { useEffect } from 'react';
 import {
   StyledDetialWrapper,
   StyledCartButton,
@@ -21,7 +23,7 @@ import SelectList from '../../components/SelectList';
 import DibIcon from '../../components/DibIcon';
 import { numberToString } from '../../util/common';
 import { IProduct } from '../../../../types/modelTypes';
-import { Container } from '@material-ui/core';
+import history from '../../history';
 
 interface ILocationState {
   product: IProduct;
@@ -34,6 +36,12 @@ const Detail = () => {
   const onClick = () => {
     setOpenList(true);
   };
+
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+    });
+  }, []);
 
   return (
     <Container maxWidth="md">
