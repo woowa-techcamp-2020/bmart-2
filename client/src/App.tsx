@@ -7,6 +7,7 @@ import { GlobalStyle, theme } from './global.styles';
 
 import history from './history';
 import Header from './components/Header';
+import Notification from './components/Notification';
 import Main from './pages/Main';
 import Category from './pages/Category';
 import Cart from './pages/Cart';
@@ -50,6 +51,7 @@ function App() {
         <GlobalStyle />
           <Router history={history}>
             <Header path={path} setPath={setPath} />
+            <Notification />
             <Switch>
               <Route path="/" exact component={Main} />
               <Route path="/cart" exact component={Cart} />
