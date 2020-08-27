@@ -28,6 +28,10 @@ export const OrderProduct = styled.div`
   div {
     padding-left: 0.4rem;
     font-size: 1.1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
     span {
       font-size: 1.1rem;
       line-height: 2rem;
