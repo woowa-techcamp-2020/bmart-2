@@ -16,7 +16,12 @@ interface Error {
 }
 startDB();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+  })
+);
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -31,10 +36,9 @@ app.engine('html', require('ejs').renderFile);
 
 app.set('view engine', 'html');
 
-app.get('/', (req: Request, res: Response) => res.render('index'));
-
 app.use('/api', router);
 app.use('/auth', loginRouter);
+app.get('*', (req: Request, res: Response) => res.render('index'));
 
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.locals.message = err.message;

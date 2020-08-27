@@ -38,7 +38,7 @@ export interface IUser {
 }
 
 export interface ISearchHistory {
-  id: number;
+  id?: number;
   userId?: number;
   keyword?: string
 }

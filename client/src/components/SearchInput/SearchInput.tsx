@@ -1,12 +1,14 @@
 import React from 'react';
-
-import { InputAdornment } from '@material-ui/core';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { faArrowLeft, faSearch } from '@fortawesome/free-solid-svg-icons';
+import SearchIcon from '@material-ui/icons/Search';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import InputBase from '@material-ui/core/InputBase';
+import IconButton from '@material-ui/core/IconButton';
+import { StyledButton, StyledLogoH } from '../Header/Header.styles';
 import { StyledFormControl, StyledInput } from './SearchInput.styles';
+import { createSearchHistory } from '../../apis/searchHistory';
+
 import history from '../../history';
+import { getCookie, isLogin } from '../../util/common';
 
 interface ISearchInputProps {
   setKeyword: React.Dispatch<React.SetStateAction<string>>;
@@ -21,10 +23,22 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
     setKeyword(event.target.value);
   };
 
+  const createSearchHistoryUsingKeyword = () => {
+    if (isLogin() && keyword.trim() !== '') {
+      const userIdStr = getCookie('userId');
+      const userId = parseInt(userIdStr!, 10);
+      createSearchHistory({
+        userId,
+        keyword,
+      });
+    }
+  };
+
   const onKeyDownHandler = (
     event: React.KeyboardEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
     if (event.key === 'Enter') {
+      createSearchHistoryUsingKeyword();
       history.push(`/result?keyword=${keyword}`);
       setPath(history.location.pathname);
     }
@@ -32,6 +46,7 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
 
   const searchClickHandler = () => {
     history.push(`/result?keyword=${keyword}`);
+    createSearchHistoryUsingKeyword();
     setPath(history.location.pathname);
   };
 
@@ -41,22 +56,21 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
   };
 
   return (
-    <StyledFormControl fullWidth>
-      <StyledInput
-        id="standard-adornment-amount"
-        onChange={(e) => onChangeHandler(e)}
-        onKeyDown={(e) => onKeyDownHandler(e)}
-        startAdornment={
-          <InputAdornment position="start" onClick={backSpaceHandler}>
-            <FontAwesomeIcon icon={faArrowLeft} size="lg" />
-          </InputAdornment>
-        }
-        endAdornment={
-          <InputAdornment position="start" onClick={searchClickHandler}>
-            <FontAwesomeIcon icon={faSearch} size="lg" />
-          </InputAdornment>
-        }
-      />
+    <StyledFormControl>
+      <StyledButton color="inherit" onClick={backSpaceHandler}>
+        <ArrowBackIcon />
+      </StyledButton>
+      <StyledLogoH>
+        <StyledInput
+          id="standard-adornment-amount"
+          onChange={(e) => onChangeHandler(e)}
+          onKeyDown={(e) => onKeyDownHandler(e)}
+          placeholder="검색어를 입력하세요"
+        />
+      </StyledLogoH>
+      <StyledButton onClick={searchClickHandler} aria-label="menu">
+        <SearchIcon />
+      </StyledButton>
     </StyledFormControl>
   );
 };

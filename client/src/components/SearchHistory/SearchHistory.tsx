@@ -1,10 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { List, ListItem, ListItemText } from '@material-ui/core';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { faTimes } from '@fortawesome/free-solid-svg-icons';
-import { getHistories } from '../../apis/searchHistory';
+import CloseIcon from '@material-ui/icons/Close';
+import { getHistories, removeHistory } from '../../apis/searchHistory';
 import {
   StyledDeleteIcon,
   StyledListHeader,
@@ -12,8 +9,6 @@ import {
   StyledListItem,
 } from './SearchHistory.styles';
 import { ISearchHistory } from '../../../../types/modelTypes';
-
-const datas = ['과자', '두유', '우유', '라면', '야채'];
 
 const SearchHistory = () => {
   const [histories, setHistories] = useState<ISearchHistory[]>([]);
@@ -24,12 +19,18 @@ const SearchHistory = () => {
     };
     getSearchHistories();
   }, []);
+
+  const closeHandler = async (id: number) => {
+    const res = await removeHistory(id);
+    if (res) setHistories(histories.filter((history) => history.id !== id));
+  };
+
   const historyList = () =>
     histories.map((searchHistory) => (
       <StyledListItem key={searchHistory.id} button>
         <ListItemText primary={searchHistory.keyword} />
-        <StyledDeleteIcon>
-          <FontAwesomeIcon icon={faTimes} size="lg" />
+        <StyledDeleteIcon onClick={() => closeHandler(searchHistory.id!)}>
+          <CloseIcon />
         </StyledDeleteIcon>
       </StyledListItem>
     ));

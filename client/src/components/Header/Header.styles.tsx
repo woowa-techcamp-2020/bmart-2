@@ -22,7 +22,7 @@ const StyledLogoH = styled(Typography)`
 
 const StyledButton = styled(Button)`
   && {
-    min-width: 32px;
+    min-width: 3vw;
   }
 `;
 
