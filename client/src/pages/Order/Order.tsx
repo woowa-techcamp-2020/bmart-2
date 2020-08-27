@@ -3,6 +3,7 @@ import SubTitle from '../../components/SubTitle';
 import OrderList from '../../components/OrderList';
 import { getOrders } from '../../apis/order';
 import ListAltIcon from '@material-ui/icons/ListAlt';
+import { Container } from '@material-ui/core';
 
 const Order = () => {
   const [orders, setOrders] = useState([]);
@@ -21,10 +22,10 @@ const Order = () => {
   };
 
   return (
-    <>
+    <Container maxWidth="md">
       <SubTitle text={'주문 내역'} icon={<ListAltIcon />}></SubTitle>
-      {renderOrderList()}
-    </>
+       {renderOrderList()}
+    </Container>
   );
 };
 

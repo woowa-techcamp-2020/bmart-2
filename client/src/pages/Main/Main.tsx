@@ -7,6 +7,10 @@ import CategoryIcons from '../../components/CategoryIcons';
 import MainProductList from '../../components/MainProductList';
 import { ICategory } from '../../../../types/modelTypes';
 import apis from '../../apis';
+import ProductRecommendList from '../../components/ProductRecommendList';
+import ProductSlideList from '../../components/ProductSlideList';
+
+import { Container } from '@material-ui/core';
 
 interface IPos {
   x: number;
@@ -153,9 +157,13 @@ const Main = () => {
         style={{ transform: transformOption() }}
         ref={transitionContainerRef}
       >
-        <CategoryIcons />
         <Carousel />
-        <SaleNow />
+        <Container maxWidth="md">
+          <CategoryIcons />
+          <SaleNow />
+          <ProductSlideList></ProductSlideList>
+          <ProductRecommendList></ProductRecommendList>
+        </Container>
         {getMainProductList}
       </div>
     </StyledMainWrap>

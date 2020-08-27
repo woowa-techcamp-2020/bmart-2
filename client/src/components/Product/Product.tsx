@@ -28,8 +28,8 @@ const Product = ({ product }: IProductProps) => {
     <>
       {product ? (
         <StyledProduct onClick={productClickHandler}>
-          <ImageWrapper>
-            <img alt={product.name} src={product.thumbImgUrl} />
+          <ImageWrapper url={product.thumbImgUrl}>
+            {/* <img alt={product.name} src={product.thumbImgUrl} /> */}
             {product.discount > 0 ? <div>{product.discount}%</div> : <></>}
             <DibIcon product={product} />
           </ImageWrapper>
@@ -48,7 +48,7 @@ const Product = ({ product }: IProductProps) => {
         </StyledProduct>
       ) : (
         <StyledProduct>
-          <ImageWrapper>
+          <ImageWrapper url="">
             <Skeleton
               variant="rect"
               style={{ width: '100%', height: '100%' }}

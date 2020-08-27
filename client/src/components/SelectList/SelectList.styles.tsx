@@ -19,7 +19,7 @@ export const StyledCountDown = styled(RemoveIcon)`
   height: 32px !important;
   width: 32px !important;
   background: white;
-  color: #dd4470;
+  color: ${(props) => props.theme.colors.main};
   padding: 4px;
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.shadow};
@@ -52,7 +52,7 @@ export const StyledCountUp = styled(AddIcon)`
   height: 32px !important;
   width: 32px !important;
   color: white;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   padding: 4px;
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.shadow};
@@ -263,7 +263,7 @@ export const StyledSelectListButtonWrapper = styled.div`
 export const StyledSelectListButton = styled(ShoppingCartIcon)`
   width: 60px !important;
   height: 100% !important;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   border-radius: 50%;
   transform: translate3d(0, 100px, 0);
   transition: all 0.4s;

@@ -1,32 +1,38 @@
 import styled from 'styled-components';
 import { Grid } from '@material-ui/core';
+import { backgroundUrlImage, TImageUrl } from '../../shared/style.styles';
 
-type TListImage = {
+interface TListImage extends TImageUrl {
   selected: boolean;
-};
+}
+
+export const StyledSaleNowWrapper = styled.div`
+  margin: 6vw 0;
+`;
 
 export const StyledProduct = styled(Grid)`
-  box-shadow: ${(props) => props.theme.shadow};
-  padding: 5px !important;
-  border-radius: 12px;
+  border-radius: ${(props) => props.theme.border.radius};
   background: white;
 ` as typeof Grid;
 
-export const ListImage = styled.img<TListImage>`
-  box-shadow: ${(props) => props.theme.shadow};
-  border-radius: 12px;
-  width: 100%;
-  height: 100%;
+export const ListImage = styled.div<TListImage>`
+  border-radius: ${(props) => props.theme.border.radius};
+  width: 22vw;
+  height: 24vw;
+  ${(props: TImageUrl) => backgroundUrlImage(props.url)};
   box-sizing: border-box;
-  border: ${(props: any) => (props.selected ? 'solid 2px red' : 'none')};
+  border: ${(props: any) =>
+    props.selected
+      ? `solid 0.5vw ${props.theme.colors.main}`
+      : 'solid 0.5vw rgba(0, 0, 0, 0)'};
 `;
 
-export const SelectedImage = styled.img`
-  border-radius: 12px;
-  box-shadow: ${(props) => props.theme.shadow};
-  object-fit: cover;
+export const SelectedImage = styled.div`
+  border-radius: ${(props) => props.theme.border.bigRadius};
+  ${(props: TImageUrl) => backgroundUrlImage(props.url)};
   width: 100%;
-  height: 300px;
+  height: 60vw;
+  position: relative;
 `;
 
 export const SelectedProductWrap = styled.div`
@@ -44,22 +50,21 @@ export const ImageWrapper = styled.div`
 
 export const ProductTitle = styled.div`
   width: 100%;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.default};
   font-weight: 600;
-  margin-bottom: 4px;
+  padding: 2vw;
 `;
 
 export const ProductPrice = styled.div`
   width: 100%;
-  font-size: 20px;
+  font-size: ${(props) => props.theme.font.default};
+  font-weight: 600;
+  padding-left: 2vw;
   color: #777;
 `;
 
 export const SaleText = styled.div`
-  span {
-    margin-left: 5px;
-    color: red;
-  }
+  font-size: ${(props) => props.theme.font.subTitle};
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 4vw;
 `;

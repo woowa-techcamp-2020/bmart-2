@@ -24,7 +24,7 @@ const Cart = () => {
   };
 
   return (
-    <StyledCartWrapper>
+    <StyledCartWrapper maxWidth="md">
       <StyledCartHeader>
         <StyledCartIconWrapper>
           <StyledCartIcon />

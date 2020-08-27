@@ -48,7 +48,6 @@ function App() {
     <>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
-        <Container maxWidth="md">
           <Router history={history}>
             <Header path={path} setPath={setPath} />
             <Switch>
@@ -70,7 +69,6 @@ function App() {
             </Switch>
           </Router>
           <CartButton path={path} setPath={setPath} />
-        </Container>
       </ThemeProvider>
     </>
   );

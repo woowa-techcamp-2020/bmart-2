@@ -80,7 +80,7 @@ export const StyledCountUp = styled(AddIcon)`
   height: 4vh !important;
   width: 4vh !important;
   color: white;
-  background: #dd4470;
+  background: ${(props) => props.theme.colors.main};
   padding: 4px;
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.shadow};
@@ -110,7 +110,7 @@ export const StyledTotalPrice = styled.div`
   flex: 1;
   display: flex;
   align-items: center;
-  color: #dd4470;
+  color: ${(props) => props.theme.colors.main};
 `;
 
 export const StyledCountDown = styled(RemoveIcon)`
@@ -120,7 +120,7 @@ export const StyledCountDown = styled(RemoveIcon)`
   height: 4vh !important;
   width: 4vh !important;
   background: white;
-  color: #dd4470;
+  color: ${(props) => props.theme.colors.main};
   padding: 4px;
   box-sizing: border-box;
   box-shadow: ${(props) => props.theme.shadow};

@@ -7,6 +7,7 @@ import {
   StyledProductListWrap,
   StyledProductTitle,
   StyledTitleWrap,
+  CategoryTitle,
 } from './MainProductList.styles';
 
 import Product from '../Product';
@@ -76,7 +77,10 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
           }}
           data-order={i}
         >
-          <StyledProductTitle>{productsInCategory.name}</StyledProductTitle>
+          <CategoryTitle>
+            <img src={productsInCategory.imgUrl}></img>
+            {productsInCategory.name}
+          </CategoryTitle>
           <StyledSortList container spacing={2}>
             {renderProduct(productsInCategory.Products as IProduct[])}
           </StyledSortList>
@@ -94,7 +98,7 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
         curCategory={curCategory}
         productListRefs={productListRefs}
       />
-      <StyledGridContainer>{productList()}</StyledGridContainer>
+      <StyledGridContainer maxWidth="md">{productList()}</StyledGridContainer>
     </div>
   );
 };

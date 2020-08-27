@@ -10,7 +10,7 @@ export const OrderListWrapper = styled.div`
     height: 1.1rem;
     svg {
       /* width: 2rem; */
-      color: #dd4470;
+      color: ${(props) => props.theme.colors.main};
       height: 1.1rem;
       margin-right: 0.4rem;
     }

@@ -15,6 +15,10 @@ import { useCategoryState } from '../../context/categoryContext';
 import history from '../../history';
 import { ICategory } from '../../../../types/modelTypes';
 
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import { Container } from '@material-ui/core';
 import { login, logout } from '../../apis/auth';
 import { getCookie } from '../../util/common';
 
@@ -22,7 +26,6 @@ const selectedAll = {
   id: 0,
   name: '전체보기',
 };
-
 const Menu = () => {
   const categories = useCategoryState();
   const [selected, setSelected] = useState(0);
@@ -71,7 +74,7 @@ const Menu = () => {
   const name = getCookie('name');
 
   return (
-    <>
+    <Container maxWidth="md">
       <MenuPageButtonWrapper>
         <MenuPageButton onClick={() => pushHistory('order')}>
           <ListAltIcon />
@@ -87,7 +90,7 @@ const Menu = () => {
         </MenuPageButton>
       </MenuPageButtonWrapper>
       <MenuCaegoryWrapper>{renderCategories()}</MenuCaegoryWrapper>
-    </>
+    </Container>
   );
 };
 

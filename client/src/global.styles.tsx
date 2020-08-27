@@ -6,7 +6,12 @@ interface BMartTheme {
     background: string;
   };
   border: {
+    bigRadius: string;
     radius: string;
+  };
+  font: {
+    default: string;
+    subTitle: string;
   };
   shadow: string;
   dropShadow: string;
@@ -19,11 +24,16 @@ declare module 'styled-components' {
 
 const theme: BMartTheme = {
   colors: {
-    main: '#ef5350',
+    main: '#e95157',
     background: '#ffebee',
   },
   border: {
-    radius: '10px',
+    bigRadius: '16px',
+    radius: '12px',
+  },
+  font: {
+    default: '1.05rem',
+    subTitle: '1.2rem',
   },
   shadow: '0px 4px 4px 1px rgba(0, 0, 0, 0.1)',
   dropShadow: '0px 3px 3px rgba(100, 100, 100, 0.25)',
@@ -66,7 +76,6 @@ button {
   font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Helvetica, Arial,
     sans-serif, Apple Color Emoji, Segoe UI Emoji;
   color: #444;
-  font-size: 14px;
 }
 form,
 fieldset {
@@ -91,10 +100,20 @@ html, body , .root{
   height: 100%;
   position: relative;
 }
+html {
+  @media only screen and (max-width: 600px ) {
+    font-size: 15px;
+  }
+  @media screen and (min-width: 600px ) and (max-width: 960px) {
+    font-size: 16px;
+  }
+  @media (min-width: 960px ){
+    font-size: 18px;
+  }
+}
 body{
  /* Disables pull-to-refresh but allows overscroll glow effects. */
  overscroll-behavior-y: none;
-}
-`;
+}`;
 
 export { theme, GlobalStyle };

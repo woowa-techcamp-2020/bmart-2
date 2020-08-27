@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Grid } from '@material-ui/core';
+import { Grid, Container } from '@material-ui/core';
 
 export const StyledTitleWrap = styled.div`
   text-align: center;
@@ -9,7 +9,8 @@ export const StyledTitleWrap = styled.div`
 
 export const StyledMainTitle = styled.div`
   font-weight: bolder;
-  font-size: 20px;
+  font-size: 1.3rem;
+  padding: 2vw;
 `;
 
 export const StyledCategoryListWrap = styled(Grid)`
@@ -25,7 +26,7 @@ export const StyledCategoryListWrap = styled(Grid)`
   }
 `;
 
-export const StyledGridContainer = styled(Grid)`
+export const StyledGridContainer = styled(Container)`
   top: 0;
   > div {
     text-align: center;
@@ -37,12 +38,12 @@ interface IStyledCategoryWrap {
 }
 export const StyledCategoryWrap = styled(Grid)<IStyledCategoryWrap>`
   > div {
-    margin-right: 20px;
+    padding: 1vw;
     border-radius: 20px;
     box-shadow: ${(props) => props.theme.shadow};
     line-height: 30px;
     background-color: ${(props: IStyledCategoryWrap) =>
-      props.selected ? '#FE72A9' : 'white'};
+      props.selected ? '#e95157' : 'white'};
     color: ${(props: IStyledCategoryWrap) =>
       props.selected ? 'white' : 'black'};
     -webkit-tap-highlight-color: transparent;
@@ -65,4 +66,16 @@ export const StyledProductTitle = styled.div`
 
 export const StyledProductListWrap = styled.div`
   margin: 15px 0;
+`;
+
+export const CategoryTitle = styled.div`
+  font-size: ${(props) => props.theme.font.subTitle};
+  font-weight: 600;
+  margin: 1.3rem 0 1rem;
+  display: flex;
+  img {
+    width: ${(props) => props.theme.font.subTitle};
+    height: ${(props) => props.theme.font.subTitle};
+    margin-right: 10px;
+  }
 `;
