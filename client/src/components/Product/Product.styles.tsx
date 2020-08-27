@@ -19,12 +19,12 @@ const ImageWrapper = styled.div`
   ${(props: TImageUrl) => backgroundUrlImage(props.url)};
   div {
     position: absolute;
-    padding: 0.6rem 0.8rem;
+    padding: 0.4rem 0.8rem;
     top: 0.6rem;
     left: 0.6rem;
-    background: ${(props) => props.theme.colors.main};
-    font-weight: bold;
-    color: white;
+    color: ${(props) => props.theme.colors.main};
+    font-weight: 500;
+    background: white;
     font-size: 1rem;
     border-radius: 12px;
   }
