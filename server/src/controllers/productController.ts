@@ -1,6 +1,8 @@
 import { Request, Response, NextFunction } from 'express';
+import { QueryTypes } from 'sequelize';
 import { ProcutService } from '../services';
 import Product from '../models/Product';
+import { sequelize } from '../models';
 
 const create = async (
   req: Request,
@@ -56,4 +58,30 @@ const softDelete = async (
   res.status(200).send({ success: true });
 };
 
-export default { create, findAll, softDelete, find };
+const FIND_LATEST = `SELECT * FROM product WHERE updatedAt ORDER BY updatedAt DESC LIMIT 6;`;
+
+const findLatest = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const result = await sequelize.query(FIND_LATEST, {
+    type: QueryTypes.SELECT,
+  });
+  res.status(200).send({ success: true, result });
+};
+
+const FIND_RANDOM = `SELECT * FROM product WHERE updatedAt ORDER BY rand() DESC LIMIT 6;`;
+
+const findRecommend = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const result = await sequelize.query(FIND_RANDOM, {
+    type: QueryTypes.SELECT,
+  });
+  res.status(200).send({ success: true, result });
+};
+
+export default { create, findAll, softDelete, find, findLatest, findRecommend };
