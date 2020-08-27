@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 
 const StyledAppBar = styled.div`
   width: 100%;
+  background: red;
   height: 62px;
   position: fixed;
   left: 0;
@@ -13,9 +14,14 @@ const StyledAppBar = styled.div`
   z-index: 2;
 `;
 
+const ButtonZone = styled.div`
+  flex: 3;
+`;
+
 const StyledLogoH = styled(Typography)`
   && {
-    flex-grow: 1;
+    /* flex-grow: 1; */
+    flex: 6;
     text-align: center;
   }
 `;
@@ -36,4 +42,11 @@ const StyledInput = styled.input.attrs({
   border-width: 0;
 `;
 
-export { StyledLogoH, StyledInput, StyledToolbar, StyledButton, StyledAppBar };
+export {
+  StyledLogoH,
+  StyledInput,
+  StyledToolbar,
+  StyledButton,
+  StyledAppBar,
+  ButtonZone,
+};

@@ -8,6 +8,7 @@ import {
   StyledToolbar,
   StyledButton,
   StyledAppBar,
+  ButtonZone,
 } from './Header.styles';
 import history from '../../history';
 
@@ -99,9 +100,12 @@ export default function Header({ path, setPath }: IHeaderProps) {
     <div>
       <StyledAppBar>
         <StyledToolbar>
-          <StyledButton color="inherit" onClick={backSpaceHandler}>
-            <ArrowBackIcon />
-          </StyledButton>
+          <ButtonZone>
+            <StyledButton color="inherit" onClick={backSpaceHandler}>
+              <ArrowBackIcon />
+            </StyledButton>
+          </ButtonZone>
+
           {renderByPage()}
         </StyledToolbar>
       </StyledAppBar>
