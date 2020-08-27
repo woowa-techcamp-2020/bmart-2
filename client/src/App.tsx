@@ -23,6 +23,7 @@ import api from './apis';
 import { getDibs } from './apis/dib';
 import SearchResult from './pages/SearchResult';
 import { useDibDispatch } from './context/dibContext';
+import CartButton from './components/CartButton';
 
 function App() {
   const [path, setPath] = useState(history.location.pathname);
@@ -68,6 +69,7 @@ function App() {
               <Route path="/signup" exact component={Signup} />
             </Switch>
           </Router>
+          <CartButton path={path} setPath={setPath} />
         </Container>
       </ThemeProvider>
     </>

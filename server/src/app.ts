@@ -15,6 +15,13 @@ interface Error {
   message?: string;
 }
 startDB();
+const whitelist = [
+  'https://github.com',
+  'http://localhost:3000',
+  'http://localhost:4000',
+];
+
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(
   cors({
@@ -47,5 +54,6 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   res.status(err.status || 500);
   res.send(err.message);
 });
+app.get('*', cors(), (req: Request, res: Response) => res.render('index'));
 
 export default app;
