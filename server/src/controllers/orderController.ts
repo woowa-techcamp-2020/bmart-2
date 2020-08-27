@@ -23,7 +23,7 @@ const create = async (
   next: NextFunction
 ): Promise<void> => {
   const { products } = req.body as IOrder;
-  const order = await Order.create({ userId: 1 });
+  const order = await Order.create({ userId: req.user as number });
   await OrderService.createOrderProductRelation(order.id, products);
   res.status(200).send({ success: true });
 };
@@ -34,7 +34,7 @@ const findByUserId = async (
   next: NextFunction
 ): Promise<void> => {
   const { params } = req;
-  const result = await OrderService.findByUserId(1);
+  const result = await OrderService.findByUserId(req.user as number);
   const orders = result.map((row: any) => {
     const { userId, orderId, lastUpdated, count, ...product } = row;
     return { userId, orderId, lastUpdated, count, product };
