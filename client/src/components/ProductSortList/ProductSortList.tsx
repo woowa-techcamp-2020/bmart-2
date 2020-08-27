@@ -33,14 +33,11 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
     if (!products) {
       products = new Array(12).fill(0);
     }
-    return (
-      products &&
-      filterProduct(products).map((item: IProduct, index) => (
-        <Grid item xs={6} sm={4} key={'sort-list' + index}>
-          <Product product={item} />
-        </Grid>
-      ))
-    );
+    return filterProduct(products).map((item: IProduct, index) => (
+      <Grid item xs={6} sm={4} key={'sort-list' + index}>
+        <Product product={item} />
+      </Grid>
+    ));
   };
 
   const filterProduct = (products: IProduct[]): IProduct[] => {

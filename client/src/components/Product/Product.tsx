@@ -25,9 +25,8 @@ const Product = ({ product }: IProductProps) => {
   const [status, setStatus] = React.useState(false);
 
   React.useEffect(() => {
-    console.log(dibState);
     setStatus(dibState.find((data) => data.id === product.id) !== undefined);
-  }, [dibState]);
+  }, [dibState, product]);
   const clickDibIcon = async (
     e: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
@@ -82,7 +81,7 @@ const Product = ({ product }: IProductProps) => {
             {numberToString(
               Math.floor((product.price * (100 - product.discount)) / 100)
             )}
-            원 {status ? 'asdf' : 'qwer'}
+            원 {product.id}
           </ProductPrice>
         </StyledProduct>
       ) : (
