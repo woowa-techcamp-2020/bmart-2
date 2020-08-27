@@ -12,7 +12,6 @@ const create = async (
   next: NextFunction
 ): Promise<void> => {
   const dib = await Dib.create(req.body);
-  console.log(req.body);
   res.status(200).send(dib);
 };
 
@@ -36,9 +35,9 @@ const find = async (
   const userId = parseInt(params.userId, 10);
   const result = await DibService.findDibIncludeProductByUserId(userId);
   const dibs = result.map((row) => {
-    const { Dibs, ...product } = row.dataValues;
-    const dib = Dibs[0].dataValues;
-    return { ...dib, product };
+    // eslint-disable-next-line no-shadow
+    const { userId, ...product } = row;
+    return { userId, product };
   });
   res.status(200).send(dibs);
 };

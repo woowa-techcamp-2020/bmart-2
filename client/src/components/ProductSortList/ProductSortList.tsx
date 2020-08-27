@@ -33,11 +33,14 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
     if (!products) {
       products = new Array(12).fill(0);
     }
-    return filterProduct(products).map((item: IProduct, index) => (
-      <Grid item xs={6} sm={4} key={'sort-list' + index}>
-        <Product product={item} />
-      </Grid>
-    ));
+    return (
+      products &&
+      filterProduct(products).map((item: IProduct, index) => (
+        <Grid item xs={6} sm={4} key={'sort-list' + index}>
+          <Product product={item} />
+        </Grid>
+      ))
+    );
   };
 
   const filterProduct = (products: IProduct[]): IProduct[] => {
@@ -58,7 +61,7 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
         // 할인율
         return products.sort((a, b) => b.discount - a.discount);
       default:
-        return products;
+        return products.sort((a, b) => a.id - b.id);
     }
   };
 
