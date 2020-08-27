@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
 /* eslint-disable no-shadow */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-call */
@@ -38,7 +39,12 @@ const findByUserId = async (
     const { userId, orderId, lastUpdated, count, ...product } = row;
     return { userId, orderId, lastUpdated, count, product };
   });
-  res.status(200).send({ success: true, orders });
+  const groupByOrders = orders.reduce(function (acc: any, cur: any) {
+    acc[cur.orderId] = acc[cur.orderId] || [];
+    acc[cur.orderId].push(cur);
+    return acc;
+  }, Object.create(null));
+  res.status(200).send({ success: true, orders: Object.values(groupByOrders) });
 };
 
 export default { create, findByUserId };

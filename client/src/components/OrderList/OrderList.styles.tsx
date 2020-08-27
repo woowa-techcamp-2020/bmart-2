@@ -17,6 +17,18 @@ export const OrderListWrapper = styled.div`
   }
 `;
 
+export const StyledSummaryInfo = styled.div`
+  font-weight: bold;
+  margin-top: 1vh;
+  display: flex;
+  font-size: 1.1rem;
+  h4 {
+    display: inline-block;
+    flex: 1;
+    font-size: 1.1rem;
+  }
+`;
+
 export const OrderProduct = styled.div`
   display: flex;
   margin: 1rem 0 0;
@@ -28,6 +40,10 @@ export const OrderProduct = styled.div`
   div {
     padding-left: 0.4rem;
     font-size: 1.1rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+
     span {
       font-size: 1.1rem;
       line-height: 2rem;

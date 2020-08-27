@@ -1,6 +1,7 @@
 import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 import { IProduct } from '../../../types/modelTypes';
 import * as api from '../apis/cart';
+import { createOrder } from '../apis/order';
 
 export interface ICartInContext {
   userId: number;
@@ -81,4 +82,11 @@ export async function createCart(
 export async function removeCart(dispatch: any, productId: number) {
   await api.removeCart(productId);
   await getCarts(dispatch);
+}
+
+export async function order(carts: TCartState) {
+  const products = carts.map((cart) => {
+    return { count: cart.count, id: cart.product.id };
+  });
+  const response = await createOrder({ products });
 }
