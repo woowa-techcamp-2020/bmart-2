@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { text } from '@fortawesome/fontawesome-svg-core';
 import {
   StyledPullContainer,
   StyledPullText,
@@ -66,14 +67,17 @@ const getRandomIdx = () => {
 const shuffle = (array: IData[]) => {
   array.sort(() => Math.random() - 0.5);
 };
-
+let textIdx = getRandomIdx();
 const Pull = ({ boxHeight, isPulling }: IPull) => {
   const [imgTopHeight, setImgTopHeight] = useState(defaultTopHeight);
   const isPullingFinished = boxHeight === minBoxSize && !isPulling;
   const pullContainerRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    if (boxHeight === 0) isBeforeEnd = false;
+    if (boxHeight === 0) {
+      isBeforeEnd = false;
+      textIdx = getRandomIdx();
+      shuffle(datas);
+    }
     if (isFinishingState || isBeforeEnd) return;
     if (isPullingFinished) {
       isFinishingState = true;
@@ -88,7 +92,6 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
               dataIdx = -1;
               setImgTopHeight(0);
               isFinishingState = false;
-              shuffle(datas);
               return;
             }
             setImgTopHeight(((maxTime - time) % range) - rangeHalf);
@@ -129,9 +132,7 @@ const Pull = ({ boxHeight, isPulling }: IPull) => {
       <StyledSlotsWrap
         style={{ top: `${imgTopHeight}px`, opacity: slotsOpacity }}
       >
-        {dataIdx === -1
-          ? `${datas[getRandomIdx()].text}`
-          : datas[dataIdx].emoji}
+        {dataIdx === -1 ? `${datas[textIdx].text}` : datas[dataIdx].emoji}
       </StyledSlotsWrap>
       <StyledPullText>땡겨요</StyledPullText>
     </StyledPullContainer>

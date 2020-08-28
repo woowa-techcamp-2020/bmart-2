@@ -14,7 +14,6 @@ import Product from '../Product';
 import { ICategory, IProduct } from '../../../../types/modelTypes';
 import { StyledSortList } from '../ProductSortList/ProductSortList.styles';
 import CategoryList from './CategoryList';
-import history from '../../history';
 
 interface IMainProductList {
   productsInCategories: ICategory[];
@@ -27,7 +26,7 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
 
   const observer = useMemo(() => {
     const options = {
-      threshold: 0.6,
+      threshold: 0.55,
     };
     const observerHandler = (entries: IntersectionObserverEntry[]) => {
       let curProductList = null;
@@ -44,23 +43,10 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
     productListRefs.current.map((productList) => observer.observe(productList));
   }, [productsInCategories.length, observer]);
 
-  const productClickHandler = (product: IProduct) => {
-    history.push({
-      pathname: '/detail',
-      state: { product },
-    });
-  };
-
   const renderProduct = (products: IProduct[]) => {
     return products.map((product) => {
       return (
-        <Grid
-          item
-          xs={6}
-          sm={4}
-          key={product.id}
-          onClick={() => productClickHandler(product)}
-        >
+        <Grid item xs={6} sm={4} key={product.id}>
           <Product product={product} />
         </Grid>
       );
@@ -78,7 +64,7 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
           data-order={i}
         >
           <CategoryTitle>
-            <img src={productsInCategory.imgUrl}></img>
+            <img src={productsInCategory.imgUrl} />
             {productsInCategory.name}
           </CategoryTitle>
           <StyledSortList container spacing={2}>
