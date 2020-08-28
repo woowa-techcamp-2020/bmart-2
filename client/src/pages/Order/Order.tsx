@@ -16,15 +16,17 @@ const Order = () => {
   }, []);
 
   const renderOrderList = () => {
-    return orders.map((order, i) => {
-      return <OrderList order={order} key={'orderList' + i} />;
-    });
+    return orders
+      .map((order, i) => {
+        return <OrderList order={order} key={'orderList' + i} />;
+      })
+      .reverse();
   };
 
   return (
     <Container maxWidth="md">
       <SubTitle text={'주문 내역'} icon={<ListAltIcon />}></SubTitle>
-       {renderOrderList()}
+      {renderOrderList()}
     </Container>
   );
 };

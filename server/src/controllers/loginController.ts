@@ -33,7 +33,7 @@ const githubCallback = async (
         data: newUser,
       },
       process.env.JWT_SECRET!,
-      { expiresIn: 60 }
+      { expiresIn: '2h' }
     );
     console.log(token);
     res.cookie('name', newUser.name);
