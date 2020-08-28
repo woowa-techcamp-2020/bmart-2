@@ -7,10 +7,10 @@ export const StyledCartButton = styled.button`
   border-radius: 3vh;
   background: ${(props) => props.theme.colors.main};
   bottom: 1vh;
-  height: 8vh;
   color: white;
+  font-size: 1.1rem;
   font-weight: 700;
-  line-height: 48px;
+  line-height: 6vh;
   text-align: center;
 `;
 
@@ -60,4 +60,28 @@ export const StyledCartIcon = styled(ShoppingCartIcon)`
   height: 3vh !important;
   width: 3vh !important;
   color: white;
+`;
+
+export const CartTitle = styled.div`
+  display: flex;
+  padding: 16px 0 0;
+  height: 8vw;
+  span {
+    line-height: 8vw;
+    margin-left: 1rem;
+    font-size: 1.2rem;
+  }
+`;
+
+export const IconWrapper = styled.div`
+  width: 8vw;
+  height: 100%;
+  background: ${(props) => props.theme.colors.main};
+  border-radius: 20px;
+  svg {
+    margin: 15%;
+    width: 70%;
+    height: 70%;
+    color: white;
+  }
 `;

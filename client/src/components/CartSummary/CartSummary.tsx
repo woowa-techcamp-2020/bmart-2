@@ -16,11 +16,11 @@ export default function CartSummary({ totalPrice }: CartSummary) {
       <StyledSummaryContent>
         <StyledSummaryInfo>
           <h4>총 주문 금액</h4>
-          <span>{numberToString(totalPrice)}</span>
+          <span>{numberToString(totalPrice)} 원</span>
         </StyledSummaryInfo>
         <StyledSummaryInfo>
           <h4>배달 팁</h4>
-          <span>0</span>
+          <span>0 원</span>
         </StyledSummaryInfo>
       </StyledSummaryContent>
     </StyledSummaryWrapper>
