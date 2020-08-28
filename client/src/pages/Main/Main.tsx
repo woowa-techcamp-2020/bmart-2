@@ -169,9 +169,8 @@ const Main = () => {
         <Carousel />
         <Container maxWidth="md">
           <CategoryIcons />
-          <SaleNow />
-          <ProductSlideList />
-          <ProductRecommendList />
+          <ProductSlideList></ProductSlideList>
+          <ProductRecommendList></ProductRecommendList>
         </Container>
         {getMainProductList}
       </div>
