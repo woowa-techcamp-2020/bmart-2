@@ -6,6 +6,8 @@ import {
   StyledListTitle,
   StyledListTitleWrapper,
   SortIcon,
+  StyledEmptyImg,
+  StyledEmptyImgWrap,
 } from './ProductSortList.styles';
 import Product from '../Product';
 
@@ -71,7 +73,13 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
           </StyledListTitle>
         </StyledListTitleWrapper>
         <StyledSortList container spacing={3}>
-          {renderProduct()}
+          {products === null || products.length > 0 ? (
+            renderProduct()
+          ) : (
+            <StyledEmptyImgWrap>
+              <StyledEmptyImg src="./images/empty.png" alt="empty" />
+            </StyledEmptyImgWrap>
+          )}
         </StyledSortList>
       </StyledListWrapper>
       <SelectSortList
