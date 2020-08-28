@@ -20,7 +20,12 @@ const SearchInput = ({ setKeyword, keyword, setPath }: ISearchInputProps) => {
   const onChangeHandler = (
     event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
   ) => {
-    setKeyword(event.target.value);
+    const limit = 20;
+    if (event.target.value.length > limit) {
+      alert('20자 이내로 입력해주세요');
+    } else {
+      setKeyword(event.target.value);
+    }
   };
 
   const createSearchHistoryUsingKeyword = () => {
