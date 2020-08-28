@@ -160,7 +160,7 @@ const Main = () => {
         <Carousel />
         <Container maxWidth="md">
           <CategoryIcons />
-          <SaleNow />
+          {/* <SaleNow /> */}
           <ProductSlideList></ProductSlideList>
           <ProductRecommendList></ProductRecommendList>
         </Container>
