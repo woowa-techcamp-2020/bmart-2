@@ -10,7 +10,7 @@ const create = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const cart = await Cart.create(req.body);
+  const cart = await Cart.create({ ...req.body, userId: req.user as number });
   res.status(200).send(cart);
 };
 
@@ -21,7 +21,18 @@ const remove = async (
 ): Promise<void> => {
   const { params } = req;
   const productId = parseInt(params.productId, 10);
-  await Cart.destroy({ where: { productId } });
+  const userId = req.user as number;
+  await Cart.destroy({ where: { productId, userId } });
+  res.status(200).send({ success: true });
+};
+
+const removeByUser = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const userId = req.user as number;
+  await Cart.destroy({ where: { userId } });
   res.status(200).send({ success: true });
 };
 
@@ -30,15 +41,30 @@ const find = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const { params } = req;
-  const userId = parseInt(params.userId, 10);
-  const result = await CartService.findCartIncludeProductByUserId(userId);
+  const result = await CartService.findCartIncludeProductByUserId(
+    req.user as number
+  );
   const carts = result.map((row) => {
     // eslint-disable-next-line no-shadow
     const { userId, count, ...product } = row;
     return { userId, count, product };
   });
-  res.status(200).send(carts);
+  res.status(200).send({ success: true, carts });
+};
+
+const isExist = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void> => {
+  const { productId } = req.params;
+  console.log(productId);
+  console.log(req.user);
+  const cart = await CartService.isExist(
+    req.user as number,
+    parseInt(productId, 10)
+  );
+  res.status(200).send({ success: true, cart });
 };
 
 const update = async (
@@ -46,9 +72,10 @@ const update = async (
   res: Response,
   next: NextFunction
 ): Promise<void> => {
-  const { userId, productId, count } = req.body;
+  const { productId, count } = req.body;
+  const userId = req.user as number;
   await Cart.update({ count }, { where: { userId, productId } });
   res.status(200).send({ success: true });
 };
 
-export default { create, remove, find, update };
+export default { create, remove, find, update, removeByUser, isExist };

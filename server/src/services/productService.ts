@@ -47,7 +47,6 @@ const findProductByCategory = async ({
   const category: ICategory = productsByCategory[0];
   const products: IProduct[] = [];
   category.SubCategories?.map((subcategory) => {
-    console.log(subcategory.Products);
     subcategory.Products?.map((product) => {
       products.push(product);
     });

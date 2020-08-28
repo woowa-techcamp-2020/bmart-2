@@ -29,3 +29,16 @@ export const StyledSortList = styled(Grid)`
 export const SortIcon = styled(Sort)`
   font-size: 1rem !important;
 `;
+
+export const StyledEmptyImg = styled.img`
+  height: 200px;
+  width: 200px;
+  padding-top: 100px;
+`;
+
+export const StyledEmptyImgWrap = styled.div`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  margin: 0 auto;
+`;

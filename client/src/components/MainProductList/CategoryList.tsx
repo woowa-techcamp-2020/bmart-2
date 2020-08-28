@@ -3,6 +3,7 @@ import { useCategoryState } from '../../context/categoryContext';
 import {
   StyledCategoryListWrap,
   StyledCategoryWrap,
+  StyledStickyWrap,
 } from './MainProductList.styles';
 import { StyledSlideList } from '../ProductSlideList/ProductSlideList.styles';
 
@@ -12,29 +13,10 @@ interface ICategoryListProps {
 }
 
 const CategoryList = ({ curCategory, productListRefs }: ICategoryListProps) => {
-  const [isTop, setIsTop] = useState(false);
-
   const categories = useCategoryState();
   const categoryListWrapRef = useRef<HTMLDivElement>(null);
   const curCategoryRef = useRef<HTMLDivElement>(null);
   const categorySlideListRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const headerHeight = 60;
-    if (categories.length === 0) return () => null;
-    const basePos = categoryListWrapRef.current!.offsetTop;
-    const handleScroll = () => {
-      if (window.pageYOffset > basePos - headerHeight) {
-        setIsTop(true);
-      } else {
-        setIsTop(false);
-      }
-    };
-    window.addEventListener('scroll', handleScroll, false);
-    return () => {
-      window.removeEventListener('scroll', handleScroll, false);
-    };
-  }, [categories.length]);
 
   useEffect(() => {
     const widthOfScroll = 100;
@@ -76,19 +58,18 @@ const CategoryList = ({ curCategory, productListRefs }: ICategoryListProps) => {
     });
 
   return (
-    <StyledCategoryListWrap
-      style={{ position: isTop ? 'fixed' : 'static' }}
-      ref={categoryListWrapRef}
-    >
-      <StyledSlideList
-        container
-        spacing={1}
-        wrap="nowrap"
-        ref={categorySlideListRef}
-      >
-        {categoryList()}
-      </StyledSlideList>
-    </StyledCategoryListWrap>
+    <StyledStickyWrap>
+      <StyledCategoryListWrap ref={categoryListWrapRef}>
+        <StyledSlideList
+          container
+          spacing={1}
+          wrap="nowrap"
+          ref={categorySlideListRef}
+        >
+          {categoryList()}
+        </StyledSlideList>
+      </StyledCategoryListWrap>
+    </StyledStickyWrap>
   );
 };
 

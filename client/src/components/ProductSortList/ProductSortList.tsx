@@ -1,14 +1,16 @@
 import * as React from 'react';
+import { Grid } from '@material-ui/core';
 import {
   StyledListWrapper,
   StyledSortList,
   StyledListTitle,
   StyledListTitleWrapper,
   SortIcon,
+  StyledEmptyImg,
+  StyledEmptyImgWrap,
 } from './ProductSortList.styles';
 import Product from '../Product';
 
-import { Grid } from '@material-ui/core';
 import { IProduct } from '../../../../types/modelTypes';
 import SelectSortList from '../../components/SelectSortList';
 
@@ -34,7 +36,7 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
       products = new Array(12).fill(0);
     }
     return filterProduct(products).map((item: IProduct, index) => (
-      <Grid item xs={6} sm={4} key={'sort-list' + index}>
+      <Grid item xs={6} sm={4} key={`sort-list${index}`}>
         <Product product={item} />
       </Grid>
     ));
@@ -58,7 +60,7 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
         // 할인율
         return products.sort((a, b) => b.discount - a.discount);
       default:
-        return products.sort((a, b) => a.id - b.id);
+        return products;
     }
   };
 
@@ -71,7 +73,13 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
           </StyledListTitle>
         </StyledListTitleWrapper>
         <StyledSortList container spacing={3}>
-          {renderProduct()}
+          {products === null || products.length > 0 ? (
+            renderProduct()
+          ) : (
+            <StyledEmptyImgWrap>
+              <StyledEmptyImg src="./images/empty.png" alt="empty" />
+            </StyledEmptyImgWrap>
+          )}
         </StyledSortList>
       </StyledListWrapper>
       <SelectSortList
@@ -80,7 +88,7 @@ const ProductSortList = ({ products }: IProudctSortListProps) => {
         selected={selected}
         setSelected={setSelected}
         sortType={sortType}
-      ></SelectSortList>
+      />
     </>
   );
 };

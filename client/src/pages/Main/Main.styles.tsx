@@ -5,6 +5,4 @@ export const StyledMainWrap = styled.div<{
   transitionTime: number;
 }>`
   transition: all ${(props) => `${props.transitionTime}`}ms linear;
-  overflow-y: hidden;
-  overflow-x: hidden;
 `;

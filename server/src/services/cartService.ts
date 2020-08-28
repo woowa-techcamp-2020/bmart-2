@@ -14,4 +14,15 @@ const findCartIncludeProductByUserId = async (
   return result;
 };
 
-export default { findCartIncludeProductByUserId };
+const isExist = async (userId: number, productId: number): Promise<any[]> => {
+  const result = await sequelize.query(
+    'select * from cart where userid = :userId and productId = :productId;',
+    {
+      replacements: { userId, productId },
+      type: QueryTypes.SELECT,
+    }
+  );
+  return result;
+};
+
+export default { findCartIncludeProductByUserId, isExist };

@@ -13,14 +13,31 @@ export const StyledMainTitle = styled.div`
   padding: 2vw;
 `;
 
+export const StyledStickyWrap = styled.div`
+  position: sticky;
+  position: -webkit-sticky;
+  top: 55px;
+  z-index: 5;
+  @media only all and (max-width: 600px) {
+    padding-left: 16px;
+  }
+  @media only all and (min-width: 600px) {
+    padding-left: 24px;
+  }
+`;
+
 export const StyledCategoryListWrap = styled(Grid)`
   margin: 10px 0;
   background-color: #ffffff;
   z-index: 2;
   width: 100%;
   height: 40px;
-  top: 40px;
+  top: 20px;
   padding-top: 10px;
+  position: sticky;
+  position: -webkit-sticky;
+  padding-bottom: 10px;
+
   > div {
     text-align: center;
   }
@@ -39,6 +56,7 @@ interface IStyledCategoryWrap {
 export const StyledCategoryWrap = styled(Grid)<IStyledCategoryWrap>`
   > div {
     padding: 1vw;
+    margin-right: 2vw;
     border-radius: 20px;
     box-shadow: ${(props) => props.theme.shadow};
     line-height: 30px;

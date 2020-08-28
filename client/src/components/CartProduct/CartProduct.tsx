@@ -53,19 +53,26 @@ export default function CartProduct({ product, count }: CarProductProps) {
           </StyledProductInfoWrapper>
           <StyledProductPurchaseWrapper>
             <StyledTotalPrice>
-              <span>{numberToString(product.price * count)}원</span>
+              <span>
+                {product.discount > 0
+                  ? numberToString(
+                      (product.price * count * product.discount) / 100
+                    )
+                  : numberToString(product.price * count)}
+                원
+              </span>
             </StyledTotalPrice>
             <StyledProductCountWrapper>
               <StyledCountUp
                 onPointerUp={() => {
-                  updateCart(cartDispatch, 1, product.id, count + 1);
+                  updateCart(cartDispatch, product.id, count + 1);
                 }}
                 count={count}
               />
               <StyledCountText>{count}</StyledCountText>
               <StyledCountDown
                 onPointerUp={() => {
-                  updateCart(cartDispatch, 1, product.id, count - 1);
+                  updateCart(cartDispatch, product.id, count - 1);
                 }}
                 count={count}
               />
