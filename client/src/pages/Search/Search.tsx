@@ -3,13 +3,19 @@ import { useState } from 'react';
 import SearchInput from '../../components/SearchInput';
 import { StyledSearchWrap } from './Search.styles';
 import SearchHistory from '../../components/SearchHistory';
+import { usePageDispatch } from '../../context/pageContext';
+import history from '../../history';
 
-interface ISearchProps {
-  setPath: React.Dispatch<React.SetStateAction<string>>;
-}
-
-const Search = ({ setPath }: ISearchProps) => {
+const Search = () => {
   const [keyword, setKeyword] = useState('');
+  const pageDispatch = usePageDispatch();
+
+  const setPath = () => {
+    pageDispatch!({
+      type: 'PATHNAME_CHANGE',
+      pathname: history.location.pathname,
+    });
+  };
   return (
     <StyledSearchWrap>
       <SearchInput

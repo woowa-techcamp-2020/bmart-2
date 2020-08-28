@@ -20,8 +20,8 @@ const ButtonZone = styled.div`
 
 const StyledLogoH = styled(Typography)`
   && {
-    /* flex-grow: 1; */
     flex: 6;
+    font-size: 1.3rem !important;
     text-align: center;
   }
 `;
@@ -29,6 +29,7 @@ const StyledLogoH = styled(Typography)`
 const StyledButton = styled(Button)`
   && {
     min-width: 3vw;
+    font-size: 1.3rem;
   }
 `;
 

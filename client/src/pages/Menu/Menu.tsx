@@ -37,6 +37,10 @@ const Menu = () => {
       pathname: `/${pathname}`,
       state: { category, subCategoryId },
     });
+    pageDispatch!({
+      type: 'PATHNAME_CHANGE',
+      pathname: history.location.pathname,
+    });
   };
 
   const renderSubCategories = (category: ICategory) => {

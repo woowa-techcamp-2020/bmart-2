@@ -11,35 +11,45 @@ import {
   ButtonZone,
 } from './Header.styles';
 import history from '../../history';
-
+import { usePageDispatch, usePageState } from '../../context/pageContext';
 const title = 'B mart';
 
-interface IHeaderProps {
-  path: string;
-  setPath: React.Dispatch<React.SetStateAction<string>>;
-}
+export default function Header() {
+  const pageDispatch = usePageDispatch();
+  const pageState = usePageState();
 
-export default function Header({ path, setPath }: IHeaderProps) {
   const searchHandler = () => {
     history.push('/search');
-    setPath(history.location.pathname);
+    pageDispatch!({
+      type: 'PATHNAME_CHANGE',
+      pathname: history.location.pathname,
+    });
   };
 
   useEffect(() => {
     const setPathHandler = () => {
-      setPath(history.location.pathname);
+      pageDispatch!({
+        type: 'PATHNAME_CHANGE',
+        pathname: history.location.pathname,
+      });
     };
     window.onpopstate = setPathHandler;
-  }, []);
+  }, [pageState]);
 
   const menuHandler = () => {
     history.push('/menu');
-    setPath(history.location.pathname);
+    pageDispatch!({
+      type: 'PATHNAME_CHANGE',
+      pathname: history.location.pathname,
+    });
   };
 
   const mainHandler = () => {
     history.push('/');
-    setPath(history.location.pathname);
+    pageDispatch!({
+      type: 'PATHNAME_CHANGE',
+      pathname: history.location.pathname,
+    });
   };
 
   const menuPageButton = () => {
@@ -84,12 +94,13 @@ export default function Header({ path, setPath }: IHeaderProps) {
         <StyledLogoH variant="h6" onClick={mainHandler}>
           {title}
         </StyledLogoH>
+        <ButtonZone />
       </>
     );
   };
 
   const renderByPage = () => {
-    switch (path) {
+    switch (pageState.pathname) {
       case '/':
         return renderInMainPage();
       case '/category':
@@ -105,12 +116,15 @@ export default function Header({ path, setPath }: IHeaderProps) {
 
   const backSpaceHandler = () => {
     history.goBack();
-    setPath(history.location.pathname);
+    pageDispatch!({
+      type: 'PATHNAME_CHANGE',
+      pathname: history.location.pathname,
+    });
   };
 
   const renderBackSpace = () => {
     return (
-      path !== '/' && (
+      history.location.pathname !== '/' && (
         <StyledButton color="inherit" onClick={backSpaceHandler}>
           <ArrowBackIcon />
         </StyledButton>

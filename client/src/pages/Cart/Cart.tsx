@@ -14,9 +14,11 @@ import {
   StyledCartWrapper,
   StyledCartButtonWrapper,
   StyledCartIcon,
-  StyledCartIconWrapper,
+  CartTitle,
+  IconWrapper,
   StyledCartHeader,
 } from './Cart.styles';
+import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 
 const Cart = () => {
   const carts: ICartInContext[] = useCartState();
@@ -34,12 +36,12 @@ const Cart = () => {
   return (
     <StyledCartWrapper maxWidth="md">
       <StyledCartHeader>
-        <StyledCartIconWrapper>
-          <StyledCartIcon />
-        </StyledCartIconWrapper>
-        <div>
-          <h2>장바구니</h2>
-        </div>
+        <CartTitle>
+          <IconWrapper>
+            <ShoppingCartIcon />
+          </IconWrapper>
+          <span>장바구니</span>
+        </CartTitle>
       </StyledCartHeader>
       <CartProductList carts={carts} />
       <CartSummary totalPrice={getTotalPrice()} />

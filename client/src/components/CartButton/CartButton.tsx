@@ -3,23 +3,24 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { StyledFab, StyledCount } from './CartButton.styles';
 import { useCartState, ICartInContext } from '../../context/cartContext';
 import history from '../../history';
+import { usePageDispatch, usePageState } from '../../context/pageContext';
 
-interface IHeaderProps {
-  path: string;
-  setPath: React.Dispatch<React.SetStateAction<string>>;
-}
-
-export default function CartButton({ path, setPath }: IHeaderProps) {
+export default function CartButton() {
   const carts: ICartInContext[] = useCartState();
+  const pageDispatch = usePageDispatch();
+  const pageState = usePageState();
 
-  return ['/', '/category'].includes(path) ? (
+  return ['/', '/category'].includes(pageState.pathname) ? (
     <StyledFab
       color="secondary"
       aria-label="edit"
       onPointerUp={(e) => {
         e.stopPropagation();
         history.push('/cart');
-        setPath(history.location.pathname);
+        pageDispatch!({
+          type: 'PATHNAME_CHANGE',
+          pathname: history.location.pathname,
+        });
       }}
     >
       <ShoppingCartIcon color="inherit" />
