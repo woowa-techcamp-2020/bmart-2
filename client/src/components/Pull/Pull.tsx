@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { text } from '@fortawesome/fontawesome-svg-core';
 import {
   StyledPullContainer,
   StyledPullText,
