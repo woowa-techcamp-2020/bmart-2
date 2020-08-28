@@ -9,6 +9,7 @@ import Product from '../Product';
 import { Grid } from '@material-ui/core';
 import { getLatestProducts } from '../../apis/product';
 import { IProduct } from '../../../../types/modelTypes';
+import { isLogin, getCookie } from '../../util/common';
 
 const ProductSlideList = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
@@ -38,9 +39,13 @@ const ProductSlideList = () => {
       ))
     );
   };
+
+  const checkUser = () => {
+    return isLogin() ? getCookie('name') : '손';
+  };
   return (
     <StyledSlideListWrapper>
-      <StyledListTitle>이수정님을 위한 최신 상품</StyledListTitle>
+      <StyledListTitle>{checkUser()}님을 위한 최신 상품</StyledListTitle>
       <StyledSlideList container spacing={2} wrap={'nowrap'}>
         {renderProduct()}
       </StyledSlideList>
