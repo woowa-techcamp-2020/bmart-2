@@ -11,17 +11,22 @@ import { IProduct } from '../../../../types/modelTypes';
 import { numberToString } from '../../util/common';
 import history from '../../history';
 import DibIcon from '../DibIcon';
-
+import { usePageDispatch } from '../../context/pageContext';
 interface IProductProps {
   product: IProduct;
   size?: string;
 }
 
 const Product = ({ product, size }: IProductProps) => {
+  const pageDispatch = usePageDispatch();
   const productClickHandler = () => {
     history.push({
       pathname: '/detail',
       state: { product },
+    });
+    pageDispatch!({
+      type: 'PATHNAME_CHANGE',
+      pathname: history.location.pathname,
     });
   };
 

@@ -44,23 +44,10 @@ const MainProductList = ({ productsInCategories }: IMainProductList) => {
     productListRefs.current.map((productList) => observer.observe(productList));
   }, [productsInCategories.length, observer]);
 
-  const productClickHandler = (product: IProduct) => {
-    history.push({
-      pathname: '/detail',
-      state: { product },
-    });
-  };
-
   const renderProduct = (products: IProduct[]) => {
     return products.map((product) => {
       return (
-        <Grid
-          item
-          xs={6}
-          sm={4}
-          key={product.id}
-          onClick={() => productClickHandler(product)}
-        >
+        <Grid item xs={6} sm={4} key={product.id}>
           <Product product={product} />
         </Grid>
       );

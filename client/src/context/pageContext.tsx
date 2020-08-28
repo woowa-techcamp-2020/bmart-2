@@ -3,13 +3,17 @@ import React, { createContext, Dispatch, useContext, useReducer } from 'react';
 export interface IPageInContext {
   onNotification: boolean;
   message: string;
+  pathname: string;
 }
 
 export type TPageState = IPageInContext;
 
 const PageStateContext = createContext<TPageState | undefined>(undefined);
 
-type TAction = { type: 'NOTI_OPEN'; message: string } | { type: 'NOTI_CLOSE' };
+type TAction =
+  | { type: 'NOTI_OPEN'; message: string }
+  | { type: 'NOTI_CLOSE' }
+  | { type: 'PATHNAME_CHANGE'; pathname: string };
 
 type TPageDispatch = Dispatch<TAction>;
 const PageDispatchContext = createContext<TPageDispatch | undefined>(undefined);
@@ -17,9 +21,23 @@ const PageDispatchContext = createContext<TPageDispatch | undefined>(undefined);
 function pageReducer(state: TPageState, action: TAction): TPageState {
   switch (action.type) {
     case 'NOTI_OPEN':
-      return { onNotification: true, message: action.message };
+      return {
+        ...state,
+        onNotification: true,
+        message: action.message,
+      };
+    // return { onNotification: true, message: action.message };
     case 'NOTI_CLOSE':
-      return { onNotification: false, message: '' };
+      return {
+        ...state,
+        onNotification: false,
+        message: '',
+      };
+    case 'PATHNAME_CHANGE':
+      return {
+        ...state,
+        pathname: action.pathname,
+      };
     default:
       throw new Error('Unhandled action');
   }
@@ -33,6 +51,7 @@ export function PageContextProvider({
   const [page, dispatch] = useReducer(pageReducer, {
     onNotification: false,
     message: '',
+    pathname: '/',
   });
 
   return (
