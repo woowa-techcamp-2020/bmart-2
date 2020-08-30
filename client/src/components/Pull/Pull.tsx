@@ -6,7 +6,7 @@ import {
 } from './Pull.styles';
 import { StyledMainWrap } from '../../pages/Main/Main.styles';
 
-interface IPull {
+interface IPullProps {
   boxHeight: number;
   isPulling: boolean;
 }
@@ -67,7 +67,7 @@ const shuffle = (array: IData[]) => {
   array.sort(() => Math.random() - 0.5);
 };
 let textIdx = getRandomIdx();
-const Pull = ({ boxHeight, isPulling }: IPull) => {
+const Pull = ({ boxHeight, isPulling }: IPullProps) => {
   const [imgTopHeight, setImgTopHeight] = useState(defaultTopHeight);
   const isPullingFinished = boxHeight === minBoxSize && !isPulling;
   const pullContainerRef = useRef<HTMLDivElement>(null);
