@@ -20,7 +20,7 @@ interface CarouselProps {
   banners: Array<bannerInfo>;
 }
 
-export default function Carousel({ banners }: CarouselProps) {
+const Carousel = ({ banners }: CarouselProps) => {
   const carouselRef = useRef<HTMLDivElement>(null);
   const intervalId = useRef(0);
   const [index, setIndex] = useState(0);
@@ -192,3 +192,5 @@ Carousel.defaultProps = {
     },
   ],
 } as Partial<CarouselProps>;
+
+export default Carousel;

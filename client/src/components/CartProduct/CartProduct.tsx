@@ -27,7 +27,7 @@ interface CarProductProps {
   count: number;
 }
 
-export default function CartProduct({ product, count }: CarProductProps) {
+const CartProduct = ({ product, count }: CarProductProps) => {
   const cartDispatch = useCartDispatch();
   const pageDispatch = usePageDispatch();
   return (
@@ -103,3 +103,5 @@ CartProduct.defaultProps = {
     updatedAt: null,
   },
 } as Partial<CarProductProps>;
+
+export default CartProduct;

@@ -13,7 +13,7 @@ type TDibDispatch = Dispatch<TAction>;
 const DibStateContext = createContext<TDibState | undefined>(undefined);
 const DibDispatchContext = createContext<TDibDispatch | undefined>(undefined);
 
-function dibReducer(state: TDibState, action: TAction): TDibState {
+const dibReducer = (state: TDibState, action: TAction): TDibState => {
   switch (action.type) {
     case 'INIT':
       return action.products;
@@ -26,11 +26,11 @@ function dibReducer(state: TDibState, action: TAction): TDibState {
   }
 }
 
-export function DibContextProvider({
+export const DibContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const [dibs, dispatch] = useReducer(dibReducer, []);
 
   return (
@@ -42,13 +42,13 @@ export function DibContextProvider({
   );
 }
 
-export function useDibState() {
+export const useDibState = () => {
   const state = useContext(DibStateContext);
   if (!state) throw new Error('DibContextProvider not found');
   return state;
 }
 
-export function useDibDispatch() {
+export const useDibDispatch = () => {
   const dispatch = useContext(DibDispatchContext);
   if (!dispatch) throw new Error('DibDispatchProvider not found');
 

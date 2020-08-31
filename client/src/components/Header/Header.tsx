@@ -14,7 +14,7 @@ import history from '../../history';
 import { usePageDispatch, usePageState } from '../../context/pageContext';
 const title = 'B mart';
 
-export default function Header() {
+const Header = () =>  {
   const pageDispatch = usePageDispatch();
   const pageState = usePageState();
 
@@ -152,3 +152,5 @@ Header.defaultProps = {
   title: 'B mart',
   page: 'category',
 };
+
+export default Header;

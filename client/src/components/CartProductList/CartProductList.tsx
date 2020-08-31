@@ -18,11 +18,11 @@ interface ProductType {
   updatedAt: string | null;
 }
 
-export default function CartProductList({
+const CartProductList = ({
   carts,
 }: {
   carts: ICartInContext[];
-}) {
+}) => {
   const renderCartProduct = () => {
     return carts.map((cart, i) => (
       <CartProduct
@@ -37,3 +37,5 @@ export default function CartProductList({
     <StyledProductListWrapper>{renderCartProduct()}</StyledProductListWrapper>
   );
 }
+
+export default CartProductList;

@@ -18,7 +18,7 @@ type TAction = { type: 'GET_CART'; payload: TCartState };
 type TCartDispatch = Dispatch<TAction>;
 const CartDispatchContext = createContext<TCartDispatch | undefined>(undefined);
 
-function cartReducer(state: TCartState, action: TAction): TCartState {
+const cartReducer = (state: TCartState, action: TAction): TCartState => {
   switch (action.type) {
     case 'GET_CART':
       return action.payload;
@@ -27,11 +27,11 @@ function cartReducer(state: TCartState, action: TAction): TCartState {
   }
 }
 
-export function CartContextProvider({
+export const CartContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const [cart, dispatch] = useReducer(cartReducer, []);
 
   return (
@@ -43,36 +43,36 @@ export function CartContextProvider({
   );
 }
 
-export function useCartState() {
+export const useCartState = () => {
   const state = useContext(CartStateContext);
   if (!state) throw new Error('cartProvider not found');
   return state;
 }
 
-export function useCartDispatch() {
+export const useCartDispatch = () => {
   const dispatch = useContext(CartDispatchContext);
   return dispatch;
 }
 
-export async function getCarts(dispatch: any) {
+export const getCarts = async (dispatch: any) => {
   const result = await api.getCarts();
   dispatch({ type: 'GET_CART', payload: result.carts });
 }
 
-export async function updateCart(
+export const updateCart = async (
   dispatch: any,
   productId: number,
   count: number
-) {
+) => {
   await api.updateCart(productId, count);
   await getCarts(dispatch);
 }
 
-export async function createCart(
+export const createCart = async(
   dispatch: any,
   productId: number,
   count: number
-) {
+) => {
   const result = await api.isExist(productId);
   if (result.cart.length > 0) {
     await updateCart(dispatch, productId, count);
@@ -82,12 +82,12 @@ export async function createCart(
   await getCarts(dispatch);
 }
 
-export async function removeCart(dispatch: any, productId: number) {
+export const removeCart= async (dispatch: any, productId: number) => {
   await api.removeCart(productId);
   await getCarts(dispatch);
 }
 
-export async function order(dispatch: any, carts: TCartState) {
+export const order = async (dispatch: any, carts: TCartState) => {
   const products = carts.map((cart) => {
     return { count: cart.count, id: cart.product.id };
   });

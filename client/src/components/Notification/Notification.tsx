@@ -13,7 +13,7 @@ function Alert(props: AlertProps) {
   return <StyledNotification elevation={6} variant="filled" {...props} />;
 }
 
-export default function Notification() {
+const Notification = () =>  {
   const page: IPageInContext = usePageState();
   const dispatch = usePageDispatch();
 
@@ -35,3 +35,5 @@ export default function Notification() {
     </Snackbar>
   );
 }
+
+export default Notification;

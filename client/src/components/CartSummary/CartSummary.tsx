@@ -9,8 +9,7 @@ import { numberToString } from '../../util/common';
 interface CartSummary {
   totalPrice: number;
 }
-
-export default function CartSummary({ totalPrice }: CartSummary) {
+const CartSummary = ({ totalPrice }: CartSummary) => {
   return (
     <StyledSummaryWrapper>
       <StyledSummaryContent>
@@ -26,3 +25,5 @@ export default function CartSummary({ totalPrice }: CartSummary) {
     </StyledSummaryWrapper>
   );
 }
+
+export default CartSummary;

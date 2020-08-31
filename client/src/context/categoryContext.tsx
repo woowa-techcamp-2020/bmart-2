@@ -18,10 +18,10 @@ const CategoryDispatchContext = createContext<TCategoryDispatch | undefined>(
   undefined
 );
 
-function categorysReducer(
+const categorysReducer = (
   state: TCategoryState,
   action: TAction
-): TCategoryState {
+): TCategoryState => {
   switch (action.type) {
     case 'INIT':
       return action.payload;
@@ -30,11 +30,11 @@ function categorysReducer(
   }
 }
 
-export function CategoryContextProvider({
+export const CategoryContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const [categories, dispatch] = useReducer(categorysReducer, []);
 
   return (
@@ -46,13 +46,13 @@ export function CategoryContextProvider({
   );
 }
 
-export function useCategoryState() {
+export const useCategoryState = () => {
   const state = useContext(CategoryStateContext);
   if (!state) throw new Error('CategoryProvider not found');
   return state;
 }
 
-export function useCategoryDispatch() {
+export const useCategoryDispatch = () => {
   const dispatch = useContext(CategoryDispatchContext);
 
   return dispatch;

@@ -5,7 +5,7 @@ import { useCartState, ICartInContext } from '../../context/cartContext';
 import history from '../../history';
 import { usePageDispatch, usePageState } from '../../context/pageContext';
 
-export default function CartButton() {
+const CartButton = () => {
   const carts: ICartInContext[] = useCartState();
   const pageDispatch = usePageDispatch();
   const pageState = usePageState();
@@ -30,3 +30,5 @@ export default function CartButton() {
     <></>
   );
 }
+
+export default CartButton;

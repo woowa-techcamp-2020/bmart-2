@@ -18,7 +18,7 @@ type TAction =
 type TPageDispatch = Dispatch<TAction>;
 const PageDispatchContext = createContext<TPageDispatch | undefined>(undefined);
 
-function pageReducer(state: TPageState, action: TAction): TPageState {
+const pageReducer = (state: TPageState, action: TAction): TPageState => {
   switch (action.type) {
     case 'NOTI_OPEN':
       return {
@@ -43,11 +43,11 @@ function pageReducer(state: TPageState, action: TAction): TPageState {
   }
 }
 
-export function PageContextProvider({
+export const PageContextProvider = ({
   children,
 }: {
   children: React.ReactNode;
-}) {
+}) => {
   const [page, dispatch] = useReducer(pageReducer, {
     onNotification: false,
     message: '',
@@ -63,22 +63,22 @@ export function PageContextProvider({
   );
 }
 
-export function usePageState() {
+export const usePageState = () => {
   const state = useContext(PageStateContext);
   if (!state) throw new Error('pageProvider not found');
   return state;
 }
 
-export function usePageDispatch() {
+export const usePageDispatch = () => {
   const dispatch = useContext(PageDispatchContext);
   return dispatch;
 }
 
-export function openNotification(dispatch: any, message: string) {
+export const openNotification = (dispatch: any, message: string) => {
   dispatch({ type: 'NOTI_CLOSE' });
   dispatch({ type: 'NOTI_OPEN', message: message });
 }
 
-export function closeNotification(dispatch: any) {
+export const closeNotification = (dispatch: any) => {
   dispatch({ type: 'NOTI_CLOSE' });
 }
