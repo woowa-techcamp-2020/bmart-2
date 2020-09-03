@@ -19,6 +19,7 @@ import {
   StyledCartHeader,
 } from './Cart.styles';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
+import { isLogin } from '../../util/common';
 
 const Cart = () => {
   const carts: ICartInContext[] = useCartState();
@@ -31,6 +32,15 @@ const Cart = () => {
         acc + cart.product.price * cart.count,
       0
     );
+  };
+
+  const checkOrder = () => {
+    if(isLogin()) {
+      order(cartDispatch, carts);
+      openNotification(pageDispatch, '주문 완료!');
+    } else {
+      openNotification(pageDispatch, '로그인이 필요합니다.');
+    }
   };
 
   return (
@@ -47,10 +57,7 @@ const Cart = () => {
       <CartSummary totalPrice={getTotalPrice()} />
       <StyledCartButtonWrapper>
         <StyledCartButton
-          onPointerUp={() => {
-            order(cartDispatch, carts);
-            openNotification(pageDispatch, '주문 완료!');
-          }}
+          onPointerUp={checkOrder}
         >
           구매하기
         </StyledCartButton>
