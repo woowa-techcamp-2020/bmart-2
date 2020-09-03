@@ -17,7 +17,7 @@ import {
   StyledCountText,
 } from './SelectList.styles';
 import { usePageDispatch, openNotification } from '../../context/pageContext';
-import { numberToString } from '../../util/common';
+import { numberToString, isLogin } from '../../util/common';
 import { IProduct } from '../../../../types/modelTypes';
 import { useCartDispatch, createCart } from '../../context/cartContext';
 
@@ -46,8 +46,12 @@ const SelectList = ({ openList, setOpenList, product }: SelectListPropType) => {
         setCount(1);
       }, 1500);
 
-      createCart(cartDispatch, product.id, cnt);
-      openNotification(pageDispatch, '장바구니 추가 완료!');
+      if (isLogin()) {
+        createCart(cartDispatch, product.id, cnt);
+        openNotification(pageDispatch, '장바구니 추가 완료!');
+      } else {
+        openNotification(pageDispatch, '로그인이 필요합니다.');
+      }
     },
     [clickbtn, setOpenList]
   );
