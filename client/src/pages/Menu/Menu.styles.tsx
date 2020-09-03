@@ -9,6 +9,7 @@ export const MenuPageButtonWrapper = styled(Grid)`
   width: 100%;
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 `;
 
 export const MenuCaegoryWrapper = styled(Grid)`
@@ -31,8 +32,8 @@ export const MenuCategory = styled.div`
 `;
 
 export const MenuPageButton = styled.div`
-  padding: 1vw;
-  margin: 0 1rem;
+  padding: 1vw 0;
+  flex-basis: 50%;
   display: flex;
   flex-direction: column;
   justify-content: center;

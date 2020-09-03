@@ -1,6 +1,3 @@
-import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
-import ListAltIcon from '@material-ui/icons/ListAlt';
-import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import React, { useState } from 'react';
 import { Container } from '@material-ui/core';
 import {
@@ -18,6 +15,12 @@ import { ICategory } from '../../../../types/modelTypes';
 import { usePageDispatch, openNotification } from '../../context/pageContext';
 import { login, logout } from '../../apis/auth';
 import { getCookie } from '../../util/common';
+
+import FavoriteBorderIcon from '@material-ui/icons/FavoriteBorder';
+import ListAltIcon from '@material-ui/icons/ListAlt';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
+
 
 const selectedAll = {
   id: 0,
@@ -81,6 +84,10 @@ const Menu = () => {
         <MenuPageButton onClick={() => pushHistory('order')}>
           <ListAltIcon />
           <span>주문 내역</span>
+        </MenuPageButton>
+        <MenuPageButton onClick={() => pushHistory('order')}>
+          <ShoppingCartOutlinedIcon />
+          <span>장바구니</span>
         </MenuPageButton>
         <MenuPageButton onClick={() => pushHistory('dib')}>
           <FavoriteBorderIcon />
