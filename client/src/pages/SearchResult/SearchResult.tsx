@@ -4,6 +4,7 @@ import history from '../../history';
 import apis from '../../apis';
 import ProductSortList from '../../components/ProductSortList';
 
+import { Container } from '@material-ui/core';
 const SearchResult = () => {
   const [products, setProducts] = useState<IProduct[]>([]);
 
@@ -21,7 +22,9 @@ const SearchResult = () => {
     fetchSearchResult();
   }, [history.location.search]);
 
-  return <ProductSortList products={products} />;
+  return <Container maxWidth="md">
+  <ProductSortList products={products} />
+  </Container>;
 };
 
 export default SearchResult;
